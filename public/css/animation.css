@@ -1,0 +1,558 @@
+.hasjs [data-animate] {
+    opacity: 0;
+  }
+  #storybook-root [data-animate] {
+    opacity: 0;
+  }
+  .hasjs .animate {
+    opacity: 1;
+  }
+  .animate{
+    /* opacity: 0; */
+  }
+
+  #storybook-root .animate {
+    opacity: 1;
+  }
+  [data-delay] {
+    opacity: 0;
+    -webkit-transition: opacity .5s ease;
+    transition: opacity .5s ease
+  }
+  .animate--fade-in {
+    opacity: 1;
+    -webkit-animation: fade-in 1s ease-in;
+    animation: fade-in 1s ease-in;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards
+  }
+  .animate--fade-in-left {
+    opacity: 1;
+    -webkit-animation: fade-in-left .5s ease-in;
+    animation: fade-in-left .5s ease-in;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards
+  }
+  .animate--fade-in-top {
+    opacity: 1;
+    -webkit-animation: fade-in-top .9s ease-in;
+    animation: fade-in-top .9s ease-in;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards
+  }
+  .animate--fade-in-right {
+    opacity: 1;
+    -webkit-animation: fade-in-right .5s ease-in;
+    animation: fade-in-right .5s ease-in;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards
+  }
+  .animate--expand-cta {
+    opacity: 1;
+    -webkit-animation: expand-cta .8s ease-in;
+    animation: expand-cta .8s ease-in;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+    animation-delay: 1.3s;
+  }
+  .animate--expand-cta.cta--primary .cta__label,
+  .animate--expand-cta.cta--secondary .cta__label {
+    opacity: 1;
+    -webkit-animation: text-wrap .8s ease-in;
+    animation: text-wrap .8s ease-in;
+    -webkit-animation-delay: 1300ms;
+    animation-delay: 1300ms;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards
+  }
+  .animate[data-animation-duration="0"] {
+    -webkit-animation-duration: 0s;
+    animation-duration: 0s
+  }
+  .animate[data-animation-delay="0"] {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s
+  }
+  .animate[data-animation-duration="50"] {
+    -webkit-animation-duration: 50ms;
+    animation-duration: 50ms
+  }
+  .animate[data-animation-delay="50"] {
+    -webkit-animation-delay: 50ms;
+    animation-delay: 50ms
+  }
+  .animate[data-animation-duration="100"] {
+    -webkit-animation-duration: .1s;
+    animation-duration: .1s
+  }
+  .animate[data-animation-delay="100"] {
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s
+  }
+  .animate[data-animation-duration="150"] {
+    -webkit-animation-duration: 150ms;
+    animation-duration: 150ms
+  }
+  .animate[data-animation-delay="150"] {
+    -webkit-animation-delay: 150ms;
+    animation-delay: 150ms
+  }
+  .animate[data-animation-duration="200"] {
+    -webkit-animation-duration: .2s;
+    animation-duration: .2s
+  }
+  .animate[data-animation-delay="200"] {
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s
+  }
+  .animate[data-animation-duration="250"] {
+    -webkit-animation-duration: 250ms;
+    animation-duration: 250ms
+  }
+  .animate[data-animation-delay="250"] {
+    -webkit-animation-delay: 250ms;
+    animation-delay: 250ms
+  }
+  .animate[data-animation-duration="300"] {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s
+  }
+  .animate[data-animation-delay="300"] {
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s
+  }
+  .animate[data-animation-duration="350"] {
+    -webkit-animation-duration: 350ms;
+    animation-duration: 350ms
+  }
+  .animate[data-animation-delay="350"] {
+    -webkit-animation-delay: 350ms;
+    animation-delay: 350ms
+  }
+  .animate[data-animation-duration="400"] {
+    -webkit-animation-duration: .4s;
+    animation-duration: .4s
+  }
+  .animate[data-animation-delay="400"] {
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s
+  }
+  .animate[data-animation-duration="450"] {
+    -webkit-animation-duration: 450ms;
+    animation-duration: 450ms
+  }
+  .animate[data-animation-delay="450"] {
+    -webkit-animation-delay: 450ms;
+    animation-delay: 450ms
+  }
+  .animate[data-animation-duration="500"] {
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s
+  }
+  .animate[data-animation-delay="500"] {
+    -webkit-animation-delay: .5s;
+    animation-delay: .5s
+  }
+  .animate[data-animation-duration="550"] {
+    -webkit-animation-duration: 550ms;
+    animation-duration: 550ms
+  }
+  .animate[data-animation-delay="550"] {
+    -webkit-animation-delay: 550ms;
+    animation-delay: 550ms
+  }
+  .animate[data-animation-duration="600"] {
+    -webkit-animation-duration: .6s;
+    animation-duration: .6s
+  }
+  .animate[data-animation-delay="600"] {
+    -webkit-animation-delay: .6s;
+    animation-delay: .6s
+  }
+  .animate[data-animation-duration="650"] {
+    -webkit-animation-duration: 650ms;
+    animation-duration: 650ms
+  }
+  .animate[data-animation-delay="650"] {
+    -webkit-animation-delay: 650ms;
+    animation-delay: 650ms
+  }
+  .animate[data-animation-duration="700"] {
+    -webkit-animation-duration: .7s;
+    animation-duration: .7s
+  }
+  .animate[data-animation-delay="700"] {
+    -webkit-animation-delay: .7s;
+    animation-delay: .7s
+  }
+  .animate[data-animation-duration="750"] {
+    -webkit-animation-duration: 750ms;
+    animation-duration: 750ms
+  }
+  .animate[data-animation-delay="750"] {
+    -webkit-animation-delay: 750ms;
+    animation-delay: 750ms
+  }
+  .animate[data-animation-duration="800"] {
+    -webkit-animation-duration: .8s;
+    animation-duration: .8s
+  }
+  .animate[data-animation-delay="800"] {
+    -webkit-animation-delay: .8s;
+    animation-delay: .8s
+  }
+  .animate[data-animation-duration="850"] {
+    -webkit-animation-duration: 850ms;
+    animation-duration: 850ms
+  }
+  .animate[data-animation-delay="850"] {
+    -webkit-animation-delay: 850ms;
+    animation-delay: 850ms
+  }
+  .animate[data-animation-duration="900"] {
+    -webkit-animation-duration: .9s;
+    animation-duration: .9s
+  }
+  .animate[data-animation-delay="900"] {
+    -webkit-animation-delay: .9s;
+    animation-delay: .9s
+  }
+  .animate[data-animation-duration="950"] {
+    -webkit-animation-duration: 950ms;
+    animation-duration: 950ms
+  }
+  .animate[data-animation-delay="950"] {
+    -webkit-animation-delay: 950ms;
+    animation-delay: 950ms
+  }
+  .animate[data-animation-duration="1000"] {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s
+  }
+  .animate[data-animation-delay="1000"] {
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s
+  }
+  .animate[data-animation-duration="1050"] {
+    -webkit-animation-duration: 1.05s;
+    animation-duration: 1.05s
+  }
+  .animate[data-animation-delay="1050"] {
+    -webkit-animation-delay: 1.05s;
+    animation-delay: 1.05s
+  }
+  .animate[data-animation-duration="1100"] {
+    -webkit-animation-duration: 1.1s;
+    animation-duration: 1.1s
+  }
+  .animate[data-animation-delay="1100"] {
+    -webkit-animation-delay: 1.1s;
+    animation-delay: 1.1s
+  }
+  .animate[data-animation-duration="1150"] {
+    -webkit-animation-duration: 1.15s;
+    animation-duration: 1.15s
+  }
+  .animate[data-animation-delay="1150"] {
+    -webkit-animation-delay: 1.15s;
+    animation-delay: 1.15s
+  }
+  .animate[data-animation-duration="1200"] {
+    -webkit-animation-duration: 1.2s;
+    animation-duration: 1.2s
+  }
+  .animate[data-animation-delay="1200"] {
+    -webkit-animation-delay: 1.2s;
+    animation-delay: 1.2s
+  }
+  .animate[data-animation-duration="1250"] {
+    -webkit-animation-duration: 1.25s;
+    animation-duration: 1.25s
+  }
+  .animate[data-animation-delay="1250"] {
+    -webkit-animation-delay: 1.25s;
+    animation-delay: 1.25s
+  }
+  .animate[data-animation-duration="1300"] {
+    -webkit-animation-duration: 1.3s;
+    animation-duration: 1.3s
+  }
+  .animate[data-animation-delay="1300"] {
+    -webkit-animation-delay: 1.3s;
+    animation-delay: 1.3s
+  }
+  .animate[data-animation-duration="1350"] {
+    -webkit-animation-duration: 1.35s;
+    animation-duration: 1.35s
+  }
+  .animate[data-animation-delay="1350"] {
+    -webkit-animation-delay: 1.35s;
+    animation-delay: 1.35s
+  }
+  .animate[data-animation-duration="1400"] {
+    -webkit-animation-duration: 1.4s;
+    animation-duration: 1.4s
+  }
+  .animate[data-animation-delay="1400"] {
+    -webkit-animation-delay: 1.4s;
+    animation-delay: 1.4s
+  }
+  .animate[data-animation-duration="1450"] {
+    -webkit-animation-duration: 1.45s;
+    animation-duration: 1.45s
+  }
+  .animate[data-animation-delay="1450"] {
+    -webkit-animation-delay: 1.45s;
+    animation-delay: 1.45s
+  }
+  .animate[data-animation-duration="1500"] {
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s
+  }
+  .animate[data-animation-delay="1500"] {
+    -webkit-animation-delay: 1.5s;
+    animation-delay: 1.5s
+  }
+  .animate[data-animation-duration="2000"] {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s
+  }
+  .animate[data-animation-delay="2000"] {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s
+  }
+  .animate--border-animation::before {
+    -webkit-animation: border-animation 2s forwards;
+    animation: border-animation 2s forwards
+  }
+  @-webkit-keyframes fade-in {
+    0% {
+      opacity: 0
+    }
+    100% {
+      opacity: 1
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0
+    }
+    100% {
+      opacity: 1
+    }
+  }
+  @-webkit-keyframes fade-in-top {
+    from {
+      opacity: 0;
+      /* -webkit-transform: translateY(3rem); */
+      -webkit-transform: translateY(70%);
+      /* transform: translateY(3rem); */
+      transform: translateY(70%);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0)
+    }
+  }
+  @keyframes fade-in-top {
+    from {
+      opacity: 0;
+      /* -webkit-transform: translateY(3rem); */
+      -webkit-transform: translateY(70%);
+      /* transform: translateY(3rem) */
+      transform: translateY(70%);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0)
+    }
+  }
+  @-webkit-keyframes fade-in-left {
+    from {
+      opacity: 0;
+      -webkit-transform: translateX(-3rem);
+      transform: translateX(-3rem);
+      -webkit-filter: blur(.2ex);
+      filter: blur(.2ex)
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-filter: blur(0);
+      filter: blur(0)
+    }
+  }
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      -webkit-transform: translateX(-3rem);
+      transform: translateX(-3rem);
+      -webkit-filter: blur(.2ex);
+      filter: blur(.2ex)
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-filter: blur(0);
+      filter: blur(0)
+    }
+  }
+  @-webkit-keyframes fade-in-right {
+    from {
+      opacity: 0;
+      -webkit-transform: translateX(3rem);
+      transform: translateX(3rem);
+      -webkit-filter: blur(.2ex);
+      filter: blur(.2ex)
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-filter: blur(0);
+      filter: blur(0)
+    }
+  }
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      -webkit-transform: translateX(3rem);
+      transform: translateX(3rem);
+      -webkit-filter: blur(.2ex);
+      filter: blur(.2ex)
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-filter: blur(0);
+      filter: blur(0)
+    }
+  }
+  @-webkit-keyframes expand-cta {
+    from {
+      opacity: 0;
+      max-width: 0;
+      padding-left: 0;
+      padding-right: 0
+    }
+    to {
+      opacity: 1;
+      max-width: 100%;
+      width: -webkit-max-content;
+      width: max-content
+    }
+  }
+  @keyframes expand-cta {
+    from {
+      opacity: 0;
+      max-width: 0;
+      padding-left: 0;
+      padding-right: 0
+    }
+    to {
+      opacity: 1;
+      max-width: 100%;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content
+    }
+  }
+  @-webkit-keyframes border-animation {
+    0% {
+      height: 0;
+      top: 100%
+    }
+    100% {
+      height: 100%;
+      top: 0
+    }
+  }
+  @keyframes border-animation {
+    0% {
+      height: 0;
+      top: 100%
+    }
+    100% {
+      height: 100%;
+      top: 0
+    }
+  }
+  @-webkit-keyframes text-wrap {
+    0% {
+      white-space: nowrap
+    }
+    100% {
+      white-space: normal
+    }
+  }
+  @keyframes text-wrap {
+    0% {
+      white-space: nowrap
+    }
+    100% {
+      white-space: normal
+    }
+  }
+  @-webkit-keyframes text-animation {
+    to {
+      clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0)
+    }
+  }
+  @keyframes text-animation {
+    to {
+      clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0)
+    }
+  }
+
+
+
+
+
+.animate-left a {
+  -webkit-animation: expand-cta-left .8s ease-in;
+  animation: expand-cta-left .8s ease-in;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+  animation-delay: 1.3s;
+}
+
+@-webkit-keyframes expand-cta-left {
+  from {
+    opacity: 0;
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+  to {
+    opacity: 1;
+    max-width: 100%;
+    width: -webkit-max-content;
+    width: max-content
+  }
+}
+@keyframes expand-cta-left {
+  from {
+    opacity: 0;
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0
+  }
+  to {
+    opacity: 1;
+    max-width: 100%;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content
+  }
+}

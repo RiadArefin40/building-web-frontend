@@ -1,0 +1,34 @@
+.tender-details-section-wrapper{
+    .top-section{
+        &::before{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            content: "";
+            width: 88px;
+            height: 88px;
+            background-color: #94F717;
+            z-index: -1;
+            @media(max-width: 991px){
+                width: 47px;
+                height: 47px;
+            }
+        }
+        &::after{
+            position: absolute;
+            left: 88px;
+            bottom: 88px;
+            content: "";
+            width: 57px;
+            height: 57px;
+            background-color: #C4E50F;
+            z-index: -1;
+            @media(max-width: 991px){
+                left: 47px;
+                bottom: 47px;
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+}

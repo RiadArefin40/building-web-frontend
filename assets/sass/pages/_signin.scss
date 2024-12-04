@@ -1,0 +1,79 @@
+.forgot-password-wrapper{
+    text-align: center;
+    button{
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        color: rgba(0, 0, 0, 0.80);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        border-radius: 0px;
+        &:hover{
+            background-color: transparent;
+            background: transparent;
+            color: rgba(0, 0, 0, 0.80);
+            text-decoration: underline;
+        }
+        &:focus{
+            text-decoration: underline;
+        }
+    }
+}
+
+.forgot-password-popup{
+    .modal-content{
+        .modal-header{
+            border-bottom: 0px;
+            .btn-close{
+                opacity: 1;
+            }
+        }
+        .modal-body{
+            form{
+                .form-group{
+                    margin-bottom: 15px;
+                    .form-floating{
+                        input{
+                            color: $black;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 8px;
+                            border: 1px solid #ddd;
+                            background-color: $white;
+                            transition: 0.3s ease-in-out;
+                            &:focus{
+                                border-color: #4182FF;
+                                background-color: #f5f6f8;
+                                box-shadow: none;
+                                outline: none;
+                            }
+                        }
+                        label{
+                            color: rgba(0, 0, 0, 0.60);
+                            font-weight: 400;
+                            font-style: normal;
+                        }
+                    }
+                }
+                .btn_submit{
+                    width: 100%;
+                    text-align: center;
+                    padding: 15px 30px;
+                    border-radius: 8px;
+                    font-weight: 500;
+                    line-height: 26px;
+                    color: $white;
+                    background: #4182FF;
+                    border: 1px solid #4182FF;
+                    transition: 0.3s ease-in-out;
+                    &:hover{
+                        background-color: transparent;
+                        color: #4182FF;
+                    }
+                }
+            }
+        }
+
+    }
+}

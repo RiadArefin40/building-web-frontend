@@ -1,0 +1,297 @@
+/* UNIVERSAL */
+:root {
+    /* Font */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    --font-weight-black: 700;
+
+    /* Font Size */
+    --font-size-xs: 14px;
+    --font-size-s: 18px;
+    --font-size-m: 26px;
+    --font-size-l: 34px;
+    --font-size-xl: 46px;
+    --font-size-xxl: 54px;
+
+    /* Colors: */
+    --color-light-blue: #2870a6;
+    --color-dark-blue: #005496;
+    --color-orange: #f18142;
+    --color-green: #9dc93b;
+    --color-black: #545252; 
+    --color-white: #ffffff;
+
+    /* Background Colors: */
+    --bg-color-white: #fff;
+    --bg-color-grey: #f7f7f7;
+    --bg-color-light-blue: #80cbf1;
+    --bg-color-orange: #f18142;
+
+    /* Border Colors: */
+    --border-color-grey: #dad9d8;
+}
+
+.section {
+    padding: 60px 0;
+    position: relative;
+}
+.section.white {
+    background: var(--bg-color-white);
+}
+.section.grey {
+    background: var(--bg-color-grey);
+}
+.section.flex {
+    padding-bottom: 0;
+}
+.section.ocean-background {
+    padding: 100px 0 200px 0;
+    background: url('../assets/images/partner/ocean-bkg.jpg') bottom center no-repeat;
+    background-size: cover;
+}
+.section p {
+    font-weight: var(--font-weight-medium);
+    margin: 0 0 40px 0;
+}
+.section p span {
+    display: block;
+    color: var(--color-orange);
+}
+.section .block {
+    display: block;
+}
+.banner-section .banner-inner h1 {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+.banner-inner {
+    width: 60%;
+    margin: 0px auto;
+}
+.banner-bkg-1 {
+    background-image: url('../assets/images/banner/banner01.jpg');
+}
+.banner-bkg-2 {
+    background-image: url('../assets/images/banner/banner02.jpg');
+}
+.banner-bkg-3 {
+    background-image: url('../assets/images/banner/banner03.jpg');
+}
+.banner-bkg-4 {
+    background-image: url('../assets/images/banner/banner04.jpg');
+}
+.banner-bkg-5 {
+    background-image: url('../assets/images/banner/banner05.jpg');
+}
+.banner-bkg-6 {
+    background-image: url('../assets/images/banner/banner06.jpg');
+}
+.banner-bkg-7 {
+    background-image: url('../assets/images/banner/banner07.jpg');
+}
+.banner-bkg-8 {
+    background-image: url('../assets/images/banner/banner08.jpg');
+}
+.banner-bkg-9 {
+    background-image: url('../assets/images/banner/banner09.jpg');
+}
+
+.entry h3 {
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark-blue);
+    margin-bottom: 25px;
+}
+
+/* Button Submit */
+.btn-light-blue {
+    color: var(--color-dark-blue);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--bg-color-light-blue);
+    padding: 8px 30px;
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    font-size: 18px;
+    border: none;
+}
+.btn-light-blue:hover {
+    background-color: var(--bg-color-orange);
+    color: var(--color-white);
+}
+
+.btn-transparent-blue {
+    color: var(--color-dark-blue);
+    font-weight: var(--font-weight-bold);
+    padding: 8px 0px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    font-size: 18px;
+    border: none;
+    float: left;
+}
+.btn-transparent-blue:hover {
+    color: var(--color-orange);
+}
+/* FLOWER IMAGE BACKGROUND */
+.flower-right-image {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    z-index: -1;
+}
+.img-box {
+    margin: 0 0 30px 0;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ededed;
+    box-shadow: 0px 5px 15px #f2f2f2;
+    background: var(--bg-color-white);
+}
+/* FORM BOX */
+.form-box {
+    background-color: #fff;
+    border-radius: 9px;
+    padding: 50px;
+    box-shadow: 0px 5px 10px 4px rgba(0, 0, 0, 0.06);
+    -webkit-box-shadow: 0px 5px 10px 4px rgba(0, 0, 0, 0.06);
+    -moz-box-shadow: 0px 5px 10px 4px rgba(0, 0, 0, 0.06);
+}
+.form-box h2 {
+    font-size: var(--font-size-l);
+    color: var(--color-orange);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 20px;
+}
+.form-box h2 span {
+    color: var(--color-green);
+}
+.form-box h3 {
+    font-size: var(--font-size-xl);
+    color: var(--color-dark-blue);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 20px;
+}
+.form-box form label {
+    font-size: var(--font-size-s);
+    color: var(--color-black);
+    font-weight: var(--font-weight-medium);
+}
+.form-box form input {
+    font-weight: var(--font-weight-medium);
+    border-color: var(--border-color-grey);
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+}
+.form-box form .form-group textarea {
+    font-weight: var(--font-weight-medium);
+    border-color: var(--border-color-grey);
+    resize: none;
+    margin: 0 0 20px 0;
+}    
+.form-box form .submit-wrapper .submit-btn {
+    color: var(--color-dark-blue);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--bg-color-light-blue);
+    padding: 8px 30px;
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    font-size: 18px;
+    border: none;
+}
+.form-box form .submit-wrapper .submit-btn:hover {
+    background-color: var(--bg-color-orange);
+    color: var(--color-white);
+}
+
+
+/* =================
+WHY PARTNER WITH US STYLES 
+=================== */
+ul.partner-terms {
+    margin: 0 0 30px -30px;
+}
+ul.partner-terms li {
+    font-weight: var(--font-weight-bold);
+    list-style: none;
+    position: relative;
+    padding: 10px 0 10px 30px;
+}
+ul.partner-terms li::before {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 16px;
+    width: 16px;
+    content: "";
+    background: url('../assets/images/partner/icon-tick.png') left center no-repeat;
+    margin: 5px 0 0 0;
+}
+/* CONSUMER BRANDING */
+.consumer-branding {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    background: var(--bg-color-grey);
+    padding: 60px 0;
+}
+.consumer-branding h3 {
+    width: 100%;
+    display: block;
+    text-align: left;
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark-blue);
+    margin-bottom: 25px;
+    border: none;
+}
+ul.contribute {
+    margin: 0 0 30px -30px;
+    position: relative;
+}
+ul.contribute li {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-s);
+    color: var(--color-light-blue);
+    list-style: none;
+    padding: 20px 0 20px 65px;
+    position: relative;
+}
+ul.contribute li::before {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 54px;
+    width: 54px;
+    content: "";
+    background: url('../assets/images/drop-bullet.png') left center no-repeat;
+    margin: 0;
+}
+
+/* =================
+PROJECT PARTNERS STYLES 
+=================== */
+.job-opportunities::before {
+    background-image: url("../assets/images/partner/job-opportunities-bkg.jpg");
+}
+
+
+
+
+
+

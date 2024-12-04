@@ -1,0 +1,119 @@
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+// @font-face {
+//   font-family: "roman-normal";
+//   src: url("../fonts/roman/timesnewroman.ttf") format("truetype");
+// }
+// @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500;600;700;800;900&family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@font-face {
+    font-family: "pretendard";
+    src: url("../fonts/PretendardVariable.ttf") format("truetype");
+}
+@font-face {
+    font-family: "pretendard_black";
+    src: url("../fonts/Pretendard-Black.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_bold";
+    src: url("../fonts/Pretendard-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_extra_bold";
+    src: url("../fonts/Pretendard-ExtraBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_extra_light";
+    src: url("../fonts/Pretendard-ExtraLight.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_light";
+    src: url("../fonts/Pretendard-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_medium";
+    src: url("../fonts/Pretendard-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_regular";
+    src: url("../fonts/Pretendard-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_semibold";
+    src: url("../fonts/Pretendard-SemiBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "pretendard_thin";
+    src: url("../fonts/Pretendard-Thin.otf") format("opentype");
+}
+
+$font-inter: "Inter", sans-serif;
+
+//   @font-face {
+//     font-family: "bambinoblack";
+//     src: url("../fonts/BambinoBlack.ttf") format("truetype");
+//   }
+//   @font-face {
+//     font-family: "paintingwithchocolate";
+//     src: url("../fonts/PaintingWithChocolate.ttf") format("truetype");
+//   }
+//   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+// @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// $montserrat: 'Montserrat', sans-serif;
+// $dmfont: 'DM Sans', sans-serif;
+
+
+// Font Family
+// $font: "font-family: 'Lato', sans-serif";
+// $font: 'Poppins', sans-serif;
+// $input-bg: #e4eefd;
+// $body-bg: #f9f8ff;
+
+// $roboto-flex: 'Roboto Flex', sans-serif;
+// $bebas: 'Bebas Neue', sans-serif;
+// $raleway: 'Raleway', sans-serif;
+// $font: 'Montserrat', sans-serif;
+// $font: 'Roboto';
+//Color
+
+
+// Font Family 
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@300;400;500;600;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+// $barlow: 'Barlow', sans-serif;
+// $bebasneue: 'Bebas Neue', sans-serif;
+// $bebasneue: 'Noto Sans', sans-serif;
+// $oswald: 'Oswald', sans-serif;
+// Font Family 
+
+// Color 
+// $theme-color: #ee690e;
+// $home-slider-bottom-border-color: #232323;
+// $footerbg-color: #202020;
+// $gray-color: #666666;
+// $title-border-color: #4d4d4d;
+// $courses-bg: #080808;
+// $dark-gray: #5a5a5a;
+// $about-border: #262626;
+// Color 
+
+$white: white;
+$black: black;
+$theme-color: #4182FF;
+$theme-secondary-color: #94F717;
+
+
+
+// <i class="fa-brands fa-x-twitter"></i>
