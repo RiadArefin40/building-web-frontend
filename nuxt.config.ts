@@ -97,7 +97,7 @@ export default defineNuxtConfig({
   css: ['~/assets/sass/main.scss'],
   runtimeConfig: {
     public: {
-      apiBase: process.env.apiBase || "http://141.164.54.23/api/v1",
+      apiBase: process.env.apiBase || "http://testingpro.xyz/api/v1/",
     },
   },
 
