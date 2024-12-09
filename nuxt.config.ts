@@ -56,11 +56,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: '/css/style.css' }
       ],
       script: [
-        {
-          src: '/home/likhon/Desktop/upwork/frontend/building_web/building_web/assets/js/owl.carousel.min.js',
-          type: 'text/javascript',
-          defer: true, // Optional: Load after the HTML parsing
-        },
+
         // FontAwesome Kit
         { src: 'https://kit.fontawesome.com/e2e8628afd.js', crossorigin: 'anonymous' },
   
@@ -76,13 +72,13 @@ export default defineNuxtConfig({
         
     
         // CounterUp JS
-        { src: '/js/jquery.counterup.min.js', type: 'text/javascript', body: true,defer: true, },
+        { src: '/js/jquery.counterup.min.js', type: 'text/javascript',defer: true, },
     
         // Waypoints JS (used by CounterUp)
-        { src: '/js/jquery.waypoints.min.js', type: 'text/javascript', body: true,defer: true, },
+        { src: '/js/jquery.waypoints.min.js', type: 'text/javascript', defer: true, },
 
         // Owl Carousel JS (load after jQuery)
-        { src: '/js/owl.carousel.min.js', type: 'text/javascript', body: true,defer: true, },
+        { src: '/js/owl.carousel.min.js', type: 'text/javascript',defer: true, },
     
         // Fancybox JS
         { src: '/js/fancybox.js', type: 'text/javascript', body: true,defer: true, },

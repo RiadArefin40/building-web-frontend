@@ -5,18 +5,21 @@
     <!-- Header  -->
 
   <!-- About top Section  -->
-  <div class="about-top-section-wrapper">
+  <div v-if="!loading" class="about-top-section-wrapper">
     <div class="about-top-section-inner">
       <div class="container-fluid">
         <div class="about-top-inner-wrapper">
           <div class="top-section">
             <div class="left-section">
-              <h2>건물 관리의<br />
-                새로운 시대를 열어갑니다.</h2>
+              <h2 v-html="aboutPageData['section-1'].title"></h2>
+
+              <!-- <h2>건물 관리의<br />
+                새로운 시대를 열어갑니다.</h2> -->
             </div>
             <div class="right-section">
-              <p>대한건물관리협회는 건물 관리 업체들이 직면한 복잡한 문제에 대해 전문적인 조언과 해결책을 제시합니다. 법적 분쟁 예방부터 효율적인 관리 방안까지, 협회는 회원들이 더 나은 관리 기준을
-                확립할 수 있도록 돕고, 효율적이고 안전한 운영 환경을 구축하는 데 있어 중요한 파트너 역할을 합니다.</p>
+              <p v-html="aboutPageData['section-1'].subtitle"></p>
+              <!-- <p>대한건물관리협회는 건물 관리 업체들이 직면한 복잡한 문제에 대해 전문적인 조언과 해결책을 제시합니다. 법적 분쟁 예방부터 효율적인 관리 방안까지, 협회는 회원들이 더 나은 관리 기준을
+                확립할 수 있도록 돕고, 효율적이고 안전한 운영 환경을 구축하는 데 있어 중요한 파트너 역할을 합니다.</p> -->
             </div>
           </div>
           <div class="bottom-image-section">
@@ -38,22 +41,26 @@
   <!-- About top Section  -->
 
   <!-- Greeting Section  -->
-  <div class="greeting-section-wrapper">
+  <div v-if="!loading" class="greeting-section-wrapper">
     <div class="container-fluid">
       <div class="greeting-section-inner">
         <div class="left-section">
-          <h2>모두가 믿을 수 있는 건물 관리, <br />확실한 기준으로 <br />건물의 가치를 높입니다.</h2>
+          <h2 style="margin-bottom: 43px;" v-html="aboutPageData['section-3'].left_title"></h2>
+          <!-- <h2>모두가 믿을 수 있는 건물 관리, <br />확실한 기준으로 <br />건물의 가치를 높입니다.</h2> -->
           <div class="image-wrapper">
             <img src="/assets/images/about/greeting-quote.svg" alt="">
           </div>
         </div>
         <div class="right-section">
-          <h4>투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4>
-          <p>대한건물관리협회는 투명하고 신뢰성 있는 관리 기준을 최우선으로 두고 있습니다. 공정한 관리 체계를 통해 모든 이해관계자가 안심하고 신뢰할 수 있는 환경을 조성합니다. 협회는 회원들에게 법적
+          <span ></span>
+          <h4  v-html="aboutPageData['section-3'].right_title"></h4>
+          <!-- <h4>투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4> -->
+           <p v-html="aboutPageData['section-3'].right_subtitle"></p>
+          <!-- <p>대한건물관리협회는 투명하고 신뢰성 있는 관리 기준을 최우선으로 두고 있습니다. 공정한 관리 체계를 통해 모든 이해관계자가 안심하고 신뢰할 수 있는 환경을 조성합니다. 협회는 회원들에게 법적
             자문과 체계적인 솔루션을 제공하여 복잡한 관리 문제를 해결하고, 건물의 가치를 지속적으로 향상시킬 수 있도록 지원합니다.</p>
           <p>회원들은 협회의 법률 자문과 체계적인 컨설팅을 통해, 건물 관리의 모든 단계에서 확실한 기준을 세우고 운영 효율성을 극대화할 수 있습니다. 협회의 지원을 통해, 더 나은 운영 환경을 만들고
             공정한 건물 관리 문화를 실현할 수 있습니다.</p>
-          <p>협회와 함께,<br/> 공정하고 신뢰할 수 있는 관리 환경을 구축해보세요.</p>
+          <p>협회와 함께,<br/> 공정하고 신뢰할 수 있는 관리 환경을 구축해보세요.</p> -->
         </div>
       </div>
     </div>
@@ -179,16 +186,30 @@
 
 
 <script setup>
-definePageMeta({
-  head: {
-    link: [
-        // Favicon
-       
-      ],
-    script: [
-      // Bootstrap Bundle JS
-     
-    ]
-  }
+const runtimeConfig = useRuntimeConfig();
+import { nextTick } from 'vue';
+const aboutPageData = ref([]);
+const loading = ref(true)
+
+
+onMounted(() => {
+  getaboutPageData();
+
 })
+
+const getaboutPageData = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}page/about`, {
+        method: 'GET',
+    })
+
+    aboutPageData.value = await res
+    loading.value = false
+    console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
 </script>

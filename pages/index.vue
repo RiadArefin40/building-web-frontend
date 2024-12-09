@@ -4,26 +4,27 @@
     <!-- Header  -->
     <Header />
     <!-- Header  -->
+    <div >
 
-    <!-- Top Banner Box  -->
-    <section class="home-top-content-box">
+       <!-- Top Banner Box  -->
+    <section v-if="!loading" class="home-top-content-box">
       <div class="home-top-container">
         <div class="home-top-content-inner">
           <div class="left-content-box">
             <div style="overflow: hidden;">
-              <h1 class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
-                data-animation-delay="300">공정하고 투명한 건물 관리,<br /><span>대한건물관리협회</span>가<br class="mobile-break" /> 함께합니다.
-              </h1>
               <!-- <h1 class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
-                data-animation-delay="300"><br class="mobile-break" />{{ homepageData[0].content.left_column.header}}
+                data-animation-delay="300">공정하고 투명한 건물 관리,<br /><span>대한건물관리협회</span>가<br class="mobile-break" /> 함께합니다.
               </h1> -->
+              <h1 v-html="homepageData['section-1'].title" class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
+                data-animation-delay="300">
+              </h1>
             </div>
-            <p class="desktop-title">대한건물관리협회는 건물 관리의 공정성과 투명성을 보장하기 위해<br /> 중재와 상담을 지원하는 <span>비영리 단체</span>입니다.</p>
+            <!-- <p class="desktop-title">대한건물관리협회는 건물 관리의 공정성과 투명성을 보장하기 위해<br /> 중재와 상담을 지원하는 <span>비영리 단체</span>입니다.</p>
             <p class="mobile-title">대한건물관리협회는 건물 관리의 공정성과 투명성을<br /> 보장하기 위해 중재와 상담을 지원하는<br /> <span>비영리 단체</span>입니다.
-            </p>
-            <!-- <p class="desktop-title"> {{ homepageData[0].content.left_column.sub_header}} </p> -->
-            <!-- <p class="mobile-title">대한건물관리협회는 건물 관리의 공정성과 투명성을<br /> 보장하기 위해 중재와 상담을 지원하는<br /> <span>비영리 단체</span>입니다.
             </p> -->
+            <p  v-html="homepageData['section-1'].subtitle" class="desktop-title"></p>
+            <p v-html="homepageData['section-1'].subtitle" class="mobile-title"></p>
+          
             <div class="link-wrapper">
               <a href="#">중재 요청하기 <span class="material-symbols-outlined">
                   arrow_right_alt
@@ -62,16 +63,18 @@
     <!-- Top Banner Box  -->
 
     <!-- Why Box Section  -->
-    <section class="why-box-wrapper" id="about">
+    <section v-if="!loading" class="why-box-wrapper" id="about">
       <div class="container-fluid">
         <div class="why-box-inner">
           <div class="left-box">
-            <h2><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2>
+            <!-- <h2><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2> -->
+            <h2 style="margin-bottom: 73px;"  v-html="homepageData['section-2'].title"></h2>
             <div class="note-box">
               <div class="star-image">
                 <img src="/assets/images/star.png" alt="star">
               </div>
-              <p>“이러한 문제들로 인해 관리자의 업무 부담이 늘어나고<br />건물의 가치가 저하될 수 있습니다.”</p>
+              <p v-html="homepageData['section-2'].subtitle"></p>
+              <!-- <p>“이러한 문제들로 인해 관리자의 업무 부담이 늘어나고<br />건물의 가치가 저하될 수 있습니다.”</p> -->
             </div>
           </div>
           <div class="right-box">
@@ -79,43 +82,45 @@
               <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2'].dropdown_1_title" class="accordion-button" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      관리비의 불투명성
+              
                     </button>
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
+                      <p v-html="homepageData['section-2'].dropdown_1_body">
                       </p>
+                      <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
+                      </p> -->
                     </div>
                   </div>
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2'].dropdown_2_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      공실 관리 기준의 혼란
                     </button>
                   </h2>
                   <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
-                      </p>
+                      <p v-html="homepageData['section-2'].dropdown_2_body"> </p>
+                      <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
+                      </p> -->
                     </div>
                   </div>
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2'].dropdown_3_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      법적 분쟁의 악순환
                     </button>
                   </h2>
                   <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
-                      </p>
+                    <div class="accordion-body">  
+                       <p v-html="homepageData['section-2'].dropdown_3_body"> </p>
+                      <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
+                      </p> -->
                     </div>
                   </div>
                 </div>
@@ -139,7 +144,7 @@
     <!-- Why Box Section  -->
 
     <!-- Billing Section  -->
-    <section class="billing-section-outer">
+    <section v-if="!loading" class="billing-section-outer">
       <div class="container-fluid">
         <div class="billing-section-inner">
           <div class="left-section">
@@ -147,15 +152,6 @@
               <div class="top-bill-section">
                 <div class="bill-box">
                   <div class="unit-box">
-                    <!-- <img src="/assets/images/bill-dots.png" alt=""> -->
-                    <!-- <div class="dot-animation-box">
-                    <div class="dot-box">
-
-                    </div>
-                    <div class="dot-animation">
-
-                    </div>
-                  </div> -->
                     <!-- New Animation  -->
                     <div class="ripple-animation-wrapper">
                       <div class="ripple">
@@ -227,12 +223,18 @@
             </div>
           </div>
           <div class="right-section">
-            <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2>
-            <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5>
-            <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
+            <!-- <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2> -->
+             <h2 style="margin-bottom: 28px;" class="rendered-h" v-html="homepageData['section-3'].title"></h2>
+
+            <!-- <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5> -->
+            <h5 v-html="homepageData['section-3'].subtitle"></h5>
+
+            <!-- <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
               <br />이러한 불투명한 관리방식은 건물주와 관리 업체 간의 갈등을 심화시키고, <br />결국 법적 분쟁으로까지 이어질 위험이 큽니다.
-            </p>
-            <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6>
+            </p> -->
+            <p class="rendered-p" style="margin-bottom: 50px;" v-html="homepageData['section-3']['text-1']"></p>
+            <!-- <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6> -->
+             <h6 v-html="homepageData['section-3']['text-2']"></h6>
           </div>
         </div>
       </div>
@@ -240,16 +242,18 @@
     <!-- Billing Section  -->
 
     <!-- Who wr are Section  -->
-    <section class="who-we-are-section">
+    <section v-if="!loading"  class="who-we-are-section">
       <div class="container-fluid">
         <div class="who-we-are-inner">
           <div class="left-box">
             <h6>협회 소개</h6>
-            <h2>건물 관리의<br />
-              새로운 표준을 제시합니다.</h2>
-            <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
+            <!-- <h2>건물 관리의<br />
+              새로운 표준을 제시합니다.</h2> -->
+              <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4'].title"></h2>
+              <p class="rendered-p" v-html="homepageData['section-4'].subtitle"></p>
+            <!-- <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
             <p class="last-p">협회는 공정한 중재와 신뢰할 수 있는 상담을 통해,<br /> 건물 관리가 투명하게 이루어지도록 지원합니다.<br /> 모든 이해관계자에게 합당한 기준을
-              제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p>
+              제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p> -->
             <div class="link-wrapper">
               <a href="#">협회 가입신청 <span class="material-symbols-outlined">
                   arrow_right_alt
@@ -345,19 +349,21 @@
     <!-- Who wr are Section  -->
 
     <!-- Fusion Section  -->
-    <section class="fusion-section">
+    <section v-if="!loading" class="fusion-section">
       <div class="container-fluid">
         <div class="fusion-inner">
           <div class="left-section">
             <p>차별화</p>
-            <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2>
+            <!-- <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2> -->
+             <h2 v-html="homepageData['section-5'].left"></h2>
           </div>
           <div class="right-section">
-            <p>대한건물관리협회는 집합건물법에 대한 깊은 이해와 경험을 바탕으로, 법적 안정성을 제공합니다. 또한, 최신 기술을 활용하여 투명한 관리 솔루션을 제공하며, 모든 회원사들이 신뢰할 수 있는
+            <p v-html="homepageData['section-5'].right"></p>
+            <!-- <p>대한건물관리협회는 집합건물법에 대한 깊은 이해와 경험을 바탕으로, 법적 안정성을 제공합니다. 또한, 최신 기술을 활용하여 투명한 관리 솔루션을 제공하며, 모든 회원사들이 신뢰할 수 있는
               환경을
               조성합니다.</p>
             <p class="last-para">다른 협회와는 달리, 대한건물관리협회는 <span>실질적인 문제 해결에 집중</span>하며, <br /><span>중재</span>와 <span>법률
-                상담</span>을 통해 갈등을 최소화합니다.</p>
+                상담</span>을 통해 갈등을 최소화합니다.</p> -->
           </div>
         </div>
       </div>
@@ -368,7 +374,7 @@
     <!-- Fusion Section  -->
 
     <!-- Key Services Section  -->
-    <section class="key-services-section">
+    <section v-if="!loading" class="key-services-section">
       <div class="container-fluid">
         <div class="key-services-inner">
           <div class="left-section">
@@ -395,8 +401,10 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4>분쟁 중재</h4>
-                    <p>관리 과정에서 발생하는 다양한 분쟁을 공정하게 중재합니다.</p>
+                    <h4 v-html="homepageData['section-6'].list_1_title"></h4>
+                    <p v-html="homepageData['section-6'].list_1_subtitle"></p>
+                           <!-- <h4>분쟁 중재</h4> -->
+                    <!-- <p>관리 과정에서 발생하는 다양한 분쟁을 공정하게 중재합니다.</p> -->
                   </div>
                 </div>
                 <div class="key-box">
@@ -408,8 +416,10 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4>공실 관리 솔루션</h4>
-                    <p>공실 발생 시, 공용전기료와 같은 문제를 투명하게 해결합니다.</p>
+                    <h4 v-html="homepageData['section-6'].list_2_title"></h4>
+                    <p v-html="homepageData['section-6'].list_2_subtitle"></p>
+                    <!-- <h4>공실 관리 솔루션</h4>
+                    <p>공실 발생 시, 공용전기료와 같은 문제를 투명하게 해결합니다.</p> -->
                   </div>
                 </div>
                 <div class="key-box">
@@ -421,8 +431,10 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4>관리비 및 공과금 상담</h4>
-                    <p>관리비와 공과금의 투명한 부과를 돕기 위해 전문가의 상담 서비스를 제공합니다.</p>
+                    <h4 v-html="homepageData['section-6'].list_3_title"></h4>
+                    <p v-html="homepageData['section-6'].list_3_subtitle"></p>
+                    <!-- <h4>관리비 및 공과금 상담</h4>
+                    <p>관리비와 공과금의 투명한 부과를 돕기 위해 전문가의 상담 서비스를 제공합니다.</p> -->
                   </div>
                 </div>
                 <div class="key-box">
@@ -434,8 +446,10 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4>법률 분쟁 지원</h4>
-                    <p>건물 관리와 법률적인 분쟁을 신속하고 공정하게 해결하는 데 도움을 드립니다.</p>
+                    <h4 v-html="homepageData['section-6'].list_4_title"></h4>
+                    <p v-html="homepageData['section-6'].list_4_subtitle"></p>
+                    <!-- <h4>법률 분쟁 지원</h4>
+                    <p>건물 관리와 법률적인 분쟁을 신속하고 공정하게 해결하는 데 도움을 드립니다.</p> -->
                   </div>
                 </div>
               </div>
@@ -447,15 +461,17 @@
     <!-- Key Services Section  -->
 
     <!-- Benifits Member Section  -->
-    <section class="benifits-member-section">
+    <section v-if="!loading" class="benifits-member-section">
       <div class="container-fluid">
         <div class="benifits-member-inner">
           <div class="left-section">
-            <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2>
+            <h2 v-html="homepageData['section-7'].top_left"></h2>
+            <!-- <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2> -->
           </div>
           <div class="right-section">
-            <p>협회 회원이 되시면, 공정한 중재와 상담 서비스, 최신 관리 솔루션 제공, 법적 안정성 확보, 업계 네트워킹 기회 등 다양한 혜택을 누리실 수 있습니다.</p>
-            <p class="last-para">협회 가입 후 관리비 절감 및 공실 관리 문제 해결로 <br />연간 수익이 개선된 실제 사례를 확인해보세요.</p>
+            <p class="rendered-p" v-html="homepageData['section-7'].top_right"></p>
+            <!-- <p>협회 회원이 되시면, 공정한 중재와 상담 서비스, 최신 관리 솔루션 제공, 법적 안정성 확보, 업계 네트워킹 기회 등 다양한 혜택을 누리실 수 있습니다.</p>
+            <p class="last-para">협회 가입 후 관리비 절감 및 공실 관리 문제 해결로 <br />연간 수익이 개선된 실제 사례를 확인해보세요.</p> -->
           </div>
         </div>
         <div class="benifits-inner-box-wrapper">
@@ -469,7 +485,8 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4>전문 중재 및 상담 서비스</h4>
+                <h4 v-html="homepageData['section-7'].list_1_title"></h4>
+                <!-- <h4>전문 중재 및 상담 서비스</h4> -->
               </div>
             </div>
             <div class="content-box">
@@ -487,7 +504,8 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4>최적화된 관리 솔루션</h4>
+                <h4 v-html="homepageData['section-7'].list_2_title"></h4>
+                <!-- <h4>최적화된 관리 솔루션</h4> -->
               </div>
             </div>
             <div class="content-box">
@@ -505,7 +523,8 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4>법적 보호 및 산업 네트워킹</h4>
+                <h4 v-html="homepageData['section-7'].list_3_title"></h4>
+                <!-- <h4>법적 보호 및 산업 네트워킹</h4> -->
               </div>
             </div>
             <div class="content-box">
@@ -608,7 +627,7 @@
     <!-- Success Stories Section  -->
 
     <!-- Management Issues Section  -->
-    <section class="management-issues-section">
+    <section v-if="!loading" class="management-issues-section">
       <div class="container-fluid">
         <div class="management-issues-inner">
           <div class="left-section">
@@ -635,8 +654,10 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p class="desktop-title">관리비 부과 기준이 명확하고 투명하게 공개되고 있습니까?</p>
-                  <p class="mobile-title">관리비 부과 기준이 명확하고<br /> 투명하게 공개되고 있습니까?</p>
+                  <p v-html="homepageData['section-9'].list_1_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9'].list_1_text" class="mobile-title" ></p>
+                  <!-- <p class="desktop-title">관리비 부과 기준이 명확하고 투명하게 공개되고 있습니까?</p>
+                  <p class="mobile-title">관리비 부과 기준이 명확하고<br /> 투명하게 공개되고 있습니까?</p> -->
                 </div>
               </div>
               <div class="issues-box">
@@ -651,8 +672,10 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p class="desktop-title">건물 내 주요 시설의 유지보수가 정기적으로 이루어지고 있나요?</p>
-                  <p class="mobile-title">건물 내 주요 시설의 유지보수가<br /> 정기적으로 이루어지고 있나요?</p>
+                  <p v-html="homepageData['section-9'].list_2_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9'].list_2_text" class="mobile-title" ></p>
+                  <!-- <p class="desktop-title">건물 내 주요 시설의 유지보수가 정기적으로 이루어지고 있나요?</p>
+                  <p class="mobile-title">건물 내 주요 시설의 유지보수가<br /> 정기적으로 이루어지고 있나요?</p> -->
                 </div>
               </div>
               <div class="issues-box">
@@ -667,8 +690,10 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p class="desktop-title">건물 관리와 관련된 법적 분쟁을 예방하기 위한 대비가 되어 있나요?</p>
-                  <p class="mobile-title">건물 관리와 관련된 법적 분쟁을<br /> 예방하기 위한 대비가 되어 있나요?</p>
+                  <p v-html="homepageData['section-9'].list_3_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9'].list_3_text" class="mobile-title" ></p>
+                  <!-- <p class="desktop-title">건물 관리와 관련된 법적 분쟁을 예방하기 위한 대비가 되어 있나요?</p>
+                  <p class="mobile-title">건물 관리와 관련된 법적 분쟁을<br /> 예방하기 위한 대비가 되어 있나요?</p> -->
                 </div>
               </div>
               <div class="issues-box">
@@ -743,29 +768,76 @@
     </footer>
     <!-- Footer  -->
 
+    </div>
+   
+
 
 
  
 </template>
 
 <script setup>
-// const runtimeConfig = useRuntimeConfig();
-// const homepageData = ref([]);
+const runtimeConfig = useRuntimeConfig();
+import { nextTick } from 'vue';
+const homepageData = ref([]);
+const loading = ref(true)
 
 
-// onMounted(() => {
-//   getHomepageData();
-// })
+onMounted(() => {
+  getHomepageData();
+  initializeCarousel();
+})
+const initializeCarousel = () => {
+  nextTick(() => {})
+      if (typeof $ !== 'undefined' && $.fn.owlCarousel) {
+        console.log('$.fn.owlCarousel',$.fn.owlCarousel)
+        const prevIcon = '<span class="material-symbols-outlined">arrow_left_alt</span>';
+        const nextIcon = '<span class="material-symbols-outlined">arrow_right_alt</span>';
 
-// const getHomepageData = async () =>{
-//   try{
-//     const res = await $fetch(`${runtimeConfig.public.apiBase}/home`, {
-//         method: 'GET',
-//     })
-//     homepageData.value = res.data
-//   }
-//   catch (e){
-//      console.error(e)
-//   }
-// }
+        $('.success-stories-slider').owlCarousel({
+          loop: true,
+          margin: 20,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          nav: true,
+          center: false,
+          navText: [prevIcon, nextIcon],
+          dots: false,
+          responsive: {
+            0: { items: 1 },
+            260: { items: 1 },
+            380: { items: 1 },
+            768: { items: 1.5 },
+            992: { items: 2.2 },
+            1300: { items: 2.5 },
+            1441: { items: 2.8 },
+          },
+        });
+      }
+    }
+const getHomepageData = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}page/home`, {
+        method: 'GET',
+    })
+
+    homepageData.value = await res
+    loading.value = false
+    console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
 </script>
+<style>
+.rendered-p p{
+  margin-bottom: 0px;
+  /* height: 20px; */
+}
+.rendered-h p{
+  margin-bottom: 0px !important;
+}
+
+</style>
