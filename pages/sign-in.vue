@@ -15,17 +15,17 @@
                         <!-- Form Section  -->
                         <div class="form-section-wrapper">
                             <div class="form-section-inner">
-                                <form action="">
+                                <form @submit.prevent="onLogin">
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="floatingusername"
+                                            <input type="text" class="form-control" v-model="userName" id="floatingusername"
                                                 placeholder="username">
                                             <label for="floatingusername">아이디</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="floatingpassword"
+                                            <input type="password" class="form-control" v-model="password" id="floatingpassword"
                                                 placeholder="password">
                                             <label for="floatingpassword">비밀번호</label>
                                         </div>
@@ -104,3 +104,35 @@
     </div>
     <!-- Forgot Password Pop up  -->
 </template>
+
+
+<script setup>
+const runtimeConfig = useRuntimeConfig();
+
+const userName = ref('')
+const password = ref('')
+const loading =  ref(false)
+
+const onLogin = async() =>{
+        try{
+            loading.value = true;
+            const res = await $fetch(`${runtimeConfig.public.apiBase}auth/login`, {
+                method: 'POST',
+                body:{
+                    username: userName.value,
+                    password:password.value
+                }
+            })
+
+            homepageData.value = await res
+            loading.value = false
+            console.log('res',res)
+        }
+        catch (e){
+            console.error(e)
+            loading.value = false
+        }
+
+}
+
+</script>

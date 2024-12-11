@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+
+import Aura from '@primevue/themes/aura';
 export default defineNuxtConfig({
   plugins:["~/plugins/customHandler.js"],
   app:{
@@ -101,5 +104,15 @@ export default defineNuxtConfig({
       apiBase: process.env.apiBase || "https://testingpro.xyz/api/v1/",
     },
   },
+  modules: [
+    '@primevue/nuxt-module'
+],
+primevue: {
+  options: {
+      theme: {
+          preset: Aura
+      }
+  }
+}
 
 })

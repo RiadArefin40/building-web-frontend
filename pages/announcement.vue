@@ -1,6 +1,6 @@
 <template>
-   <!-- Header  -->
-   <Header />
+    <!-- Header  -->
+    <Header />
     <!-- Header  -->
 
     <!-- Announcements Top Section  -->
@@ -61,21 +61,18 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
-                                                <li v-for="category in categories" :key="category.id" class="nav-item ProductNav_Link" role="presentation">
-                                                    <button 
-                                                    class="nav-link" 
-                                                    :class="{ active: category.id == selectedCategory }"
-                                                    :id="category.id"
-                                                    data-bs-toggle="pill" 
-                                                    data-bs-target="#pills-home" 
-                                                    type="button"
-                                                    role="tab" 
-                                                    :aria-controls="'pills-' + category.id" 
-                                                    @click="selectCategory(category.id)">
-                                                    {{ category.name }} 
+                                                <li v-for="category in categories" :key="category.id"
+                                                    class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link"
+                                                        :class="{ active: category.id == selectedCategory }"
+                                                        :id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        :aria-controls="'pills-' + category.id"
+                                                        @click="selectCategory(category.id)">
+                                                        {{ category.name }}
                                                     </button>
                                                 </li>
-                                                
+
                                                 <!-- <li class="nav-item ProductNav_Link" role="presentation">
                                                     <button class="nav-link" id="pills-profile-tab"
                                                         data-bs-toggle="pill" data-bs-target="#pills-profile"
@@ -126,10 +123,11 @@
                                     </div>
                                     <div class="select-filter">
                                         <div class="form-group">
-                                            <select class="form-select" v-model="sortOrder" aria-label="Default select example">
-      <option value="latest" selected>최신 순</option>
-      <option value="oldest">오래된 순</option>
-    </select>
+                                            <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example">
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +198,13 @@
                                                     </div>
                                                 </div> -->
                                                 <!-- <div v-if="!loading" v-html="truncate(homepageData.data[0].body)"></div> -->
-                                                <div  class="news-box" v-for="news in homepageData.data" :class="{ active: news.is_pinned }" >
+
+
+                                                <ProgressSpinner v-if="loading" style="width: 50px; height: 50px"
+                                                    strokeWidth="8" fill="transparent" animationDuration=".5s"
+                                                    aria-label="Custom ProgressSpinner" />
+                                                <div v-else class="news-box" v-for="news in homepageData.data"
+                                                    :class="{ active: news.is_pinned }">
                                                     <div class="category-date-wrapper">
                                                         <div class="category-wrapper">
                                                             <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -214,23 +218,24 @@
                                                         </div>
                                                         <div class="date-wrapper">
                                                             <!-- <h5>2024년 9월 18일</h5> -->
-                                                             <h5>{{formatTimestamp(news.created_at) }}</h5>
+                                                            <h5>{{ formatTimestamp(news.created_at) }}</h5>
                                                         </div>
                                                     </div>
-                                                    <div class="news-title">
+                                                    <div class="news-title truncate-title">
                                                         <!-- <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3> -->
-                                                         <h2>{{ news.topic }}</h2>
+                                                        <h2>{{ news.topic }}</h2>
                                                     </div>
-                                                    <div class="content-wrapper">
+                                                    <div class="content-wrapper truncate">
                                                         <!-- <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
                                                         </p> -->
-                                                        <p v-html="truncate(news.body)"></p>
+                                                        <p v-html="news.body"></p>
                                                     </div>
                                                     <div class="link-wrapper">
                                                         <NuxtLink :to="`/announcements-details/${news.id}`">
-    자세히 보기
-    <span class="material-symbols-outlined">arrow_right_alt</span>
-  </NuxtLink>
+                                                            자세히 보기
+                                                            <span
+                                                                class="material-symbols-outlined">arrow_right_alt</span>
+                                                        </NuxtLink>
                                                     </div>
                                                 </div>
 
@@ -1234,16 +1239,20 @@
                                     <div class="pagination-outer-wrappers">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#"><span class="desktop-version">이전 페이지</span> <span class="material-symbols-outlined mobile-version">
-                                                    arrow_left_alt
-                                                </span></a></li>
+                                                <li class="page-item"><a class="page-link" href="#"><span
+                                                            class="desktop-version">이전 페이지</span> <span
+                                                            class="material-symbols-outlined mobile-version">
+                                                            arrow_left_alt
+                                                        </span></a></li>
                                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span class="desktop-version">다음 페이지</span>  <span class="material-symbols-outlined mobile-version">
-                                                    arrow_right_alt
-                                                </span></a></li>
+                                                <li class="page-item"><a class="page-link" href="#"><span
+                                                            class="desktop-version">다음 페이지</span> <span
+                                                            class="material-symbols-outlined mobile-version">
+                                                            arrow_right_alt
+                                                        </span></a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -1301,7 +1310,7 @@
 </template>
 
 <script setup>
-
+import ProgressSpinner from 'primevue/progressspinner';
 const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
 const homepageData = ref([]);
@@ -1314,206 +1323,224 @@ const searchText = ref('')
 
 onMounted(() => {
     geCategories()
-  getHomepageData();
-//   initializeCarousel();
-   var SETTINGS = {
-            navBarTravelling: false,
-            navBarTravelDirection: "",
-            navBarTravelDistance: 150
+    getHomepageData();
+    //   initializeCarousel();
+    var SETTINGS = {
+        navBarTravelling: false,
+        navBarTravelDirection: "",
+        navBarTravelDistance: 150
+    }
+
+    var colours = {
+        0: "#fead00"
+    }
+
+    var AdvancerLeft = document.getElementById("AdvancerLeft");
+    var AdvancerRight = document.getElementById("AdvancerRight");
+
+
+    ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+
+
+
+
+    AdvancerLeft.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
         }
 
-        var colours = {
-            0: "#fead00"
-        }
 
-        var AdvancerLeft = document.getElementById("AdvancerLeft");
-        var AdvancerRight = document.getElementById("AdvancerRight");
-
-
-        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
-
-
-
-
-        AdvancerLeft.addEventListener("click", function () {
-            // If in the middle of a move return
-            if (SETTINGS.navBarTravelling === true) {
-                return;
-            }
-
-    
-            // If we have content overflowing both sides or on the left
-            if (determineOverflow(ProductNavContents, ProductNav) === "left" || determineOverflow(ProductNavContents, ProductNav) === "both") {
-                // Find how far this panel has been scrolled
-                var availableScrollLeft = ProductNav.scrollLeft;
-                // If the space available is less than two lots of our desired distance, just move the whole amount
-                // otherwise, move by the amount in the settings
-                if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
-                    ProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
-                } else {
-                    ProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
-                }
-                // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
-                ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
-                // Update our settings
-                SETTINGS.navBarTravelDirection = "left";
-                SETTINGS.navBarTravelling = true;
-            }
-            // Now update the attribute in the DOM
-            ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
-        });
-
-        AdvancerRight.addEventListener("click", function () {
-            // If in the middle of a move return
-            if (SETTINGS.navBarTravelling === true) {
-                return;
-            }
-            // If we have content overflowing both sides or on the right
-            if (determineOverflow(ProductNavContents, ProductNav) === "right" || determineOverflow(ProductNavContents, ProductNav) === "both") {
-                // Get the right edge of the container and content
-                var navBarRightEdge = ProductNavContents.getBoundingClientRect().right;
-                var navBarScrollerRightEdge = ProductNav.getBoundingClientRect().right;
-                // Now we know how much space we have available to scroll
-                var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
-                // If the space available is less than two lots of our desired distance, just move the whole amount
-                // otherwise, move by the amount in the settings
-                if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
-                    ProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
-                } else {
-                    ProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
-                }
-                // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
-                ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
-                // Update our settings
-                SETTINGS.navBarTravelDirection = "right";
-                SETTINGS.navBarTravelling = true;
-            }
-            // Now update the attribute in the DOM
-            ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
-        });
-
-
-        ProductNavContents.addEventListener(
-            "transitionend",
-            function () {
-                // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
-                var styleOfTransform = window.getComputedStyle(ProductNavContents, null);
-                var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
-                // If there is no transition we want to default to 0 and not null
-                var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
-                ProductNavContents.style.transform = "none";
-                ProductNavContents.classList.add("ProductNav_Contents-no-transition");
-                // Now lets set the scroll position
-                if (SETTINGS.navBarTravelDirection === "left") {
-                    ProductNav.scrollLeft = ProductNav.scrollLeft - amount;
-                } else {
-                    ProductNav.scrollLeft = ProductNav.scrollLeft + amount;
-                }
-                SETTINGS.navBarTravelling = false;
-            },
-            false
-        );
-
-
-
-        function determineOverflow(content, container) {
-            var containerMetrics = container.getBoundingClientRect();
-            var containerMetricsRight = Math.floor(containerMetrics.right);
-            var containerMetricsLeft = Math.floor(containerMetrics.left);
-            var contentMetrics = content.getBoundingClientRect();
-            var contentMetricsRight = Math.floor(contentMetrics.right);
-            var contentMetricsLeft = Math.floor(contentMetrics.left);
-            if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
-                return "both";
-            } else if (contentMetricsLeft < containerMetricsLeft) {
-                return "left";
-            } else if (contentMetricsRight > containerMetricsRight) {
-                return "right";
+        // If we have content overflowing both sides or on the left
+        if (determineOverflow(ProductNavContents, ProductNav) === "left" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Find how far this panel has been scrolled
+            var availableScrollLeft = ProductNav.scrollLeft;
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
             } else {
-                return "none";
+                ProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
             }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "left";
+            SETTINGS.navBarTravelling = true;
         }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+    AdvancerRight.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
+        }
+        // If we have content overflowing both sides or on the right
+        if (determineOverflow(ProductNavContents, ProductNav) === "right" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Get the right edge of the container and content
+            var navBarRightEdge = ProductNavContents.getBoundingClientRect().right;
+            var navBarScrollerRightEdge = ProductNav.getBoundingClientRect().right;
+            // Now we know how much space we have available to scroll
+            var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
+            } else {
+                ProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
+            }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "right";
+            SETTINGS.navBarTravelling = true;
+        }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+
+    ProductNavContents.addEventListener(
+        "transitionend",
+        function () {
+            // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
+            var styleOfTransform = window.getComputedStyle(ProductNavContents, null);
+            var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
+            // If there is no transition we want to default to 0 and not null
+            var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
+            ProductNavContents.style.transform = "none";
+            ProductNavContents.classList.add("ProductNav_Contents-no-transition");
+            // Now lets set the scroll position
+            if (SETTINGS.navBarTravelDirection === "left") {
+                ProductNav.scrollLeft = ProductNav.scrollLeft - amount;
+            } else {
+                ProductNav.scrollLeft = ProductNav.scrollLeft + amount;
+            }
+            SETTINGS.navBarTravelling = false;
+        },
+        false
+    );
+
+
+
+    function determineOverflow(content, container) {
+        var containerMetrics = container.getBoundingClientRect();
+        var containerMetricsRight = Math.floor(containerMetrics.right);
+        var containerMetricsLeft = Math.floor(containerMetrics.left);
+        var contentMetrics = content.getBoundingClientRect();
+        var contentMetricsRight = Math.floor(contentMetrics.right);
+        var contentMetricsLeft = Math.floor(contentMetrics.left);
+        if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+            return "both";
+        } else if (contentMetricsLeft < containerMetricsLeft) {
+            return "left";
+        } else if (contentMetricsRight > containerMetricsRight) {
+            return "right";
+        } else {
+            return "none";
+        }
+    }
 
 })
 
-const getHomepageData = async () =>{
-  try{
-    const res = await $fetch(`${runtimeConfig.public.apiBase}announcements`, {
-        method: 'GET',
-    })
+const getHomepageData = async () => {
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements`, {
+            method: 'GET',
+        })
 
-    homepageData.value = await res
-    loading.value = false
-    console.log('res',res)
-  }
-  catch (e){
-     console.error(e)
-     loading.value = false
-  }
+        homepageData.value = await res
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
 }
-const geCategories = async () =>{
-  try{
-    const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
-        method: 'GET',
-    })
+const geCategories = async () => {
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+            method: 'GET',
+        })
 
-    categories.value = await res.data
-    loading.value = false
-    console.log('res',res)
-  }
-  catch (e){
-     console.error(e)
-     loading.value = false
-  }
-}
-
-
-
-function truncate(content) {
-  return content.length > 200 ? `${content.slice(0, 200)}...` : content;
+        categories.value = await res.data
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
 }
 
-function  formatTimestamp(timestamp) {
-      return new Date(timestamp).toLocaleString(); 
+
+
+
+
+function formatTimestamp(timestamp) {
+    return new Date(timestamp).toLocaleString();
 }
 
- async function selectCategory (id) {
+async function selectCategory(id) {
     // selectCategory.value = id
-    try{
+    try {
+        loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${id}`, {
-    method: 'GET',
-});
+            method: 'GET',
+        });
 
-homepageData.value = await res
-    loading.value = false
-    console.log('res',res)
-  }
-  catch (e){
-     console.error(e)
-     loading.value = false
-  }
+        homepageData.value = await res
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
 }
 watch(searchText, async (newSearchText) => {
-//   if (newSearchText.trim() === '') {
-//     homepageData.value = []; 
-//     return;
-//   }
+    //   if (newSearchText.trim() === '') {
+    //     homepageData.value = []; 
+    //     return;
+    //   }
 
-  loading.value = true;
+    loading.value = true;
 
 
-  try {
-    const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?&search=${newSearchText}`, {
-      method: 'GET',
-    });
+    try {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?&search=${newSearchText}`, {
+            method: 'GET',
+        });
 
-    homepageData.value = res;  // Assuming the response has a 'data' field with the results
-  } catch (err) {
-    console.error(err);
-  } finally {
-    loading.value = false;
-  }
+        homepageData.value = res;  // Assuming the response has a 'data' field with the results
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loading.value = false;
+    }
 });
 
 
 </script>
+
+<style>
+.truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
