@@ -18,15 +18,15 @@
                                 <form @submit.prevent="onLogin">
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" v-model="userName" id="floatingusername"
-                                                placeholder="username">
+                                            <input type="text" class="form-control" v-model="userName"
+                                                id="floatingusername" placeholder="username">
                                             <label for="floatingusername">아이디</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" v-model="password" id="floatingpassword"
-                                                placeholder="password">
+                                            <input type="password" class="form-control" v-model="password"
+                                                id="floatingpassword" placeholder="password">
                                             <label for="floatingpassword">비밀번호</label>
                                         </div>
                                     </div>
@@ -57,7 +57,8 @@
                     <!-- Bottom Section  -->
                     <div class="bottom-section-wrapper">
                         <div class="inner-wrapper">
-                            <p>회원이 아니신가요?   <NuxtLink to = "/sign-up">회원가입 하기 ></NuxtLink></p>
+                            <p>회원이 아니신가요? <NuxtLink to="/sign-up">회원가입 하기 ></NuxtLink>
+                            </p>
                         </div>
                     </div>
                     <!-- Bottom Section  -->
@@ -77,7 +78,8 @@
 
     <!-- Forgot Password Pop up  -->
     <!-- Modal -->
-    <div class="modal fade forgot-password-popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade forgot-password-popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,8 +90,7 @@
                     <form action="">
                         <div class="form-group">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="floatinguseremail"
-                                    placeholder="이메일 아이디">
+                                <input type="email" class="form-control" id="floatinguseremail" placeholder="이메일 아이디">
                                 <label for="floatinguseremail">당신의 이메일 ID를 알려주세요</label>
                             </div>
                         </div>
@@ -98,40 +99,58 @@
                         </div>
                     </form>
                 </div>
-                
+
             </div>
         </div>
     </div>
     <!-- Forgot Password Pop up  -->
+    <Toast />
 </template>
 
 
 <script setup>
+import useAuth from '@/composables/useAuth';
+const { login } = useAuth();
 const runtimeConfig = useRuntimeConfig();
-
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+import Toast from 'primevue/toast';
 const userName = ref('')
 const password = ref('')
-const loading =  ref(false)
+const loading = ref(false)
+const router = useRouter();
 
-const onLogin = async() =>{
-        try{
-            loading.value = true;
-            const res = await $fetch(`${runtimeConfig.public.apiBase}auth/login`, {
-                method: 'POST',
-                body:{
-                    username: userName.value,
-                    password:password.value
-                }
-            })
+const onLogin = async () => {
+    try {
+        loading.value = true;
+        const res = await $fetch(`${runtimeConfig.public.apiBase}auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type
+            },
+            body: {
+                username: userName.value,
+                password: password.value
+            }
+        })
 
-            homepageData.value = await res
-            loading.value = false
-            console.log('res',res)
+        if (res.token) {
+            login(res.token,res.data );
+            const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
+            router.push(redirectTo);
         }
-        catch (e){
-            console.error(e)
-            loading.value = false
-        }
+
+     
+        loading.value = false
+        toast.add({ detail:res.message , life: 3000 });
+        console.log('res', res)
+    }
+    catch (e) {
+
+        console.log('erroe', e)
+        toast.add({ detail:'Something Went Wrong' , life: 3000 });
+        loading.value = false
+    }
 
 }
 

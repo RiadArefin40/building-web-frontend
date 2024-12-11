@@ -549,7 +549,7 @@ $(window).scroll(function () {
 // });
 $(document).ready(function(){
 	// $('#myVideo').play();
-	$('#loginModal').modal('show');
+	// $('#loginModal').modal('show');
 });
 
 slowScroll();

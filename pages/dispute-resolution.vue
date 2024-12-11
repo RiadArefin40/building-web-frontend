@@ -2,7 +2,6 @@
      <!-- Header  -->
      <Header />
     <!-- Header  -->
-
     <!-- Dispute Resolution Top Section  -->
     <div class="dispute-resolution-top-section-wrapper">
         <div class="container-fluid">
@@ -755,17 +754,26 @@
                 </div>
             </div>
         </div>
+       
     </div>
     <!-- Login Modal  -->
 </template>
 
 <script setup>
-
+import useAuth from '@/composables/useAuth';
+const { isAuthenticated } = useAuth();
+definePageMeta({
+  middleware: ['auth'],
+});
 onMounted(() => {
-    $(document).ready(function(){
-	// $('#myVideo').play();
+    if(!isAuthenticated){
+        $(document).ready(function(){
+
 	$('#loginModal').modal('show');
 });
+    }
+
+
 })
 
 

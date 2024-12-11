@@ -14,24 +14,24 @@
                         <!-- Form Section  -->
                         <div class="form-section-wrapper">
                             <div class="form-section-inner">
-                                <form action="">
+                                <form @submit.prevent="onSignUp">
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="floatingusername"
+                                            <input type="text" class="form-control" v-model="userName" id="floatingusername"
                                                 placeholder="username">
                                             <label for="floatingusername">아이디</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="floatingpassword"
+                                            <input type="password" v-model="password" class="form-control" id="floatingpassword"
                                                 placeholder="password">
                                             <label for="floatingpassword">비밀번호</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="floatingpassword"
+                                            <input type="password" v-model="confirmPassword" class="form-control" id="floatingpassword"
                                                 placeholder="password">
                                             <label for="floatingpassword">비밀번호 확인</label>
                                         </div>
@@ -40,7 +40,7 @@
                                         <div class="col-inner">
                                             <div class="form-group">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="floatingfirstname"
+                                                    <input type="text" v-model="name" class="form-control" id="floatingfirstname"
                                                         placeholder="firstname">
                                                     <label for="floatingfirstname">이름</label>
                                                 </div>
@@ -49,7 +49,7 @@
                                         <div class="col-inner">
                                             <div class="form-group">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="floatinglastname"
+                                                    <input type="text" v-model="position" class="form-control" id="floatinglastname"
                                                         placeholder="lastname">
                                                     <label for="floatinglastname">직책</label>
                                                 </div>
@@ -58,14 +58,14 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="floatingemail"
+                                            <input type="email" v-model="email" class="form-control" id="floatingemail"
                                                 placeholder="email">
                                             <label for="floatingemail">이메일 주소</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="floatingaddress"
+                                            <input type="text" v-model="phone_number" class="form-control" id="floatingaddress"
                                                 placeholder="address">
                                             <label for="floatingaddress">전화 번호</label>
                                         </div>
@@ -105,5 +105,69 @@
             </div>
         </div>
     </div>
+    <Toast />
     <!-- Sign in up Wrapper  -->
 </template>
+
+
+<script setup>
+import useAuth from '@/composables/useAuth';
+const { login } = useAuth();
+const runtimeConfig = useRuntimeConfig();
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+import Toast from 'primevue/toast';
+const router = useRouter();
+
+const userName = ref('')
+const name = ref('')
+const email = ref('')
+const phone_number = ref('')
+const position = ref('')
+const password = ref(false)
+const confirmPassword = ref(false)
+const loading = ref(false)
+
+
+const onSignUp = async ()=>{
+
+    try {
+        loading.value = true;
+        const res = await $fetch(`${runtimeConfig.public.apiBase}auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type
+            },
+            body: {username:userName.value,
+                    name:name.value,
+                    email:email.value,
+                    position:position.value,
+                    password:password.value,
+                    password_confirmation:confirmPassword.value,
+                    phone_number:phone_number.value}
+        })
+
+        if (res.token) {
+            login(res.token,res.data );
+            const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
+            router.push(redirectTo);
+        }
+
+     
+        loading.value = false
+        toast.add({ detail:res.message , life: 3000 });
+        console.log('res', res)
+    }
+    catch (e) {
+
+        console.log('erroe', e)
+        toast.add({ detail:'Something Went Wrong' , life: 3000 });
+        loading.value = false
+    }
+
+
+
+}
+
+
+</script>
