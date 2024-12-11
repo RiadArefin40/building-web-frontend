@@ -758,3 +758,16 @@
     </div>
     <!-- Login Modal  -->
 </template>
+
+<script setup>
+
+onMounted(() => {
+    $(document).ready(function(){
+	// $('#myVideo').play();
+	$('#loginModal').modal('show');
+});
+})
+
+
+
+</script>

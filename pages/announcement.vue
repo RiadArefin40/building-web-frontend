@@ -38,7 +38,7 @@
                                                 fill="black" />
                                         </g>
                                     </svg></button>
-                                <input type="text" class="form-control" placeholder="공지사항 검색 ...">
+                                <input v-model="searchText" type="text" class="form-control" placeholder="공지사항 검색 ...">
                             </div>
                         </form>
                     </div>
@@ -61,13 +61,22 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link active" id="pills-home-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-                                                        role="tab" aria-controls="pills-home" aria-selected="true">모든
-                                                        공지사항</button>
+                                                <li v-for="category in categories" :key="category.id" class="nav-item ProductNav_Link" role="presentation">
+                                                    <button 
+                                                    class="nav-link" 
+                                                    :class="{ active: category.id == selectedCategory }"
+                                                    :id="category.id"
+                                                    data-bs-toggle="pill" 
+                                                    data-bs-target="#pills-home" 
+                                                    type="button"
+                                                    role="tab" 
+                                                    :aria-controls="'pills-' + category.id" 
+                                                    @click="selectCategory(category.id)">
+                                                    {{ category.name }} 
+                                                    </button>
                                                 </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
+                                                
+                                                <!-- <li class="nav-item ProductNav_Link" role="presentation">
                                                     <button class="nav-link" id="pills-profile-tab"
                                                         data-bs-toggle="pill" data-bs-target="#pills-profile"
                                                         type="button" role="tab" aria-controls="pills-profile"
@@ -95,7 +104,7 @@
                                                     <button class="nav-link" id="pills-extra-tab" data-bs-toggle="pill"
                                                         data-bs-target="#pills-extra" type="button" role="tab"
                                                         aria-controls="pills-extra" aria-selected="false">모범 사례</button>
-                                                </li>
+                                                </li> -->
                                                 <span id="Indicator" class="ProductNav_Indicator"></span>
                                             </div>
                                         </nav>
@@ -117,10 +126,10 @@
                                     </div>
                                     <div class="select-filter">
                                         <div class="form-group">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>최신 순</option>
-                                                <option>오래된 순</option>
-                                            </select>
+                                            <select class="form-select" v-model="sortOrder" aria-label="Default select example">
+      <option value="latest" selected>최신 순</option>
+      <option value="oldest">오래된 순</option>
+    </select>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +141,100 @@
                                             aria-labelledby="pills-home-tab" tabindex="0">
                                             <!-- announcements News Inner  -->
                                             <div class="news-inner-wrapper">
-                                                <div class="news-box active">
+                                                <!-- <div class="news-box active">
+                                                    <div class="category-date-wrapper">
+                                                        <div class="category-wrapper">
+                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path
+                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
+                                                                        stroke="currentColor" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg> 고정됨</h5>
+                                                        </div>
+                                                        <div class="date-wrapper">
+                                                            <h5>2024년 9월 18일</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="news-title">
+                                                        <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3>
+                                                    </div>
+                                                    <div class="content-wrapper">
+                                                        <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
+                                                        </p>
+                                                    </div>
+                                                    <div class="link-wrapper">
+                                                        <a href="./announcements-details.html">자세히 보기 <span class="material-symbols-outlined">
+                                                                arrow_right_alt
+                                                            </span></a>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="news-box">
+                                                    <div class="category-date-wrapper">
+                                                        <div class="category-wrapper">
+                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path
+                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
+                                                                        stroke="currentColor" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg> 고정됨</h5>
+                                                        </div>
+                                                        <div class="date-wrapper">
+                                                            <h5>2024년 9월 18일</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="news-title">
+                                                        <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3>
+                                                    </div>
+                                                    <div class="content-wrapper">
+                                                        <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
+                                                        </p>
+                                                    </div>
+                                                    <div class="link-wrapper">
+                                                        <a href="./announcements-details.html">자세히 보기 <span class="material-symbols-outlined">
+                                                                arrow_right_alt
+                                                            </span></a>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div v-if="!loading" v-html="truncate(homepageData.data[0].body)"></div> -->
+                                                <div  class="news-box" v-for="news in homepageData.data" :class="{ active: news.is_pinned }" >
+                                                    <div class="category-date-wrapper">
+                                                        <div class="category-wrapper">
+                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path
+                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
+                                                                        stroke="currentColor" stroke-width="1.5"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg> 고정됨</h5>
+                                                        </div>
+                                                        <div class="date-wrapper">
+                                                            <!-- <h5>2024년 9월 18일</h5> -->
+                                                             <h5>{{formatTimestamp(news.created_at) }}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="news-title">
+                                                        <!-- <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3> -->
+                                                         <h2>{{ news.topic }}</h2>
+                                                    </div>
+                                                    <div class="content-wrapper">
+                                                        <!-- <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
+                                                        </p> -->
+                                                        <p v-html="truncate(news.body)"></p>
+                                                    </div>
+                                                    <div class="link-wrapper">
+                                                        <NuxtLink :to="`/announcements-details/${news.id}`">
+    자세히 보기
+    <span class="material-symbols-outlined">arrow_right_alt</span>
+  </NuxtLink>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="news-box">
                                                     <div class="category-date-wrapper">
                                                         <div class="category-wrapper">
                                                             <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -218,94 +320,7 @@
                                                                 arrow_right_alt
                                                             </span></a>
                                                     </div>
-                                                </div>
-                                                <div class="news-box">
-                                                    <div class="category-date-wrapper">
-                                                        <div class="category-wrapper">
-                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                    height="20" viewBox="0 0 20 20" fill="none">
-                                                                    <path
-                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
-                                                                        stroke="currentColor" stroke-width="1.5"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round" />
-                                                                </svg> 고정됨</h5>
-                                                        </div>
-                                                        <div class="date-wrapper">
-                                                            <h5>2024년 9월 18일</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="news-title">
-                                                        <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3>
-                                                    </div>
-                                                    <div class="content-wrapper">
-                                                        <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
-                                                        </p>
-                                                    </div>
-                                                    <div class="link-wrapper">
-                                                        <a href="./announcements-details.html">자세히 보기 <span class="material-symbols-outlined">
-                                                                arrow_right_alt
-                                                            </span></a>
-                                                    </div>
-                                                </div>
-                                                <div class="news-box">
-                                                    <div class="category-date-wrapper">
-                                                        <div class="category-wrapper">
-                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                    height="20" viewBox="0 0 20 20" fill="none">
-                                                                    <path
-                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
-                                                                        stroke="currentColor" stroke-width="1.5"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round" />
-                                                                </svg> 고정됨</h5>
-                                                        </div>
-                                                        <div class="date-wrapper">
-                                                            <h5>2024년 9월 18일</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="news-title">
-                                                        <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3>
-                                                    </div>
-                                                    <div class="content-wrapper">
-                                                        <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
-                                                        </p>
-                                                    </div>
-                                                    <div class="link-wrapper">
-                                                        <a href="./announcements-details.html">자세히 보기 <span class="material-symbols-outlined">
-                                                                arrow_right_alt
-                                                            </span></a>
-                                                    </div>
-                                                </div>
-                                                <div class="news-box">
-                                                    <div class="category-date-wrapper">
-                                                        <div class="category-wrapper">
-                                                            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                    height="20" viewBox="0 0 20 20" fill="none">
-                                                                    <path
-                                                                        d="M6.98065 13.0138L2.2666 17.7279M9.74539 5.53507L8.44465 6.83581C8.33854 6.94191 8.28549 6.99496 8.22505 7.03712C8.1714 7.07453 8.11353 7.10551 8.05264 7.12939C7.98404 7.1563 7.91047 7.17101 7.76333 7.20044L4.70961 7.81118C3.91602 7.9699 3.51923 8.04926 3.33359 8.25847C3.17187 8.44073 3.09802 8.68464 3.13148 8.92599C3.16989 9.20304 3.45602 9.48917 4.02829 10.0614L9.93307 15.9662C10.5053 16.5385 10.7915 16.8246 11.0685 16.863C11.3099 16.8965 11.5538 16.8226 11.736 16.6609C11.9452 16.4753 12.0246 16.0785 12.1833 15.2849L12.7941 12.2312C12.8235 12.084 12.8382 12.0105 12.8651 11.9419C12.889 11.881 12.92 11.8231 12.9574 11.7695C12.9995 11.709 13.0526 11.656 13.1587 11.5499L14.4594 10.2491C14.5273 10.1813 14.5612 10.1474 14.5985 10.1177C14.6316 10.0914 14.6667 10.0677 14.7034 10.0467C14.7447 10.0231 14.7888 10.0042 14.877 9.9664L16.9556 9.07555C17.5621 8.81566 17.8653 8.68572 18.003 8.47573C18.1234 8.2921 18.1665 8.06835 18.1229 7.85312C18.073 7.607 17.8398 7.37374 17.3732 6.90722L13.0873 2.62127C12.6208 2.15475 12.3875 1.92149 12.1414 1.8716C11.9262 1.82797 11.7024 1.87106 11.5188 1.9915C11.3088 2.12923 11.1788 2.43244 10.9189 3.03886L10.0281 5.11749C9.99031 5.20567 9.97142 5.24976 9.9478 5.2911C9.92682 5.32783 9.90307 5.36291 9.87676 5.39603C9.84714 5.43331 9.81322 5.46723 9.74539 5.53507Z"
-                                                                        stroke="currentColor" stroke-width="1.5"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round" />
-                                                                </svg> 고정됨</h5>
-                                                        </div>
-                                                        <div class="date-wrapper">
-                                                            <h5>2024년 9월 18일</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="news-title">
-                                                        <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3>
-                                                    </div>
-                                                    <div class="content-wrapper">
-                                                        <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
-                                                        </p>
-                                                    </div>
-                                                    <div class="link-wrapper">
-                                                        <a href="./announcements-details.html">자세히 보기 <span class="material-symbols-outlined">
-                                                                arrow_right_alt
-                                                            </span></a>
-                                                    </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <!-- announcements News Inner  -->
                                         </div>
@@ -1284,3 +1299,221 @@
     </footer>
     <!-- Footer  -->
 </template>
+
+<script setup>
+
+const runtimeConfig = useRuntimeConfig();
+import { nextTick } from 'vue';
+const homepageData = ref([]);
+const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
+const loading = ref(true)
+const selectedCategory = ref('1')
+const searchText = ref('')
+
+
+
+onMounted(() => {
+    geCategories()
+  getHomepageData();
+//   initializeCarousel();
+   var SETTINGS = {
+            navBarTravelling: false,
+            navBarTravelDirection: "",
+            navBarTravelDistance: 150
+        }
+
+        var colours = {
+            0: "#fead00"
+        }
+
+        var AdvancerLeft = document.getElementById("AdvancerLeft");
+        var AdvancerRight = document.getElementById("AdvancerRight");
+
+
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+
+
+
+
+        AdvancerLeft.addEventListener("click", function () {
+            // If in the middle of a move return
+            if (SETTINGS.navBarTravelling === true) {
+                return;
+            }
+
+    
+            // If we have content overflowing both sides or on the left
+            if (determineOverflow(ProductNavContents, ProductNav) === "left" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+                // Find how far this panel has been scrolled
+                var availableScrollLeft = ProductNav.scrollLeft;
+                // If the space available is less than two lots of our desired distance, just move the whole amount
+                // otherwise, move by the amount in the settings
+                if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
+                    ProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
+                } else {
+                    ProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
+                }
+                // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+                ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+                // Update our settings
+                SETTINGS.navBarTravelDirection = "left";
+                SETTINGS.navBarTravelling = true;
+            }
+            // Now update the attribute in the DOM
+            ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+        });
+
+        AdvancerRight.addEventListener("click", function () {
+            // If in the middle of a move return
+            if (SETTINGS.navBarTravelling === true) {
+                return;
+            }
+            // If we have content overflowing both sides or on the right
+            if (determineOverflow(ProductNavContents, ProductNav) === "right" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+                // Get the right edge of the container and content
+                var navBarRightEdge = ProductNavContents.getBoundingClientRect().right;
+                var navBarScrollerRightEdge = ProductNav.getBoundingClientRect().right;
+                // Now we know how much space we have available to scroll
+                var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
+                // If the space available is less than two lots of our desired distance, just move the whole amount
+                // otherwise, move by the amount in the settings
+                if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
+                    ProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
+                } else {
+                    ProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
+                }
+                // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+                ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+                // Update our settings
+                SETTINGS.navBarTravelDirection = "right";
+                SETTINGS.navBarTravelling = true;
+            }
+            // Now update the attribute in the DOM
+            ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+        });
+
+
+        ProductNavContents.addEventListener(
+            "transitionend",
+            function () {
+                // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
+                var styleOfTransform = window.getComputedStyle(ProductNavContents, null);
+                var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
+                // If there is no transition we want to default to 0 and not null
+                var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
+                ProductNavContents.style.transform = "none";
+                ProductNavContents.classList.add("ProductNav_Contents-no-transition");
+                // Now lets set the scroll position
+                if (SETTINGS.navBarTravelDirection === "left") {
+                    ProductNav.scrollLeft = ProductNav.scrollLeft - amount;
+                } else {
+                    ProductNav.scrollLeft = ProductNav.scrollLeft + amount;
+                }
+                SETTINGS.navBarTravelling = false;
+            },
+            false
+        );
+
+
+
+        function determineOverflow(content, container) {
+            var containerMetrics = container.getBoundingClientRect();
+            var containerMetricsRight = Math.floor(containerMetrics.right);
+            var containerMetricsLeft = Math.floor(containerMetrics.left);
+            var contentMetrics = content.getBoundingClientRect();
+            var contentMetricsRight = Math.floor(contentMetrics.right);
+            var contentMetricsLeft = Math.floor(contentMetrics.left);
+            if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+                return "both";
+            } else if (contentMetricsLeft < containerMetricsLeft) {
+                return "left";
+            } else if (contentMetricsRight > containerMetricsRight) {
+                return "right";
+            } else {
+                return "none";
+            }
+        }
+
+})
+
+const getHomepageData = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}announcements`, {
+        method: 'GET',
+    })
+
+    homepageData.value = await res
+    loading.value = false
+    console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
+const geCategories = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+        method: 'GET',
+    })
+
+    categories.value = await res.data
+    loading.value = false
+    console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
+
+
+
+function truncate(content) {
+  return content.length > 200 ? `${content.slice(0, 200)}...` : content;
+}
+
+function  formatTimestamp(timestamp) {
+      return new Date(timestamp).toLocaleString(); 
+}
+
+ async function selectCategory (id) {
+    // selectCategory.value = id
+    try{
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${id}`, {
+    method: 'GET',
+});
+
+homepageData.value = await res
+    loading.value = false
+    console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
+watch(searchText, async (newSearchText) => {
+//   if (newSearchText.trim() === '') {
+//     homepageData.value = []; 
+//     return;
+//   }
+
+  loading.value = true;
+
+
+  try {
+    const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?&search=${newSearchText}`, {
+      method: 'GET',
+    });
+
+    homepageData.value = res;  // Assuming the response has a 'data' field with the results
+  } catch (err) {
+    console.error(err);
+  } finally {
+    loading.value = false;
+  }
+});
+
+
+</script>
