@@ -370,11 +370,35 @@ const handleLogout = () =>{
 
 </script>
 
-<style>
+<style scss>
 .p-toast {
   top: 20px; /* Adjust this value to position the toast as desired */
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999; /* Ensure the toast appears above other elements */
+}
+.userdetails-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  /* min-width: 127px; */
+}
+
+.userdetails-inner .user-image img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.userdetails-inner .user-name h5 {
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
 }
 </style>
