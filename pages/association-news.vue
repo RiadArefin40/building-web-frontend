@@ -631,4 +631,29 @@
         </div>
     </footer>
     <!-- Footer  -->
+         <!-- Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="login-popup-inner-wrapper">
+                        <div class="top-image-box">
+                            <img src="/assets/images/login-popup-image.svg" alt="">
+                        </div>
+                        <div class="center-content">
+                            <h3>분쟁 해결 요청을 위해 <br />로그인이 필요합니다.</h3>
+                            <p>요청을 제출하려면 로그인이 필요합니다. <br />계속 진행하려면 로그인하거나 회원가입을 해주세요.</p>
+                        </div>
+                        <div class="login-signup-btn-wrapper">
+                            <a href="/sign-in">로그인</a>
+                            <a href="/sign-up">회원가입</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <!-- Login Modal  -->
 </template>

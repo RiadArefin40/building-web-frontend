@@ -78,31 +78,7 @@
 
     <!-- Forgot Password Pop up  -->
     <!-- Modal -->
-    <div class="modal fade forgot-password-popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="form-group">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="floatinguseremail" placeholder="이메일 아이디">
-                                <label for="floatinguseremail">당신의 이메일 ID를 알려주세요</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn_submit" type="submit">로그인</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
+<SignInModal></SignInModal>
     <!-- Forgot Password Pop up  -->
     <Toast />
 </template>
@@ -136,8 +112,10 @@ const onLogin = async () => {
 
         if (res.token) {
             login(res.token,res.data );
-            const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
+            const redirectTo = localStorage.getItem('redirectTo');
+            // const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
             router.push(redirectTo);
+            localStorage.removeItem('redirectTo');
         }
 
      
