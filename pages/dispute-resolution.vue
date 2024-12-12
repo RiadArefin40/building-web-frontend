@@ -808,7 +808,7 @@ function formatTimestamp(timestamp) {
 }
 
 async function onSubmit () {
-
+ 
     try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}disputes`, {
