@@ -2,7 +2,7 @@
     <Toast />
 
 
-  <header v-if="!authToken">
+  <header v-show ="!authToken">
     <div class="header-inner-wrapper">
       <div class="container-fluid">
         <div class="header-inner">
@@ -70,7 +70,7 @@
               </li>
             </ul>
           </div>
-          <div class="">
+          <div class="right-sign-up-box">
             <NuxtLink to="/sign-in">
               로그인 / 회원가입
             </NuxtLink>
@@ -164,7 +164,7 @@
     </div>
   </header>
 
-  <header v-else>
+  <header v-show ="authToken">
     <div class="header-inner-wrapper">
       <div class="container-fluid">
         <div class="header-inner">

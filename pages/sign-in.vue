@@ -114,8 +114,12 @@ const onLogin = async () => {
             login(res.token,res.data );
             const redirectTo = localStorage.getItem('redirectTo');
             // const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
-            router.push(redirectTo);
-            localStorage.removeItem('redirectTo');
+            if(redirectTo){
+                router.push(redirectTo);
+                localStorage.removeItem('redirectTo');
+            }
+            else router.push('/');
+        
         }
 
      
