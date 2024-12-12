@@ -70,7 +70,7 @@
               </li>
             </ul>
           </div>
-          <div class="right-sign-up-box">
+          <div class="">
             <NuxtLink to="/sign-in">
               로그인 / 회원가입
             </NuxtLink>
