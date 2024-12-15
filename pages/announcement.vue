@@ -142,7 +142,7 @@
                                                     <div class="content-wrapper truncate">
                                                         <!-- <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
                                                         </p> -->
-                                                        <p v-html="news.body"></p>
+                                                        <p v-html="removeImageTags(news.body)"></p>
                                                     </div>
                                                     <div class="link-wrapper">
                                                         <NuxtLink :to="`/announcements-details/${news.id}`">
@@ -476,7 +476,10 @@ watch(searchText, async (newSearchText) => {
 });
 
 
-
+function removeImageTags(html) {
+  // Remove all <img> tags using a regular expression
+  return html.replace(/<img[^>]*>/gi, "");
+}
 
 </script>
 

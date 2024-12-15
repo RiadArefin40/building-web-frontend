@@ -61,40 +61,16 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link active" id="pills-home-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-                                                        role="tab" aria-controls="pills-home" aria-selected="true">모든
-                                                        공지사항</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-profile-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                                        type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">이벤트 및 컨퍼런스</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-contact-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-contact"
-                                                        type="button" role="tab" aria-controls="pills-contact"
-                                                        aria-selected="false">파트너십 및 협력</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-goverment-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-goverment"
-                                                        type="button" role="tab" aria-controls="pills-goverment"
-                                                        aria-selected="false">정책 및 규제 업데이트</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-practice-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-practice"
-                                                        type="button" role="tab" aria-controls="pills-practice"
-                                                        aria-selected="false">모범 사례</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-extra-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-extra" type="button" role="tab"
-                                                        aria-controls="pills-extra" aria-selected="false">모범 사례</button>
+                                                <li v-for="category in categories" :key="category.id"
+                                                    class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link"
+                                                        :class="{ active: category.id == selectedCategory }"
+                                                        :id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        :aria-controls="'pills-' + category.id"
+                                                        @click="selectCategory(category.id)">
+                                                        {{ category.name }}
+                                                    </button>
                                                 </li>
                                                 <span id="Indicator" class="ProductNav_Indicator"></span>
                                             </div>
@@ -150,1026 +126,17 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
+                                                                <tr v-for = "data in homepageData">
+                                                                    <td>{{ data?.category?.name }}</td>
+                                                                    <td>{{ data?.user?.name }}</td>
                                                                     <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
+                                                                    <td>{{ formatTimestamp(data?.created_at) }}</td>
+                                                                    <td><a @click = "handleDetails(data?.id)">자세히 보기 <span
                                                                                 class="material-symbols-outlined">
                                                                                 arrow_right_alt
                                                                             </span></a></td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-mobile-wrapper">
-                                                        <div class="mobile-table-inner-wrapper">
-                                                            <div class="table-mobile-header">
-                                                                <h5>모집부문</h5>
-                                                            </div>
-                                                            <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">이전 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_left_alt
-                                                                    </span></a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">다음 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_right_alt
-                                                                    </span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                            </div>
-                                            <!-- Tender announcements Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                            aria-labelledby="pills-profile-tab" tabindex="0">
-                                            <!-- Tender announcements Inner  -->
-                                            <div class="outer-wrapper">
-                                                <div class="tender-announcements-inner-wrapper">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-mobile-wrapper">
-                                                        <div class="mobile-table-inner-wrapper">
-                                                            <div class="table-mobile-header">
-                                                                <h5>모집부문</h5>
-                                                            </div>
-                                                            <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">이전 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_left_alt
-                                                                    </span></a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">다음 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_right_alt
-                                                                    </span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                            </div>
-                                            <!-- Tender announcements Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                            aria-labelledby="pills-contact-tab" tabindex="0">
-                                            <!-- Tender announcements Inner  -->
-                                            <div class="outer-wrapper">
-                                                <div class="tender-announcements-inner-wrapper">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-mobile-wrapper">
-                                                        <div class="mobile-table-inner-wrapper">
-                                                            <div class="table-mobile-header">
-                                                                <h5>모집부문</h5>
-                                                            </div>
-                                                            <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">이전 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_left_alt
-                                                                    </span></a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">다음 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_right_alt
-                                                                    </span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                            </div>
-                                            <!-- Tender announcements Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-goverment" role="tabpanel"
-                                            aria-labelledby="pills-goverment-tab" tabindex="0">
-                                            <!-- Tender announcements Inner  -->
-                                            <div class="outer-wrapper">
-                                                <div class="tender-announcements-inner-wrapper">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-mobile-wrapper">
-                                                        <div class="mobile-table-inner-wrapper">
-                                                            <div class="table-mobile-header">
-                                                                <h5>모집부문</h5>
-                                                            </div>
-                                                            <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">이전 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_left_alt
-                                                                    </span></a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">다음 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_right_alt
-                                                                    </span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                            </div>
-                                            <!-- Tender announcements Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-practice" role="tabpanel"
-                                            aria-labelledby="pills-practice-tab" tabindex="0">
-                                            <!-- Tender announcements Inner  -->
-                                            <div class="outer-wrapper">
-                                                <div class="tender-announcements-inner-wrapper">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-mobile-wrapper">
-                                                        <div class="mobile-table-inner-wrapper">
-                                                            <div class="table-mobile-header">
-                                                                <h5>모집부문</h5>
-                                                            </div>
-                                                            <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">이전 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_left_alt
-                                                                    </span></a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                                        class="desktop-version">다음 페이지</span> <span
-                                                                        class="material-symbols-outlined mobile-version">
-                                                                        arrow_right_alt
-                                                                    </span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <!-- Pagination Wrapper  -->
-                                            </div>
-                                            <!-- Tender announcements Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-extra" role="tabpanel"
-                                            aria-labelledby="pills-extra-tab" tabindex="0">
-                                            <!-- Tender announcements Inner  -->
-                                            <div class="outer-wrapper">
-                                                <div class="tender-announcements-inner-wrapper">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>5</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>6</td>
-                                                                    <td>에너지 효율 개선 프로젝트</td>
-                                                                    <td>김성진</td>
-                                                                    <td>18/08/2024</td>
-                                                                    <td><a href="#">자세히 보기 <span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a></td>
-                                                                </tr>
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -1286,28 +253,7 @@
                                             <!-- Tender announcements Inner  -->
                                         </div>
                                     </div>
-                                    <!-- Pagination Wrapper  -->
-                                    <!-- <div class="pagination-outer-wrappers">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#"><span
-                                                            class="desktop-version">이전 페이지</span> <span
-                                                            class="material-symbols-outlined mobile-version">
-                                                            arrow_left_alt
-                                                        </span></a></li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span
-                                                            class="desktop-version">다음 페이지</span> <span
-                                                            class="material-symbols-outlined mobile-version">
-                                                            arrow_right_alt
-                                                        </span></a></li>
-                                            </ul>
-                                        </nav>
-                                    </div> -->
-                                    <!-- Pagination Wrapper  -->
+    
                                 </div>
                             </div>
                         </div>
@@ -1384,3 +330,218 @@
     </div>
     <!-- Login Modal  -->
 </template>
+<script setup>
+import ProgressSpinner from 'primevue/progressspinner';
+const runtimeConfig = useRuntimeConfig();
+import { nextTick } from 'vue';
+const toast = useToast();
+import Toast from 'primevue/toast';
+import useAuth from '@/composables/useAuth';
+const { authToken } = await useAuth();
+const homepageData = ref([]);
+const categories = ref([])
+const loading = ref(true)
+const selectedCategory = ref('1')
+const searchText = ref('')
+const sortOrder = ref('latest')
+const pagination = ref(null)
+const router = useRouter()
+const deleteId = ref('')
+const confirmModal = ref(false)
+
+onMounted(()=>{
+    geCategories()
+    getAnnouncement()
+
+
+
+    var SETTINGS = {
+        navBarTravelling: false,
+        navBarTravelDirection: "",
+        navBarTravelDistance: 150
+    }
+
+    var colours = {
+        0: "#fead00"
+    }
+
+    var AdvancerLeft = document.getElementById("AdvancerLeft");
+    var AdvancerRight = document.getElementById("AdvancerRight");
+
+
+    ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+
+
+
+
+    AdvancerLeft.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
+        }
+
+
+        // If we have content overflowing both sides or on the left
+        if (determineOverflow(ProductNavContents, ProductNav) === "left" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Find how far this panel has been scrolled
+            var availableScrollLeft = ProductNav.scrollLeft;
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
+            } else {
+                ProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
+            }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "left";
+            SETTINGS.navBarTravelling = true;
+        }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+    AdvancerRight.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
+        }
+        // If we have content overflowing both sides or on the right
+        if (determineOverflow(ProductNavContents, ProductNav) === "right" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Get the right edge of the container and content
+            var navBarRightEdge = ProductNavContents.getBoundingClientRect().right;
+            var navBarScrollerRightEdge = ProductNav.getBoundingClientRect().right;
+            // Now we know how much space we have available to scroll
+            var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
+            } else {
+                ProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
+            }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "right";
+            SETTINGS.navBarTravelling = true;
+        }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+
+    ProductNavContents.addEventListener(
+        "transitionend",
+        function () {
+            // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
+            var styleOfTransform = window.getComputedStyle(ProductNavContents, null);
+            var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
+            // If there is no transition we want to default to 0 and not null
+            var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
+            ProductNavContents.style.transform = "none";
+            ProductNavContents.classList.add("ProductNav_Contents-no-transition");
+            // Now lets set the scroll position
+            if (SETTINGS.navBarTravelDirection === "left") {
+                ProductNav.scrollLeft = ProductNav.scrollLeft - amount;
+            } else {
+                ProductNav.scrollLeft = ProductNav.scrollLeft + amount;
+            }
+            SETTINGS.navBarTravelling = false;
+        },
+        false
+    );
+
+
+
+    function determineOverflow(content, container) {
+        var containerMetrics = container.getBoundingClientRect();
+        var containerMetricsRight = Math.floor(containerMetrics.right);
+        var containerMetricsLeft = Math.floor(containerMetrics.left);
+        var contentMetrics = content.getBoundingClientRect();
+        var contentMetricsRight = Math.floor(contentMetrics.right);
+        var contentMetricsLeft = Math.floor(contentMetrics.left);
+        if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+            return "both";
+        } else if (contentMetricsLeft < containerMetricsLeft) {
+            return "left";
+        } else if (contentMetricsRight > containerMetricsRight) {
+            return "right";
+        } else {
+            return "none";
+        }
+    }
+})
+
+
+const geCategories = async () => {
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        categories.value = await res.data
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+
+const getAnnouncement = async () =>{
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}`, {
+            method: 'GET',
+            // headers: {
+            //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            // }
+        });
+
+        homepageData.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+}
+
+
+async function selectCategory(id) {
+    selectedCategory.value = id
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}`, {
+            method: 'GET',
+            // headers: {
+            //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            // }
+        });
+
+        homepageData.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+function  formatTimestamp(timestamp) {
+      return new Date(timestamp).toLocaleString(); 
+}
+
+
+</script>

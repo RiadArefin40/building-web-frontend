@@ -398,7 +398,7 @@ import Toast from 'primevue/toast';
 import useAuth from '@/composables/useAuth';
 const { authToken } = await useAuth();
 const homepageData = ref([]);
-const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
+const categories = ref([])
 const loading = ref(true)
 const selectedCategory = ref('1')
 const searchText = ref('')

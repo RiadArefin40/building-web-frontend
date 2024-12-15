@@ -34,12 +34,12 @@
                              <p>건물 관리 분야의 최신 기술과 지식을 전문가들에게 제공하기 위해 고안된 새로운 건물 관리자 교육 프로그램 출시를 알려드리게 되어 기쁩니다.</p>
                              <p>이 프로그램은 집합건물법 준수, 에너지 효율 전략, 디지털 관리 도구를 포함한 광범위한 필수 주제를 다룹니다.</p>
                          </div> -->
-                         <div class="image-wrapper">
+                         <!-- <div class="image-wrapper">
                              <img src="/assets/images/announcements-details/announcements-details.png" alt="">
-                         </div>
+                         </div> -->
                          <div class="key-recommendation-wrapper">
 
-                            <div v-html="announcement.body"></div>
+                            <div v-html="styledBody"></div>
                              <!-- <h3>프로그램 하이라이트:</h3>
                              <ul>
                                  <li><p><span>정기 감사 및 보고</span> 정기적으로 내부 감사를 실시하고 그 결과를 주민과 공유함으로써 책임감을 강화할 수 있습니다.</p></li>
@@ -142,8 +142,13 @@ const id = route.params.id
 const loading = ref(true)
 const announcement = ref(null)
 
+const imageWidth = ref("740px");
+
+
 onMounted(() => {
+    updateImageWidth();
   getData(id);
+  window.addEventListener("resize", updateImageWidth);
 })
 
 async function getData(id){
@@ -163,11 +168,37 @@ announcement.value = await res.data
 
 }
 
+function styleImages(html, styles) {
+  const styleString = Object.entries(styles)
+    .map(([key, value]) => `${key}: ${value};`)
+    .join(" ");
+  
+  return html.replace(/<img([^>]*)>/gi, `<img style="${styleString}" $1>`);
+}
+
 function  formatTimestamp(timestamp) {
       return new Date(timestamp).toLocaleString(); 
 }
 
+   // Function to update image width based on screen size
+   const updateImageWidth = () => {
+      if (window.innerWidth <= 991) {
+        imageWidth.value = "390px";
+      } else {
+        imageWidth.value = "740px";
+      }
+    };
 
 
+
+    const styledBody = computed(() => 
+      styleImages(announcement.value.body, { width: imageWidth.value, "border-radius": "10px" })
+    );
 
 </script>
+
+<style scoped>
+  img {
+    width: 200px;
+  }
+</style>
