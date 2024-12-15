@@ -155,7 +155,6 @@ async function getData(id){
 
 announcement.value = await res.data
     loading.value = false
-    console.log('res',res)
   }
   catch (e){
      console.error(e)

@@ -785,8 +785,8 @@
                             <p>요청을 제출하려면 로그인이 필요합니다. <br />계속 진행하려면 로그인하거나 회원가입을 해주세요.</p>
                         </div>
                         <div class="login-signup-btn-wrapper">
-                            <a href="/sign-in">로그인</a>
-                            <a href="/sign-up">회원가입</a>
+                            <a @click = "toSignin" >로그인</a>
+                            <a @click = "toSignup" >회원가입</a>
                         </div>
                     </div>
                 </div>
@@ -804,8 +804,16 @@ const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
 const homepageData = ref([]);
 const loading = ref(true)
+const router = useRouter();
 
-
+const toSignin = () =>{
+  $('#loginModal').modal('hide');
+  router.push('/sign-in')
+}
+const toSignup = () =>{
+  $('#loginModal').modal('hide');
+  router.push('/sign-up')
+}
 onMounted(() => {
   getHomepageData();
   initializeCarousel();

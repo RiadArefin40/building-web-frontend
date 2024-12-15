@@ -23,6 +23,10 @@ export default defineNuxtConfig({
           integrity: 'sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT', 
           crossorigin: 'anonymous' 
         },
+        {
+          rel:'stylesheet',
+          href:'https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css'
+        },
   
         // Material Icons
         { 
@@ -57,7 +61,8 @@ export default defineNuxtConfig({
   
         // Custom Styles
         { rel: 'stylesheet', href: '/css/animation.css' },
-        { rel: 'stylesheet', href: '/css/style.css' }
+        { rel: 'stylesheet', href: '/css/style.css' },
+        
       ],
       script: [
 
@@ -73,7 +78,7 @@ export default defineNuxtConfig({
         // AOS (Animate On Scroll)
         { src: 'https://unpkg.com/aos@2.3.1/dist/aos.js', type: 'text/javascript', body: true },
     
-        
+        {src:'https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js',type: 'text/javascript',defer: true },
     
         // CounterUp JS
         { src: '/js/jquery.counterup.min.js', type: 'text/javascript',defer: true, },

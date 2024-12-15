@@ -1,6 +1,6 @@
 <template>
-     <!-- Header  -->
-     <Header />
+    <!-- Header  -->
+    <Header />
     <!-- Header  -->
 
     <!-- Announcements Top Section  -->
@@ -52,24 +52,6 @@
     <!-- Job Listing Section  -->
     <div class="job-listing-section-wrapper">
         <div class="container-fluid">
-            <!-- <div class="right-box-button-filter-wrapper">
-                <div class="button-wrapper">
-                    <a href="#">글쓰기</a>
-                </div>
-                <div class="right-select-filter-wrapper">
-                    <div class="left-title">
-                        <h5>카테고리:</h5>
-                    </div>
-                    <div class="select-filter">
-                        <div class="form-group">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>전체</option>
-                                <option>오래된 순</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="job-listing-section-inner">
                 <div class="left-tab-button-wrapper">
                     <div class="tabs-button-inner-wrapper">
@@ -78,24 +60,27 @@
                         </div>
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <button class="nav-link active" id="v-pills-one-tab" data-bs-toggle="pill"
+                            <button v-for="category in categories" class="nav-link"
+                                :class="{ active: category.id == selectedCategory }" :id="category.id"
+                                data-bs-toggle="pill" data-bs-target="#v-pills-one" type="button" role="tab"
+                                :aria-controls="'pills-' + category.id" aria-selected="true"
+                                @click="selectCategory(category.id)">{{ category.name }}</button>
+
+                            <!-- <button class="nav-link" id="v-pills-two-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-one" type="button" role="tab" aria-controls="v-pills-one"
-                                aria-selected="true">모두</button>
-                            <button class="nav-link" id="v-pills-two-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-two" type="button" role="tab" aria-controls="v-pills-two"
                                 aria-selected="false">관리자</button>
                             <button class="nav-link" id="v-pills-three-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-three" type="button" role="tab" aria-controls="v-pills-three"
+                                data-bs-target="#v-pills-one" type="button" role="tab" aria-controls="v-pills-one"
                                 aria-selected="false">전기</button>
                             <button class="nav-link" id="v-pills-four-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-four" type="button" role="tab" aria-controls="v-pills-four"
+                                data-bs-target="#v-pills-one" type="button" role="tab" aria-controls="v-pills-one"
                                 aria-selected="false">경비</button>
                             <button class="nav-link" id="v-pills-five-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-five" type="button" role="tab" aria-controls="v-pills-five"
+                                data-bs-target="#v-pills-one" type="button" role="tab" aria-controls="v-pills-one"
                                 aria-selected="false">회계</button>
                             <button class="nav-link" id="v-pills-six-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-six" type="button" role="tab" aria-controls="v-pills-six"
-                                aria-selected="false">감독자</button>
+                                data-bs-target="#v-pills-one" type="button" role="tab" aria-controls="v-pills-one"
+                                aria-selected="false">감독자</button> -->
                         </div>
                     </div>
                 </div>
@@ -122,110 +107,74 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inner-tab-content-wrapper">
-                                    <div class="content-box">
-                                        <a href="#">
+                                <ProgressSpinner v-if="loading" style="width: 50px; height: 50px"
+                                                    strokeWidth="8" fill="transparent" animationDuration=".5s"
+                                                    aria-label="Custom ProgressSpinner" />
+                                <div v-else class="inner-tab-content-wrapper">
+                                    <div v-for="job in jobs" class="content-box">
+                                        <NuxtLink :to="`/joblisting-details/${job.id}`">
                                             <div class="top-box-wrapper">
                                                 <div class="top-writer-box">
-                                                    <p>회계</p>
+                                                    <!-- <p>회계</p> -->
+                                                    <p>{{ job.category?.name }}</p>
                                                 </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
+                                                <div class="job-title truncate-title">
+                                                    <!-- <h5>행정 보조원</h5> -->
+                                                    <h5>{{ job.title }}</h5>
                                                 </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
+                                                <div class="job-description truncate-description">
+                                                    <!-- <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p> -->
+                                                    <p>{{ job.description }}</p>
                                                 </div>
                                                 <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
+                                                    <!-- <p>작성자: <span>한국경영관</span></p> -->
                                                 </div>
                                             </div>
                                             <div class="bottom-date">
-                                                <p>2일 전</p>
+                                                <!-- <p>2일 전</p> -->
+                                                <p>{{ job.created_ago }}</p>
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
+                                        </NuxtLink>
                                     </div>
                                 </div>
                                 <!-- Pagination Wrapper  -->
-                                <div class="pagination-outer-wrappers">
+
+                                <div v-if="pagination?.links?.length > 0 && jobs.length > 0"
+                                    class="pagination-outer-wrappers">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">이전 페이지</span> <span
+                                            <!-- Previous Page -->
+                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                                <a class="page-link" href="#"
+                                                    @click.prevent="changePage(pagination.current_page - 1)">
+
+                                                    <span class="desktop-version">이전 페이지</span> <span
                                                         class="material-symbols-outlined mobile-version">
                                                         arrow_left_alt
-                                                    </span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">다음 페이지</span> <span
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <!-- Page Numbers -->
+                                            <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
+                                                class="page-item" :class="{ active: link.active }">
+                                                <a class="page-link" href="#" @click.prevent="changePage(link.label)">
+                                                    {{ link.label }}
+                                                </a>
+                                            </li>
+
+                                            <!-- Next Page -->
+                                            <li class="page-item"
+                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                <a class="page-link" href="#"
+                                                    @click.prevent="changePage(pagination.current_page + 1)">
+
+                                                    <span class="desktop-version">다음 페이지</span> <span
                                                         class="material-symbols-outlined mobile-version">
                                                         arrow_right_alt
-                                                    </span></a></li>
+                                                    </span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -363,530 +312,7 @@
                                 <!-- Pagination Wrapper  -->
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-three" role="tabpanel"
-                            aria-labelledby="v-pills-three-tab" tabindex="0">
-                            <div class="inner-tab-content">
-                                <div class="right-box-button-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
-                                    </div>
-                                    <div class="right-select-filter-wrapper">
-                                        <div class="left-title">
-                                            <h5>카테고리:</h5>
-                                        </div>
-                                        <div class="select-filter">
-                                            <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>전체</option>
-                                                    <option>오래된 순</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner-tab-content-wrapper">
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                                <div class="pagination-outer-wrappers">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">이전 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_left_alt
-                                                    </span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">다음 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_right_alt
-                                                    </span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab"
-                            tabindex="0">
-                            <div class="inner-tab-content">
-                                <div class="right-box-button-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
-                                    </div>
-                                    <div class="right-select-filter-wrapper">
-                                        <div class="left-title">
-                                            <h5>카테고리:</h5>
-                                        </div>
-                                        <div class="select-filter">
-                                            <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>전체</option>
-                                                    <option>오래된 순</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner-tab-content-wrapper">
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                                <div class="pagination-outer-wrappers">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">이전 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_left_alt
-                                                    </span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">다음 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_right_alt
-                                                    </span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-five" role="tabpanel" aria-labelledby="v-pills-five-tab"
-                            tabindex="0">
-                            <div class="inner-tab-content">
-                                <div class="right-box-button-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
-                                    </div>
-                                    <div class="right-select-filter-wrapper">
-                                        <div class="left-title">
-                                            <h5>카테고리:</h5>
-                                        </div>
-                                        <div class="select-filter">
-                                            <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>전체</option>
-                                                    <option>오래된 순</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner-tab-content-wrapper">
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                                <div class="pagination-outer-wrappers">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">이전 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_left_alt
-                                                    </span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">다음 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_right_alt
-                                                    </span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-six" role="tabpanel" aria-labelledby="v-pills-six-tab"
-                            tabindex="0">
-                            <div class="inner-tab-content">
-                                <div class="right-box-button-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
-                                    </div>
-                                    <div class="right-select-filter-wrapper">
-                                        <div class="left-title">
-                                            <h5>카테고리:</h5>
-                                        </div>
-                                        <div class="select-filter">
-                                            <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>전체</option>
-                                                    <option>오래된 순</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inner-tab-content-wrapper">
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="content-box">
-                                        <a href="#">
-                                            <div class="top-box-wrapper">
-                                                <div class="top-writer-box">
-                                                    <p>회계</p>
-                                                </div>
-                                                <div class="job-title">
-                                                    <h5>행정 보조원</h5>
-                                                </div>
-                                                <div class="job-description">
-                                                    <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p>
-                                                </div>
-                                                <div class="category-wrapper">
-                                                    <p>작성자: <span>한국경영관</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-date">
-                                                <p>2일 전</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                                <div class="pagination-outer-wrappers">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">이전 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_left_alt
-                                                    </span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span
-                                                        class="desktop-version">다음 페이지</span> <span
-                                                        class="material-symbols-outlined mobile-version">
-                                                        arrow_right_alt
-                                                    </span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Pagination Wrapper  -->
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -933,7 +359,7 @@
         </div>
     </footer>
     <!-- Footer  -->
-         <!-- Modal -->
+    <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -955,8 +381,138 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- Login Modal  -->
 
 </template>
+
+<script setup>
+
+import { useToast } from "primevue/usetoast";
+import ProgressSpinner from 'primevue/progressspinner';
+const router = useRouter()
+const toast = useToast();
+import Toast from 'primevue/toast';
+import useAuth from '@/composables/useAuth';
+const { isAuthenticated } = useAuth();
+const runtimeConfig = useRuntimeConfig();
+const { authToken } = await useAuth();
+const loading = ref(false)
+const selectedCategory = ref('1')
+const pagination = ref(null);
+const type = ref('')
+const categories = ref(null)
+const jobs = ref([])
+
+onMounted(() => {
+    getJobType()
+    getJobData()
+    if (!isAuthenticated) {
+        $(document).ready(function () {
+
+            $('#loginModal').modal('show');
+        });
+    }
+
+})
+
+async function selectCategory(id) {
+    selectedCategory.value = id
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?category_id=${selectedCategory.value}`, {
+            method: 'GET',
+        });
+
+        jobs.value = await res.data.reverse()
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+}
+
+const getJobData = async (page = 1) => {
+    try {
+        loading.value = true
+
+
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?page=${page}&category_id=${selectedCategory.value}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        jobs.value = await res.data.reverse();
+        pagination.value = await res.meta
+        loading.value = false
+
+
+
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+}
+
+
+const getJobType = async () => {
+
+
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}job-categories`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        categories.value = await res.data;
+        // disputeTypeData.value = disputeType.value[0].id
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+}
+
+async function changePage(page) {
+    if (page < 1 || page > pagination.last_page) return;
+    getJobData(page);
+}
+
+
+
+
+
+</script>
+
+<style>
+.truncate-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.truncate-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>

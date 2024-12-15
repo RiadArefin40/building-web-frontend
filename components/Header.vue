@@ -250,6 +250,12 @@
 
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">마이 페이지</a></li>
+                <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handlePostManagement()">
+                 Job Post Management</a></li>
+                  <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handleTenderManagement()">
+                    Tender Management
+
+</a></li>
                 <li><a class="dropdown-item" @click ="handleLogout()">로그아웃</a></li>
               </ul>
             </div>
@@ -366,6 +372,12 @@ const handleLogout = () =>{
   router.push(redirectTo);
 
 
+}
+const handlePostManagement = () =>{
+  router.push('/job-management');
+}
+const handleTenderManagement = () =>{
+  router.push('/tender-management');
 }
 
 </script>
