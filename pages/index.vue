@@ -172,7 +172,7 @@
                       <p>전기요금<br /><span class="span1">면적 </span><span class="span2">기준</span></p>
                       <h5></h5>
                     </div>
-                  </div>
+                  </div>, 
                   <div class="bill-count-box">
                     <h4>200,000 원</h4>
                   </div>
@@ -222,19 +222,19 @@
               </div>
             </div>
           </div>
-          <div class="right-section">
-            <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2>
-             <!-- <h2 style="margin-bottom: 28px;" class="rendered-h" v-html="homepageData['section-3'].title"></h2> -->
+          <div v-if="!loading" class="right-section">
+            <!-- <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2> -->
+             <h2  v-html="homepageData['section-3']?.title"></h2>
 
-            <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5>
-            <!-- <h5 v-html="homepageData['section-3'].subtitle"></h5> -->
+            <!-- <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5> -->
+            <h5 v-html="homepageData['section-3'].subtitle"></h5>
 
-            <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
+            <!-- <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
               <br />이러한 불투명한 관리방식은 건물주와 관리 업체 간의 갈등을 심화시키고, <br />결국 법적 분쟁으로까지 이어질 위험이 큽니다.
-            </p>
-            <!-- <p class="rendered-p" style="margin-bottom: 50px;" v-html="homepageData['section-3']['text-1']"></p> -->
-            <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6>
-             <!-- <h6 v-html="homepageData['section-3']['text-2']"></h6> -->
+            </p> -->
+            <p  v-html="homepageData['section-3']['text-1']"></p>
+            <!-- <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6> -->
+             <h6 v-html="homepageData['section-3']['text-2']"></h6>
           </div>
         </div>
       </div>
@@ -242,18 +242,18 @@
     <!-- Billing Section  -->
 
     <!-- Who wr are Section  -->
-    <section   class="who-we-are-section">
+    <section  v-if="!loading" class="who-we-are-section">
       <div class="container-fluid">
         <div class="who-we-are-inner">
           <div class="left-box">
             <h6>협회 소개</h6>
             <h2>건물 관리의<br />
               새로운 표준을 제시합니다.</h2>
-              <!-- <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4'].title"></h2>
-              <p class="rendered-p" v-html="homepageData['section-4'].subtitle"></p> -->
-            <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
+              <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4'].title"></h2>
+              <p class="rendered-p" v-html="homepageData['section-4'].subtitle"></p>
+            <!-- <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
             <p class="last-p">협회는 공정한 중재와 신뢰할 수 있는 상담을 통해,<br /> 건물 관리가 투명하게 이루어지도록 지원합니다.<br /> 모든 이해관계자에게 합당한 기준을
-              제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p>
+              제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p> -->
             <div class="link-wrapper">
               <a href="#">협회 가입신청 <span class="material-symbols-outlined">
                   arrow_right_alt
@@ -349,21 +349,21 @@
     <!-- Who wr are Section  -->
 
     <!-- Fusion Section  -->
-    <section  class="fusion-section">
+    <section v-if="!loading" class="fusion-section">
       <div class="container-fluid">
         <div class="fusion-inner">
           <div class="left-section">
             <p>차별화</p>
-            <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2>
-             <!-- <h2 v-html="homepageData['section-5'].left"></h2> -->
+            <!-- <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2> -->
+             <h2 v-html="homepageData['section-5'].left"></h2>
           </div>
           <div class="right-section">
-            <!-- <p v-html="homepageData['section-5'].right"></p> -->
-            <p>대한건물관리협회는 집합건물법에 대한 깊은 이해와 경험을 바탕으로, 법적 안정성을 제공합니다. 또한, 최신 기술을 활용하여 투명한 관리 솔루션을 제공하며, 모든 회원사들이 신뢰할 수 있는
+            <p v-html="homepageData['section-5'].right"></p>
+            <!-- <p>대한건물관리협회는 집합건물법에 대한 깊은 이해와 경험을 바탕으로, 법적 안정성을 제공합니다. 또한, 최신 기술을 활용하여 투명한 관리 솔루션을 제공하며, 모든 회원사들이 신뢰할 수 있는
               환경을
               조성합니다.</p>
             <p class="last-para">다른 협회와는 달리, 대한건물관리협회는 <span>실질적인 문제 해결에 집중</span>하며, <br /><span>중재</span>와 <span>법률
-                상담</span>을 통해 갈등을 최소화합니다.</p>
+                상담</span>을 통해 갈등을 최소화합니다.</p> -->
           </div>
         </div>
       </div>
@@ -465,13 +465,13 @@
       <div class="container-fluid">
         <div class="benifits-member-inner">
           <div class="left-section">
-            <!-- <h2 v-html="homepageData['section-7'].top_left"></h2> -->
-            <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2>
+            <h2 v-html="homepageData['section-7'].top_left"></h2>
+            <!-- <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2> -->
           </div>
           <div class="right-section">
-            <!-- <p class="rendered-p" v-html="homepageData['section-7'].top_right"></p> -->
-            <p>협회 회원이 되시면, 공정한 중재와 상담 서비스, 최신 관리 솔루션 제공, 법적 안정성 확보, 업계 네트워킹 기회 등 다양한 혜택을 누리실 수 있습니다.</p>
-            <p class="last-para">협회 가입 후 관리비 절감 및 공실 관리 문제 해결로 <br />연간 수익이 개선된 실제 사례를 확인해보세요.</p>
+            <p  v-html="homepageData['section-7'].top_right"></p>
+            <!-- <p>협회 회원이 되시면, 공정한 중재와 상담 서비스, 최신 관리 솔루션 제공, 법적 안정성 확보, 업계 네트워킹 기회 등 다양한 혜택을 누리실 수 있습니다.</p>
+            <p class="last-para">협회 가입 후 관리비 절감 및 공실 관리 문제 해결로 <br />연간 수익이 개선된 실제 사례를 확인해보세요.</p> -->
           </div>
         </div>
         <div class="benifits-inner-box-wrapper">
@@ -490,8 +490,9 @@
               </div>
             </div>
             <div class="content-box">
-              <p><span>중재와 분쟁 해결: </span>전문가의 중재와 상담을 통해 건물 관리 <br />에서 발생하는 분쟁을 효과적으로 해결하세요.</p>
-              <p class="last-para"><span>맞춤형 컨설팅: </span>전문 컨설팅을 통해 관리 비용을 절감하고, <br />효율적인 운영 방안을 제시해 드립니다.</p>
+              <p v-html="homepageData['section-7'].list_1_subtitle"></p>
+              <!-- <p><span>중재와 분쟁 해결: </span>전문가의 중재와 상담을 통해 건물 관리 <br />에서 발생하는 분쟁을 효과적으로 해결하세요.</p>
+              <p class="last-para"><span>맞춤형 컨설팅: </span>전문 컨설팅을 통해 관리 비용을 절감하고, <br />효율적인 운영 방안을 제시해 드립니다.</p> -->
             </div>
           </div>
           <div class="benifits-box">
@@ -509,8 +510,9 @@
               </div>
             </div>
             <div class="content-box">
-              <p><span>관리 절감 솔루션: </span>최신 관리 도구를 활용하여 건물 관리 비 <br />용을 절감하고, 운영 효율성을 극대화합니다.</p>
-              <p class="last-para"><span>사례 연구 제공: </span>성공적인 관리 사례를 통해, 비용 절감과 <br />효율적인 운영 방안을 확인하고 적용해 보세요.</p>
+              <p v-html="homepageData['section-7'].list_2_subtitle"></p>
+              <!-- <p><span>관리 절감 솔루션: </span>최신 관리 도구를 활용하여 건물 관리 비 <br />용을 절감하고, 운영 효율성을 극대화합니다.</p>
+              <p class="last-para"><span>사례 연구 제공: </span>성공적인 관리 사례를 통해, 비용 절감과 <br />효율적인 운영 방안을 확인하고 적용해 보세요.</p> -->
             </div>
           </div>
           <div class="benifits-box">
@@ -528,9 +530,10 @@
               </div>
             </div>
             <div class="content-box">
-              <p><span>법적 안정성 확보: </span>법적 분쟁 및 이슈를 예방하고 해결하기 <br />위해, 전문가의 법률 자문을 제공합니다.</p>
+              <p v-html="homepageData['section-7'].list_3_subtitle"></p>
+              <!-- <p><span>법적 안정성 확보: </span>법적 분쟁 및 이슈를 예방하고 해결하기 <br />위해, 전문가의 법률 자문을 제공합니다.</p>
               <p class="last-para"><span>협회 네트워킹 혜택: </span>회원 간의 네트워킹을 통해, 산업 내에 <br />서 입지를 강화하고, 새로운 협력 기회를 발굴해 보세요.
-              </p>
+              </p> -->
             </div>
           </div>
         </div>
@@ -539,7 +542,7 @@
     <!-- Benifits Member Section  -->
 
     <!-- Success Stories Section  -->
-    <section class="success-stories-section">
+    <section v-if="!loading" class="success-stories-section">
       <div class="success-stories-inner">
         <div class="success-stories-container">
           <div class="success-stories-top-title-wrapper">
@@ -547,17 +550,19 @@
           </div>
           <div class="success-stories-slider-wrapper">
             <div class="success-stories-slider owl-carousel owl-theme">
-              <div class="item">
+              <div v-for="data in testimonials" class="item">
                 <div class="item-inner">
                   <div class="item-inner-top-wrapper">
                     <div class="quote-box">
                       <img src="/assets/images/quote.svg" alt="">
                     </div>
                     <div class="title-box">
-                      <h4>대한건물관리협회에 감사의 말씀을 전하고 싶습니다.</h4>
+                      <!-- <h4>대한건물관리협회에 감사의 말씀을 전하고 싶습니다.</h4> -->
+                       <h4 class="truncate-title">{{ data?.title }}</h4>
                     </div>
                     <div class="paragraph-content">
-                      <p>관리 솔루션 덕분에 비용을 대폭 줄일 수 있었어요. 맞춤형 컨설팅으로 관리 업무가 효율적이고 체계적으로 개선되었습니다.</p>
+                      <!-- <p>관리 솔루션 덕분에 비용을 대폭 줄일 수 있었어요. 맞춤형 컨설팅으로 관리 업무가 효율적이고 체계적으로 개선되었습니다.</p> -->
+                       <p class="truncate" style="max-width: fit-content;">{{ data?.description }}</p>
                     </div>
                   </div>
                   <div class="user-designation-box">
@@ -571,54 +576,8 @@
                   </div>
                 </div>
               </div>
-              <div class="item">
-                <div class="item-inner">
-                  <div class="item-inner-top-wrapper">
-                    <div class="quote-box">
-                      <img src="/assets/images/quote.svg" alt="">
-                    </div>
-                    <div class="title-box">
-                      <h4>긴 법적 분쟁을 빠르게 해결해 주셔서 감사합니다.</h4>
-                    </div>
-                    <div class="paragraph-content">
-                      <p>대한건물관리협회의 도움 덕분에 오랜 법적 분쟁을 빠르게 해결할 수 있었습니다. 협회의 전문적인 중재와 법률 지원 덕분에, 시간과 비용을 크게 절감할 수 있었습니다.</p>
-                    </div>
-                  </div>
-                  <div class="user-designation-box">
-                    <div class="user-image">
-                      <img src="/assets/images/user2.png" alt="">
-                    </div>
-                    <div class="designation-content">
-                      <h6>이영희</h6>
-                      <p>회원</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="item-inner">
-                  <div class="item-inner-top-wrapper">
-                    <div class="quote-box">
-                      <img src="/assets/images/quote.svg" alt="">
-                    </div>
-                    <div class="title-box">
-                      <h4>복잡한 규제 문제를 한 번에 해결했어요.</h4>
-                    </div>
-                    <div class="paragraph-content">
-                      <p>복잡한 규제 문제를 협회와 함께 해결했습니다. 덕분에 모든 법적 요구 사항을 충족하고, 안정성을 높일 수 있었습니다.</p>
-                    </div>
-                  </div>
-                  <div class="user-designation-box">
-                    <div class="user-image">
-                      <img src="/assets/images/user3.png" alt="">
-                    </div>
-                    <div class="designation-content">
-                      <h6>이영희</h6>
-                      <p>회원</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      
+           
             </div>
           </div>
         </div>
@@ -805,7 +764,7 @@ import { nextTick } from 'vue';
 const homepageData = ref([]);
 const loading = ref(true)
 const router = useRouter();
-
+const testimonials = ref([])
 const toSignin = () =>{
   $('#loginModal').modal('hide');
   router.push('/sign-in')
@@ -816,7 +775,8 @@ const toSignup = () =>{
 }
 onMounted(() => {
   getHomepageData();
-  initializeCarousel();
+  
+  getTestimonialData();
 })
 const initializeCarousel = () => {
   nextTick(() => {})
@@ -855,6 +815,24 @@ const getHomepageData = async () =>{
     homepageData.value = await res
     loading.value = false
     console.log('res',res)
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
+const getTestimonialData = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}testimonials`, {
+        method: 'GET',
+    })
+
+    testimonials.value = await res.data
+    loading.value = false
+    setTimeout(()=>{
+      initializeCarousel();
+    },500)
+  
   }
   catch (e){
      console.error(e)

@@ -396,7 +396,7 @@ onMounted(() => {
 })
 
 const getHomepageData = async () => {
-if(selectCategory.value){
+if(selectedCategory.value){
     try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
@@ -457,7 +457,7 @@ function formatTimestamp(timestamp) {
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    if(selectCategory.value){
+    if(selectedCategory.value){
         try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
