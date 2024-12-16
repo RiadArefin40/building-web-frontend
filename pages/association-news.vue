@@ -42,9 +42,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="left-image-right-content-wrapper">
+                <div v-if="homepageData.length > 0" class="left-image-right-content-wrapper">
                     <div class="left-image-wrapper">
-                        <img src="/assets/images/associationnews/association-new-top.png" alt="">
+                        <img style="max-height: 340px;" :src="`https://testingpro.xyz/storage/${homepageData[0]?.thumbnail}`" alt="">
                     </div>
                     <div class="right-content-wrapper">
                         <div class="top-date">
@@ -91,11 +91,14 @@
                                 </svg>
                             </div>
                             <div class="news-date">
-                                <h6>2024년 9월 19일</h6>
+                                <!-- <h6>2024년 9월 19일</h6> -->
+                                <h6>{{ formatTimestamp(homepageData[0]?.
+                                                                    created_at)
+                                                                    }}</h6>
                             </div>
                         </div>
                         <div class="title-wrapper">
-                            <h3>멤버십을 위한 새로운 혜택 및 서비스</h3>
+                            <h3>{{ homepageData[0]?.topic }}</h3>
                         </div>
                         <div class="conttent-wrapper">
                             <p>한국건물관리협회는 회원들이 보다 큰 효율성과 법적 안정성을 달성할 수 있도록 지원하기 위해 고안된 다양한 새로운 혜택과 서비스를 소개하게 되어 기쁘게
@@ -130,40 +133,23 @@
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
                                                 <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link active" id="pills-home-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-                                                        role="tab" aria-controls="pills-home" aria-selected="true">모든
-                                                        뉴스</button>
+                                                    <button class="nav-link" :class="{ active: !selectedCategory }"
+                                                        id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        aria-controls="pills" @click="selectCategory('')">
+                                                        All
+                                                    </button>
                                                 </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-profile-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                                        type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">정책 업데이트</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-contact-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-contact"
-                                                        type="button" role="tab" aria-controls="pills-contact"
-                                                        aria-selected="false">기술</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-goverment-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-goverment"
-                                                        type="button" role="tab" aria-controls="pills-goverment"
-                                                        aria-selected="false">정부 규정</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-practice-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-practice"
-                                                        type="button" role="tab" aria-controls="pills-practice"
-                                                        aria-selected="false">모범 사례</button>
-                                                </li>
-                                                <li class="nav-item ProductNav_Link" role="presentation">
-                                                    <button class="nav-link" id="pills-extra-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-extra"
-                                                        type="button" role="tab" aria-controls="pills-extra"
-                                                        aria-selected="false">모범 사례</button>
+                                                <li v-for="category in categories" :key="category.id"
+                                                    class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link"
+                                                        :class="{ active: category.id == selectedCategory }"
+                                                        :id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        :aria-controls="'pills-' + category.id"
+                                                        @click="selectCategory(category.id)">
+                                                        {{ category.name }}
+                                                    </button>
                                                 </li>
                                                 <span id="Indicator" class="ProductNav_Indicator"></span>
                                             </div>
@@ -201,382 +187,81 @@
                                             aria-labelledby="pills-home-tab" tabindex="0">
                                             <!-- Association News Inner  -->
                                             <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
+                                                <div v-if="loading"
+                                                    class="d-flex align-items-center justify-content-center">
+                                                    <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8"
+                                                        fill="transparent" animationDuration=".5s"
+                                                        aria-label="Custom ProgressSpinner" />
+
                                                 </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
+                                                <div v-else v-for="data in homepageData" class="news-box">
+                                                    <NuxtLink :to="`/association-news-details/${data?.id}`">
                                                         <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
+                                                            <img style="max-height: 280px;"
+                                                                :src="`https://testingpro.xyz/storage/${data?.thumbnail}`"
+                                                                alt="">
                                                         </div>
                                                         <div class="category-date-wrapper">
                                                             <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
+                                                                <!-- <h5>모범 사례</h5> -->
+                                                                <h5>{{ data?.category?.name }}</h5>
                                                             </div>
                                                             <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
+                                                                <!-- <h5>2024년 9월 18일</h5> -->
+                                                                <h5>{{ formatTimestamp(data?.
+                                                                    created_at)
+                                                                    }}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
+                                                            <h3>{{ data?.topic }}</h3>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
+                                                    </NuxtLink>
                                                 </div>
                                             </div>
                                             <!-- Association News Inner  -->
                                         </div>
-                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                            aria-labelledby="pills-profile-tab" tabindex="0">
-                                            <!-- Association News Inner  -->
-                                            <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- Association News Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                            aria-labelledby="pills-contact-tab" tabindex="0">
-                                            <!-- Association News Inner  -->
-                                            <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- Association News Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-goverment" role="tabpanel"
-                                            aria-labelledby="pills-goverment-tab" tabindex="0">
-                                            <!-- Association News Inner  -->
-                                            <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- Association News Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-practice" role="tabpanel"
-                                            aria-labelledby="pills-practice-tab" tabindex="0">
-                                            <!-- Association News Inner  -->
-                                            <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- Association News Inner  -->
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-extra" role="tabpanel"
-                                            aria-labelledby="pills-extra-tab" tabindex="0">
-                                            <!-- Association News Inner  -->
-                                            <div class="news-inner-wrapper">
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>모범 사례</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>주거용 건물의 투명한 관리 수수료를 위한 모범 사례</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news1.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>정책 업데이트</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>최근 정부 정책 변화에서 얻은 10가지 주요 통찰력</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="news-box">
-                                                    <a href="./association-news-details.html">
-                                                        <div class="image-box">
-                                                            <img src="/assets/images/associationnews/news2.png" alt="">
-                                                        </div>
-                                                        <div class="category-date-wrapper">
-                                                            <div class="category-wrapper">
-                                                                <h5>기술</h5>
-                                                            </div>
-                                                            <div class="date-wrapper">
-                                                                <h5>2024년 9월 18일</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="news-title">
-                                                            <h3>기술 기업과의 파트너십을 통해 관리 시스템 강화</h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- Association News Inner  -->
-                                        </div>
+
                                     </div>
                                     <!-- Pagination Wrapper  -->
-                                    <div class="pagination-outer-wrappers">
+
+                                    <div v-if="pagination?.links?.length > 0 && homepageData.length > 0"
+                                        class="pagination-outer-wrappers">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
-                                                <li class="page-item"><a class="page-link" href="#"><span class="desktop-version">이전 페이지</span> <span class="material-symbols-outlined mobile-version">
-                                                    arrow_left_alt
-                                                </span></a></li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span class="desktop-version">다음 페이지</span>  <span class="material-symbols-outlined mobile-version">
-                                                    arrow_right_alt
-                                                </span></a></li>
+                                                <!-- Previous Page -->
+                                                <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                                    <a class="page-link" href="#"
+                                                        @click.prevent="changePage(pagination.current_page - 1)">
+
+                                                        <span class="desktop-version">이전 페이지</span> <span
+                                                            class="material-symbols-outlined mobile-version">
+                                                            arrow_left_alt
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <!-- Page Numbers -->
+                                                <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
+                                                    class="page-item" :class="{ active: link.active }">
+                                                    <a class="page-link" href="#"
+                                                        @click.prevent="changePage(link.label)">
+                                                        {{ link.label }}
+                                                    </a>
+                                                </li>
+
+                                                <!-- Next Page -->
+                                                <li class="page-item"
+                                                    :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                    <a class="page-link" href="#"
+                                                        @click.prevent="changePage(pagination.current_page + 1)">
+
+                                                        <span class="desktop-version">다음 페이지</span> <span
+                                                            class="material-symbols-outlined mobile-version">
+                                                            arrow_right_alt
+                                                        </span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -631,7 +316,7 @@
         </div>
     </footer>
     <!-- Footer  -->
-         <!-- Modal -->
+    <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -653,7 +338,273 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- Login Modal  -->
 </template>
+
+<script setup>
+
+import Dialog from 'primevue/dialog';
+
+import Button from 'primevue/button';
+
+import ProgressSpinner from 'primevue/progressspinner';
+const runtimeConfig = useRuntimeConfig();
+import { nextTick } from 'vue';
+const toast = useToast();
+import Toast from 'primevue/toast';
+import useAuth from '@/composables/useAuth';
+const { authToken } = await useAuth();
+const homepageData = ref([]);
+const categories = ref([])
+const loading = ref(true)
+const selectedCategory = ref('')
+const searchText = ref('')
+const sortOrder = ref('latest')
+const pagination = ref(null)
+const router = useRouter()
+const deleteId = ref('')
+const confirmModal = ref(false)
+
+onMounted(() => {
+    geCategories()
+    getHomepageData();
+    //   initializeCarousel();
+    var SETTINGS = {
+        navBarTravelling: false,
+        navBarTravelDirection: "",
+        navBarTravelDistance: 150
+    }
+
+    var colours = {
+        0: "#fead00"
+    }
+
+    var AdvancerLeft = document.getElementById("AdvancerLeft");
+    var AdvancerRight = document.getElementById("AdvancerRight");
+
+
+    ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+
+
+
+
+    AdvancerLeft.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
+        }
+
+
+        // If we have content overflowing both sides or on the left
+        if (determineOverflow(ProductNavContents, ProductNav) === "left" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Find how far this panel has been scrolled
+            var availableScrollLeft = ProductNav.scrollLeft;
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollLeft < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(" + availableScrollLeft + "px)";
+            } else {
+                ProductNavContents.style.transform = "translateX(" + SETTINGS.navBarTravelDistance + "px)";
+            }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "left";
+            SETTINGS.navBarTravelling = true;
+        }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+    AdvancerRight.addEventListener("click", function () {
+        // If in the middle of a move return
+        if (SETTINGS.navBarTravelling === true) {
+            return;
+        }
+        // If we have content overflowing both sides or on the right
+        if (determineOverflow(ProductNavContents, ProductNav) === "right" || determineOverflow(ProductNavContents, ProductNav) === "both") {
+            // Get the right edge of the container and content
+            var navBarRightEdge = ProductNavContents.getBoundingClientRect().right;
+            var navBarScrollerRightEdge = ProductNav.getBoundingClientRect().right;
+            // Now we know how much space we have available to scroll
+            var availableScrollRight = Math.floor(navBarRightEdge - navBarScrollerRightEdge);
+            // If the space available is less than two lots of our desired distance, just move the whole amount
+            // otherwise, move by the amount in the settings
+            if (availableScrollRight < SETTINGS.navBarTravelDistance * 2) {
+                ProductNavContents.style.transform = "translateX(-" + availableScrollRight + "px)";
+            } else {
+                ProductNavContents.style.transform = "translateX(-" + SETTINGS.navBarTravelDistance + "px)";
+            }
+            // We do want a transition (this is set in CSS) when moving so remove the class that would prevent that
+            ProductNavContents.classList.remove("ProductNav_Contents-no-transition");
+            // Update our settings
+            SETTINGS.navBarTravelDirection = "right";
+            SETTINGS.navBarTravelling = true;
+        }
+        // Now update the attribute in the DOM
+        ProductNav.setAttribute("data-overflowing", determineOverflow(ProductNavContents, ProductNav));
+    });
+
+
+    ProductNavContents.addEventListener(
+        "transitionend",
+        function () {
+            // get the value of the transform, apply that to the current scroll position (so get the scroll pos first) and then remove the transform
+            var styleOfTransform = window.getComputedStyle(ProductNavContents, null);
+            var tr = styleOfTransform.getPropertyValue("-webkit-transform") || styleOfTransform.getPropertyValue("transform");
+            // If there is no transition we want to default to 0 and not null
+            var amount = Math.abs(parseInt(tr.split(",")[4]) || 0);
+            ProductNavContents.style.transform = "none";
+            ProductNavContents.classList.add("ProductNav_Contents-no-transition");
+            // Now lets set the scroll position
+            if (SETTINGS.navBarTravelDirection === "left") {
+                ProductNav.scrollLeft = ProductNav.scrollLeft - amount;
+            } else {
+                ProductNav.scrollLeft = ProductNav.scrollLeft + amount;
+            }
+            SETTINGS.navBarTravelling = false;
+        },
+        false
+    );
+
+
+
+    function determineOverflow(content, container) {
+        var containerMetrics = container.getBoundingClientRect();
+        var containerMetricsRight = Math.floor(containerMetrics.right);
+        var containerMetricsLeft = Math.floor(containerMetrics.left);
+        var contentMetrics = content.getBoundingClientRect();
+        var contentMetricsRight = Math.floor(contentMetrics.right);
+        var contentMetricsLeft = Math.floor(contentMetrics.left);
+        if (containerMetricsLeft > contentMetricsLeft && containerMetricsRight < contentMetricsRight) {
+            return "both";
+        } else if (contentMetricsLeft < containerMetricsLeft) {
+            return "left";
+        } else if (contentMetricsRight > containerMetricsRight) {
+            return "right";
+        } else {
+            return "none";
+        }
+    }
+
+})
+
+
+
+
+
+const geCategories = async () => {
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}news-categories`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        categories.value = await res.data
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+
+const getHomepageData = async (page = 1) => {
+    try {
+        if (selectCategory.value) {
+            loading.value = true
+            console.log('category', selectedCategory.value)
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&category_id=${selectedCategory.value}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            })
+            homepageData.value = await res.data.reverse()
+            pagination.value = await res.meta
+            loading.value = false
+
+        }
+        else {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            })
+            homepageData.value = await res.data.reverse()
+            pagination.value = await res.meta
+            loading.value = false
+
+        }
+
+
+
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+
+async function selectCategory(id) {
+    selectedCategory.value = id
+    try {
+        if (selectedCategory.value) {
+
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?category_id=${selectedCategory.value}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            });
+
+            homepageData.value = await res.data
+            pagination.value = await res.meta
+            loading.value = false
+
+        }
+        else {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            });
+
+            homepageData.value = await res.data
+            pagination.value = await res.meta
+            loading.value = false
+        }
+
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+
+function formatTimestamp(timestamp) {
+    return new Date(timestamp).toLocaleString();
+}
+
+async function changePage(page) {
+    if (page < 1 || page > pagination.last_page) return;
+    getHomepageData(page);
+}
+const handleEdit = (id) => {
+    router.push(`post-job/${id}`)
+}
+const handleCreate = () => {
+    router.push('/create-job-post')
+}
+</script>

@@ -101,7 +101,7 @@
                             <!-- {{ jobs }} -->
                             <div class="job-listing-related-wrapper">
                                 <div v-for="job in jobs?.slice(0, 3)" :key="job.id" class="content-box">
-                                    <a href="#">
+                                    <a @click="toJobDetails(job.id)" >
                                         <div class="top-box-wrapper">
                                             <div class="top-writer-box">
                                                 <p>회계</p>

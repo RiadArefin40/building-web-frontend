@@ -12,12 +12,12 @@
         <div class="home-top-content-inner">
           <div class="left-content-box">
             <div style="overflow: hidden;">
-              <h1 class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
+              <!-- <h1 class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
                 data-animation-delay="300">공정하고 투명한 건물 관리,<br /><span>대한건물관리협회</span>가<br class="mobile-break" /> 함께합니다.
-              </h1>
-              <!-- <h1 v-html="homepageData['section-1'].title" class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
-                data-animation-delay="300">
               </h1> -->
+              <h1 v-html="homepageData['section-1']?.title" class="animate fade-in-top-animation" data-animate="" data-animation="fade-in-top"
+                data-animation-delay="300">
+              </h1>
             </div>
             <p class="desktop-title">대한건물관리협회는 건물 관리의 공정성과 투명성을 보장하기 위해<br /> 중재와 상담을 지원하는 <span>비영리 단체</span>입니다.</p>
             <p class="mobile-title">대한건물관리협회는 건물 관리의 공정성과 투명성을<br /> 보장하기 위해 중재와 상담을 지원하는<br /> <span>비영리 단체</span>입니다.

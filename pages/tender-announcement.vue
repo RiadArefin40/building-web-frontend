@@ -478,7 +478,7 @@ onMounted(()=>{
 const geCategories = async () => {
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcement-categories`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here

@@ -265,7 +265,7 @@ import { nextTick } from 'vue';
 const homepageData = ref([]);
 const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
 const loading = ref(true)
-const selectedCategory = ref('1')
+const selectedCategory = ref('')
 const searchText = ref('')
 const sortOrder = ref('latest')
 
@@ -396,6 +396,7 @@ onMounted(() => {
 })
 
 const getHomepageData = async () => {
+if(selectCategory.value){
     try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
@@ -410,6 +411,24 @@ const getHomepageData = async () => {
         console.error(e)
         loading.value = false
     }
+}
+else{
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?sort=${sortOrder.value}`, {
+            method: 'GET',
+        })
+
+        homepageData.value = await res
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+}
+
 }
 const geCategories = async () => {
     try {
@@ -438,7 +457,8 @@ function formatTimestamp(timestamp) {
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    try {
+    if(selectCategory.value){
+        try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
             method: 'GET',
@@ -452,6 +472,24 @@ async function selectCategory(id) {
         console.error(e)
         loading.value = false
     }
+    }
+    else{
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?sort=${sortOrder.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+    }
+
 }
 watch(searchText, async (newSearchText) => {
     //   if (newSearchText.trim() === '') {
