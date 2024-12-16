@@ -19,11 +19,11 @@
                 data-animation-delay="300">
               </h1>
             </div>
-            <p class="desktop-title">대한건물관리협회는 건물 관리의 공정성과 투명성을 보장하기 위해<br /> 중재와 상담을 지원하는 <span>비영리 단체</span>입니다.</p>
+            <!-- <p class="desktop-title">대한건물관리협회는 건물 관리의 공정성과 투명성을 보장하기 위해<br /> 중재와 상담을 지원하는 <span>비영리 단체</span>입니다.</p>
             <p class="mobile-title">대한건물관리협회는 건물 관리의 공정성과 투명성을<br /> 보장하기 위해 중재와 상담을 지원하는<br /> <span>비영리 단체</span>입니다.
-            </p>
-            <!-- <p  v-html="homepageData['section-1'].subtitle" class="desktop-title"></p>
-            <p v-html="homepageData['section-1'].subtitle" class="mobile-title"></p> -->
+            </p> -->
+            <p  v-html="homepageData['section-1']?.subtitle" class="desktop-title"></p>
+            <p v-html="homepageData['section-1']?.subtitle" class="mobile-title"></p>
           
             <div class="link-wrapper">
               <a href="#">중재 요청하기 <span class="material-symbols-outlined">
@@ -67,13 +67,13 @@
       <div class="container-fluid">
         <div class="why-box-inner">
           <div class="left-box">
-            <h2><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2>
-            <!-- <h2 style="margin-bottom: 73px;"  v-html="homepageData['section-2'].title"></h2> -->
+            <!-- <h2><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2> -->
+            <h2 v-html="homepageData['section-2']?.title"></h2>
             <div class="note-box">
               <div class="star-image">
                 <img src="/assets/images/star.png" alt="star">
               </div>
-              <p v-html="homepageData['section-2'].subtitle"></p>
+              <p v-html="homepageData['section-2']?.subtitle"></p>
               <!-- <p>“이러한 문제들로 인해 관리자의 업무 부담이 늘어나고<br />건물의 가치가 저하될 수 있습니다.”</p> -->
             </div>
           </div>
@@ -82,14 +82,14 @@
               <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button v-html="homepageData['section-2'].dropdown_1_title" class="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2']?.dropdown_1_title" class="accordion-button" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               
                     </button>
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p v-html="homepageData['section-2'].dropdown_1_body">
+                      <p v-html="homepageData['section-2']?.dropdown_1_body">
                       </p>
                       <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
                       </p> -->
