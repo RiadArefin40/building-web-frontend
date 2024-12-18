@@ -6,14 +6,15 @@ export default function useAuth() {
     const authUser = ref(false);
     if (process.client) {
         authToken.value = localStorage.getItem('authToken');
-        authUser.value = localStorage.getItem('authUser');
+        authUser.value = JSON.parse(localStorage.getItem('authUser')); 
         console.log('authUser.value',authUser.value)
         isAuthenticated.value = !!authToken.value; }
 
   const login = (token, authData) => {
   
     localStorage.setItem('authToken', token);
-    localStorage.setItem('authUser', authData.name);
+    localStorage.setItem('authUser', JSON.stringify(authData));
+
     authUser.value = authData.name;
     authToken.value = token;
     isAuthenticated.value = true;

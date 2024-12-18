@@ -66,7 +66,7 @@
                                                         id="category.id" data-bs-toggle="pill"
                                                         data-bs-target="#pills-home" type="button" role="tab"
                                                         aria-controls="pills" @click="selectCategory('')">
-                                                        모두
+                                                        전체보기
                                                     </button>
                                                 </li>
                                                 <li v-for="category in categories" :key="category.id"
@@ -126,7 +126,7 @@
                                                
                                           
                                                 <div v-else class="news-box" v-for="news in homepageData.data"
-                                                    :class="{ active: news.is_pinned }">
+                                                    :class="{ active: news.is_pinned }" style="max-width: 700px;">
                                                     <div class="category-date-wrapper">
                                                         <div class="category-wrapper">
                                                             <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"

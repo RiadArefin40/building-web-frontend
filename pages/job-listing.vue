@@ -60,6 +60,11 @@
                         </div>
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
+                            <button  class="nav-link"
+                               :class="{ active: !selectedCategory }" id=""
+                                data-bs-toggle="pill" data-bs-target="#v-pills-one" type="button" role="tab"
+                                :aria-controls="'pills-' " aria-selected="true"
+                                @click="selectCategory('')">전체보기</button>
                             <button v-for="category in categories" class="nav-link"
                                 :class="{ active: category.id == selectedCategory }" :id="category.id"
                                 data-bs-toggle="pill" data-bs-target="#v-pills-one" type="button" role="tab"

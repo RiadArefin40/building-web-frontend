@@ -124,8 +124,8 @@ const name = ref('')
 const email = ref('')
 const phone_number = ref('')
 const position = ref('')
-const password = ref(false)
-const confirmPassword = ref(false)
+const password = ref('')
+const confirmPassword = ref('')
 const loading = ref(false)
 
 
@@ -141,7 +141,6 @@ const onSignUp = async ()=>{
                     phone_number:phone_number.value}
         loading.value = true;
         const res = await axios.post(`${runtimeConfig.public.apiBase}auth/register`, body, {
-            method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Specify the content type
             },

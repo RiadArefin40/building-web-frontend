@@ -215,86 +215,42 @@
                     </div>
                 </div>
                 <div class="membership-right">
+
                     <div class="membership-form-inner">
-                        <form action="">
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option selected>Incheon Metropolitan City Council</option>
-                                        <option value="Incheon Metropolitan City Council">Incheon Metropolitan City Council</option>
-                                        <option value="Incheon Metropolitan City Council">Incheon Metropolitan City Council</option>
-                                        <option value="Incheon Metropolitan City Council">Incheon Metropolitan City Council</option>
-                                    </select>
-                                    <label for="floatingSelect">소속 지사, 지부</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingusername"
-                                        placeholder="username">
-                                    <label for="floatingusername">이름</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">전화 번호</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">이메일 주소</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">회사 이름</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">회사 주소</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">상호명(직위)</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingaddress"
-                                        placeholder="addresses">
-                                    <label for="floatingaddress">사업장 주소</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        서비스 약관, 일반 약관 및 개인정보 처리방침에 동의합니다.
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn_submit" type="submit">신청서 제출 <span
-                                        class="material-symbols-outlined">
-                                        arrow_right_alt
-                                    </span></button>
-                            </div>
-                        </form>
-                    </div>
+      <form @submit.prevent="handleSubmit">
+        <div v-for="field in memberFormData" :key="field.name" class="form-group">
+          <div v-if="field.value_type === 'option'" class="form-floating">
+            <select
+              :id="`floating_${field.name}`"
+              class="form-select"
+              v-model="formValues[field.name]"
+            >
+              <option v-for="option in field.value_options" :key="option" :value="option">
+                {{ option }}
+              </option>
+            </select>
+            <label :for="`floating_${field.name}`">{{ field.label }}</label>
+          </div>
+          <div v-else class="form-floating">
+            <input
+              :id="`floating_${field.name}`"
+              class="form-control"
+              :type="field.value_type || 'text'"
+              :placeholder="field.label"
+              v-model="formValues[field.name]"
+            />
+            <label :for="`floating_${field.name}`">{{ field.label }}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn_submit">
+            Submit Application
+            <span class="material-symbols-outlined">arrow_right_alt</span>
+          </button>
+        </div>
+      </form>
+    </div>
+               
                 </div>
             </div>
         </div>
@@ -459,3 +415,83 @@
     <!-- Login Modal  -->
 
 </template>
+
+
+<script setup>
+import useAuth from '@/composables/useAuth';
+const { logout, authUser,authToken, isAuthenticated,login } = useAuth();
+const runtimeConfig = useRuntimeConfig();
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+const formValues = ref({});
+import Toast from 'primevue/toast';
+const router = useRouter();
+import axios from 'axios'
+const memberFormData = ref()
+const loading = ref(false)
+
+onMounted(()=>{
+    getMemberFormData()
+})
+
+
+const getMemberFormData = async ()=>{
+
+    try {
+       
+        loading.value = true;
+        const res = await axios.get(`${runtimeConfig.public.apiBase}membership-applications/form/`, {
+            headers: {
+                'Content-Type': 'application/json', 
+                Authorization: `Bearer ${authToken.value}` // Specify the content type
+            },
+
+        
+        })
+
+        memberFormData.value = res?.data?.data
+
+        memberFormData.value.forEach((field) => {
+      formValues[field.name] = field.value_type === "option" ? field.value_options[0] : "";
+  });
+     
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+
+        console.log('erroe', e)
+        loading.value = false
+    }
+
+
+
+}
+
+const handleSubmit = async () => {
+  console.log("Form Submitted", formValues.value);
+  try {
+       
+       loading.value = true;
+       const res = await axios.post(`${runtimeConfig.public.apiBase}membership-applications`,JSON.stringify(formValues.value), {
+           headers: {
+               'Content-Type': 'application/json', 
+               Authorization: `Bearer ${authToken.value}` // Specify the content type
+           },
+
+       
+       })
+
+
+       loading.value = false
+       toast.add({ detail:res?.data?.message , life: 3000 });
+
+   }
+   catch (e) {
+       toast.add({ detail:e?.response?.data?.message , life: 3000 });
+       loading.value = false
+   }
+};
+
+
+</script>

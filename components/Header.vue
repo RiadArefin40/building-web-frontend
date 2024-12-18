@@ -243,7 +243,7 @@
                   </div>
                   <div class="user-name">
                     <!-- <h5>박철민</h5> -->
-                     <h5>{{ authUser }}</h5>
+                     <h5>{{ authUser?.name }}</h5>
                   </div>
                 </div>
               </a>
@@ -251,9 +251,13 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">마이 페이지</a></li>
                 <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handlePostManagement()">
-                 Job Post Management</a></li>
+                  직무관리</a></li>
                   <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handleTenderManagement()">
-                    Tender Management
+                    입찰 관리
+
+</a></li>
+<li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handleMyProfile()">
+  내 프로필
 
 </a></li>
                 <li><a class="dropdown-item" @click ="handleLogout()">로그아웃</a></li>
@@ -379,6 +383,9 @@ const handlePostManagement = () =>{
 const handleTenderManagement = () =>{
   router.push('/tender-management');
 }
+const handleMyProfile = () =>{
+  router.push('/my-profile');
+} 
 
 </script>
 

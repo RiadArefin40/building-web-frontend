@@ -553,7 +553,6 @@
               <div v-for="data in testimonials" class="item">
                 <div class="item-inner">
                   <div class="item-inner-top-wrapper">
-                    {{ data }}
                     <div class="quote-box">
                       <img src="/assets/images/quote.svg" alt="">
                     </div>
@@ -568,7 +567,7 @@
                   </div>
                   <div class="user-designation-box">
                     <div class="user-image">
-                      <img src="/assets/images/user1.png" alt="">
+                      <img :src="`https://testingpro.xyz/${data?.icon}`" alt="">
                     </div>
                     <div class="designation-content">
                       <h6>{{ data?.author_name }}</h6>
