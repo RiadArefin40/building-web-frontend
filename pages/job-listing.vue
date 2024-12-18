@@ -38,7 +38,7 @@
                                                 fill="black" />
                                         </g>
                                     </svg></button>
-                                <input type="text" class="form-control" placeholder="구인공고 검색 ...">
+                                <input v-model="searchText" type="text" class="form-control" placeholder="구인공고 검색 ...">
                             </div>
                         </form>
                     </div>
@@ -99,10 +99,11 @@
                                         </div>
                                         <div class="select-filter">
                                             <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>전체</option>
-                                                    <option>오래된 순</option>
-                                                </select>
+                                                <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example"  @change="getJobData()" >
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +125,7 @@
                                                 </div>
                                                 <div class="job-description truncate-description">
                                                     <!-- <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p> -->
-                                                    <p>{{ job.description }}</p>
+                                                    <p v-html="job?.description"></p>
                                                 </div>
                                                 <div class="category-wrapper">
                                                     <!-- <p>작성자: <span>한국경영관</span></p> -->
@@ -402,8 +403,10 @@ const loading = ref(false)
 const selectedCategory = ref('1')
 const pagination = ref(null);
 const type = ref('')
+const searchText = ref('')
 const categories = ref(null)
 const jobs = ref([])
+const sortOrder = ref('latest')
 
 onMounted(() => {
     getJobType()
@@ -442,7 +445,7 @@ const getJobData = async (page = 1) => {
         loading.value = true
 
 
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?page=${page}&category_id=${selectedCategory.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -493,6 +496,27 @@ async function changePage(page) {
     getJobData(page);
 }
 
+watch(searchText, async (newSearchText) => {
+    //   if (newSearchText.trim() === '') {
+    //     homepageData.value = []; 
+    //     return;
+    //   }
+
+    loading.value = true;
+
+
+    try {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/?search=${newSearchText}&sort=${sortOrder.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res.data;  // Assuming the response has a 'data' field with the results
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loading.value = false;
+    }
+});
 
 
 

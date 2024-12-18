@@ -37,14 +37,14 @@
                                                 fill="black" />
                                         </g>
                                     </svg></button>
-                                <input type="text" class="form-control" placeholder="협회 소식 검색 ...">
+                                <input v-model="searchText" type="text" class="form-control" placeholder="협회 소식 검색 ...">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div v-if="homepageData.length > 0" class="left-image-right-content-wrapper">
                     <div class="left-image-wrapper">
-                        <img style="max-height: 340px;" :src="`https://testingpro.xyz/storage/${homepageData[0]?.thumbnail}`" alt="">
+                        <img class="custom-img-width"  :src="`https://testingpro.xyz/storage/${homepageData[0]?.thumbnail}`" alt="">
                     </div>
                     <div class="right-content-wrapper">
                         <div class="top-date">
@@ -137,7 +137,7 @@
                                                         id="category.id" data-bs-toggle="pill"
                                                         data-bs-target="#pills-home" type="button" role="tab"
                                                         aria-controls="pills" @click="selectCategory('')">
-                                                        All
+                                                        모두
                                                     </button>
                                                 </li>
                                                 <li v-for="category in categories" :key="category.id"
@@ -172,9 +172,10 @@
                                     </div>
                                     <div class="select-filter">
                                         <div class="form-group">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>최신 순</option>
-                                                <option>오래된 순</option>
+                                            <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example"  @change="getHomepageData()" >
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
                                             </select>
                                         </div>
                                     </div>
@@ -197,7 +198,7 @@
                                                 <div v-else v-for="data in homepageData" class="news-box">
                                                     <NuxtLink :to="`/association-news-details/${data?.id}`">
                                                         <div class="image-box">
-                                                            <img style="max-height: 280px;"
+                                                            <img style="max-height: 280px; object-fit: cover;"
                                                                 :src="`https://testingpro.xyz/storage/${data?.thumbnail}`"
                                                                 alt="">
                                                         </div>
@@ -520,7 +521,7 @@ const getHomepageData = async (page = 1) => {
         if (selectCategory.value) {
             loading.value = true
             console.log('category', selectedCategory.value)
-            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&category_id=${selectedCategory.value}`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -533,7 +534,7 @@ const getHomepageData = async (page = 1) => {
         }
         else {
             loading.value = true
-            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -560,7 +561,7 @@ async function selectCategory(id) {
         if (selectedCategory.value) {
 
             loading.value = true
-            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?category_id=${selectedCategory.value}`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -574,7 +575,7 @@ async function selectCategory(id) {
         }
         else {
             loading.value = true
-            const res = await $fetch(`${runtimeConfig.public.apiBase}news/`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}news/?sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -607,4 +608,52 @@ const handleEdit = (id) => {
 const handleCreate = () => {
     router.push('/create-job-post')
 }
+watch(searchText, async (newSearchText) => {
+    //   if (newSearchText.trim() === '') {
+    //     homepageData.value = []; 
+    //     return;
+    //   }
+
+    loading.value = true;
+
+
+    try {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}news?search=${newSearchText}&sort=${sortOrder.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res.data;  // Assuming the response has a 'data' field with the results
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loading.value = false;
+    }
+});
 </script>
+
+<style scoped>
+.custom-img-width{
+
+max-height: 340px !important; 
+width:50vw !important; 
+object-fit: cover !important;
+
+
+}
+
+@media (max-width: 991px) {
+
+    .custom-img-width{
+
+max-height: 340px !important; 
+width:100vw !important; 
+object-fit: cover !important;
+
+
+}
+
+}
+
+
+
+</style>

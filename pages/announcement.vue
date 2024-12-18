@@ -61,6 +61,14 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
+                                                <li class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link" :class="{ active: !selectedCategory }"
+                                                        id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        aria-controls="pills" @click="selectCategory('')">
+                                                        모두
+                                                    </button>
+                                                </li>
                                                 <li v-for="category in categories" :key="category.id"
                                                     class="nav-item ProductNav_Link" role="presentation">
                                                     <button class="nav-link"
@@ -94,7 +102,7 @@
                                     <div class="select-filter">
                                         <div class="form-group">
                                             <select class="form-select" v-model="sortOrder"
-                                                aria-label="Default select example"  @change="getHomepageData" >
+                                                aria-label="Default select example"  @change="getHomepageData()" >
                                                 <option value="latest" selected>최신 순</option>
                                                 <option value="oldest">오래된 순</option>
                                             </select>
@@ -137,7 +145,7 @@
                                                     </div>
                                                     <div class="news-title truncate-title">
                                                         <!-- <h3>건물 관리자를 위한 새로운 교육 프로그램 출시</h3> -->
-                                                        <h2>{{ news.topic }}</h2>
+                                                        <h2 style="cursor: pointer;" class="cursor-pointer" @click="toDetails(news.id)">{{ news.topic }}</h2>
                                                     </div>
                                                     <div class="content-wrapper truncate">
                                                         <!-- <p>건물 관리자의 규정 준수, 안전 및 기술 분야의 기술을 향상시키도록 설계된 전문 인증 프로그램을 발표합니다.
@@ -159,7 +167,7 @@
 
                                     </div>
                                     <!-- Pagination Wrapper  -->
-                                    <div class="pagination-outer-wrappers">
+                                    <!-- <div class="pagination-outer-wrappers">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <li class="page-item"><a class="page-link" href="#"><span
@@ -178,7 +186,47 @@
                                                         </span></a></li>
                                             </ul>
                                         </nav>
-                                    </div>
+                                    </div> -->
+
+                                    <div v-if="pagination?.links?.length > 0 && homepageData?.data?.length > 0"
+                                    class="pagination-outer-wrappers">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <!-- Previous Page -->
+                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                                <a class="page-link" href="#"
+                                                    @click.prevent="changePage(pagination.current_page - 1)">
+
+                                                    <span class="desktop-version">이전 페이지</span> <span
+                                                        class="material-symbols-outlined mobile-version">
+                                                        arrow_left_alt
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <!-- Page Numbers -->
+                                            <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
+                                                class="page-item" :class="{ active: link.active }">
+                                                <a class="page-link" href="#" @click.prevent="changePage(link.label)">
+                                                    {{ link.label }}
+                                                </a>
+                                            </li>
+
+                                            <!-- Next Page -->
+                                            <li class="page-item"
+                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                <a class="page-link" href="#"
+                                                    @click.prevent="changePage(pagination.current_page + 1)">
+
+                                                    <span class="desktop-version">다음 페이지</span> <span
+                                                        class="material-symbols-outlined mobile-version">
+                                                        arrow_right_alt
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                   </div>
                                     <!-- Pagination Wrapper  -->
                                 </div>
                             </div>
@@ -261,14 +309,14 @@
 import ProgressSpinner from 'primevue/progressspinner';
 const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
-
+const pagination = ref(null);
 const homepageData = ref([]);
 const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
 const loading = ref(true)
 const selectedCategory = ref('')
 const searchText = ref('')
 const sortOrder = ref('latest')
-
+const router = useRouter()
 
 
 onMounted(() => {
@@ -395,15 +443,20 @@ onMounted(() => {
 
 })
 
-const getHomepageData = async () => {
+const toDetails = (id) =>{
+  router.push(`announcements-details/${id}`)
+}
+
+const getHomepageData = async (page = 1) => {
 if(selectedCategory.value){
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
             method: 'GET',
         })
 
         homepageData.value = await res
+        pagination.value = await res.meta
         loading.value = false
         console.log('res', res)
     }
@@ -415,11 +468,12 @@ if(selectedCategory.value){
 else{
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?sort=${sortOrder.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?page=${page}&sort=${sortOrder.value}`, {
             method: 'GET',
         })
 
         homepageData.value = await res
+        pagination.value = await res.meta
         loading.value = false
         console.log('res', res)
     }
@@ -438,6 +492,7 @@ const geCategories = async () => {
         })
 
         categories.value = await res.data
+        pagination.value = await res.meta
         loading.value = false
         console.log('res', res)
     }
@@ -501,7 +556,7 @@ watch(searchText, async (newSearchText) => {
 
 
     try {
-        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?&search=${newSearchText}?&sort=${sortOrder.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements?search=${newSearchText}&sort=${sortOrder.value}`, {
             method: 'GET',
         });
 
@@ -517,6 +572,10 @@ watch(searchText, async (newSearchText) => {
 function removeImageTags(html) {
   // Remove all <img> tags using a regular expression
   return html.replace(/<img[^>]*>/gi, "");
+}
+async function changePage(page) {
+    if (page < 1 || page > pagination.last_page) return;
+    getHomepageData(page);
 }
 
 </script>

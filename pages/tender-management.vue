@@ -37,6 +37,14 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
+                                                <li class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link" :class="{ active: !selectedCategory }"
+                                                        id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        aria-controls="pills" @click="selectCategory('')">
+                                                        모두
+                                                    </button>
+                                                </li>
                                                 <li v-for="category in categories" :key="category.id"
                                                     class="nav-item ProductNav_Link" role="presentation">
                                                     <button class="nav-link"
@@ -105,12 +113,13 @@
                                                             <tbody>
                                                                 <tr v-for="job in homepageData">
                                                                     <td>{{ job.id }}</td>
-                                                                    <td v-html ="job.topic"></td>
+                                                                    <td v-html="job.topic"></td>
                                                                     <td>{{ job.user.name }}</td>
                                                                     <td>{{ formatTimestamp(job.created_at) }}</td>
                                                                     <td>
                                                                         <div class="buttons-wrapper">
-                                                                            <button class="btn edit-btn" @click="handleEdit(job.id)"><svg
+                                                                            <button class="btn edit-btn"
+                                                                                @click="handleEdit(job.id)"><svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24" height="24"
                                                                                     viewBox="0 0 24 24" fill="none">
@@ -127,7 +136,8 @@
                                                                                         stroke-linecap="round"
                                                                                         stroke-linejoin="round" />
                                                                                 </svg></button>
-                                                                            <button @click = "handleDelete(job.id)" class="btn delete-btn">
+                                                                            <button @click="handleDelete(job.id)"
+                                                                                class="btn delete-btn">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24" height="24"
                                                                                     viewBox="0 0 24 24" fill="none">
@@ -190,10 +200,11 @@
                                                                     <div class="data-link-wrapper">
                                                                         <div class="announcemnts-wrapper">
                                                                             <!-- <h5>에너지 효율 개선 프로젝트</h5> -->
-                                                                            <h5 v-html ="job.topic"></h5>
+                                                                            <h5 v-html="job.topic"></h5>
                                                                         </div>
                                                                         <div class="buttons-wrapper">
-                                                                            <button @click="handleEdit(job.id)" class="btn edit-btn"><svg
+                                                                            <button @click="handleEdit(job.id)"
+                                                                                class="btn edit-btn"><svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24" height="24"
                                                                                     viewBox="0 0 24 24" fill="none">
@@ -210,7 +221,8 @@
                                                                                         stroke-linecap="round"
                                                                                         stroke-linejoin="round" />
                                                                                 </svg></button>
-                                                                            <button @click = "handleDelete(job.id)" class="btn delete-btn">
+                                                                            <button @click="handleDelete(job.id)"
+                                                                                class="btn delete-btn">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24" height="24"
                                                                                     viewBox="0 0 24 24" fill="none">
@@ -246,7 +258,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- Pagination Wrapper  -->
-                                             
+
                                                 <!-- Pagination Wrapper  -->
 
                                                 <div v-if="pagination?.links?.length > 0 && homepageData.length > 0"
@@ -375,11 +387,11 @@
     </div>
     <Dialog v-model:visible="confirmModal" modal header="Confirm Delete this Post?" :style="{ width: '25rem' }">
         <div class="d-flex justify-content-center gap-2">
-                <Button type="button"  label="Cancel" severity="secondary" @click="confirmModal = false"></Button>
-                <Button type="button" :loading="loading" label="Confirm" @click="confirmDelete"></Button>
-            </div>
+            <Button type="button" label="Cancel" severity="secondary" @click="confirmModal = false"></Button>
+            <Button type="button" :loading="loading" label="Confirm" @click="confirmDelete"></Button>
+        </div>
     </Dialog>
-    <Toast/>
+    <Toast />
     <!-- Login Modal  -->
 </template>
 
@@ -399,7 +411,7 @@ const { authToken } = await useAuth();
 const homepageData = ref([]);
 const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
 const loading = ref(true)
-const selectedCategory = ref('1')
+const selectedCategory = ref('')
 const searchText = ref('')
 const sortOrder = ref('latest')
 const pagination = ref(null)
@@ -531,12 +543,12 @@ onMounted(() => {
 
 })
 
-const handleDelete = async (id) =>{
+const handleDelete = async (id) => {
     deleteId.value = id;
-    confirmModal.value =  true;
+    confirmModal.value = true;
 }
 
-const confirmDelete = async () =>{
+const confirmDelete = async () => {
     try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/${deleteId.value}`, {
@@ -546,12 +558,12 @@ const confirmDelete = async () =>{
             }
         })
 
-        toast.add({ detail:"Deleted Successfully!" , life: 3000 });
+        toast.add({ detail: "Deleted Successfully!", life: 3000 });
         getHomepageData();
         confirmModal.value = false
     }
     catch (e) {
-        toast.add({ detail:e , life: 3000 });
+        toast.add({ detail: e, life: 3000 });
         console.error(e)
         loading.value = false
     }
@@ -577,48 +589,98 @@ const geCategories = async () => {
     }
 }
 
-const getHomepageData = async (page=1) => {
-    try {
-        loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}&category_id=${selectedCategory.value}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-            }
-        })
+const getHomepageData = async (page = 1) => {
+    if (!selectedCategory.value) {
+        try {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            })
 
-        homepageData.value = await res.data.reverse()
-        pagination.value = await res.meta
-        console.log(pagination.value)
-        loading.value = false
-        console.log('res', res)
+            homepageData.value = await res.data.reverse()
+            pagination.value = await res.meta
+            console.log(pagination.value)
+            loading.value = false
+            console.log('res', res)
+        }
+        catch (e) {
+            console.error(e)
+            loading.value = false
+        }
+
     }
-    catch (e) {
-        console.error(e)
-        loading.value = false
+    else {
+        try {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}&category_id=${selectedCategory.value}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            })
+
+            homepageData.value = await res.data.reverse()
+            pagination.value = await res.meta
+            console.log(pagination.value)
+            loading.value = false
+            console.log('res', res)
+        }
+        catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
+
 }
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    try {
-        loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?category_id=${selectedCategory.value}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-            }
-        });
+    if (!selectedCategory.value) {
+        console.log('sss', selectedCategory.value)
+        try {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            });
 
-        homepageData.value = await res.data
-        pagination.value = await res.meta
-        loading.value = false
-        console.log('res', res)
+            homepageData.value = await res.data
+            pagination.value = await res.meta
+            loading.value = false
+            console.log('res', res)
+        }
+        catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
-    catch (e) {
-        console.error(e)
-        loading.value = false
+    else {
+        selectedCategory.value = id
+        try {
+            loading.value = true
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?category_id=${selectedCategory.value}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                }
+            });
+
+            homepageData.value = await res.data
+            pagination.value = await res.meta
+            loading.value = false
+            console.log('res', res)
+        }
+        catch (e) {
+            console.error(e)
+            loading.value = false
+        }
     }
+
 }
 
 function formatTimestamp(timestamp) {
@@ -629,10 +691,10 @@ async function changePage(page) {
     if (page < 1 || page > pagination.last_page) return;
     getHomepageData(page);
 }
-const handleEdit = (id) =>{
- router.push(`/post-tender/${id}`)
+const handleEdit = (id) => {
+    router.push(`/post-tender/${id}`)
 }
-const handleCreate = () =>{
+const handleCreate = () => {
     router.push('/create-tender-post')
 }
 </script>

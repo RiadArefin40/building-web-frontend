@@ -217,6 +217,10 @@ onMounted(() => {
   getData(id);
 })
 
+function toJobDetails(id){
+   router.push(`/joblisting-details/${id}`)
+}
+
 async function getData(id){
 
     try{

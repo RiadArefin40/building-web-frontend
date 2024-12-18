@@ -4,14 +4,14 @@
      <!-- Header  -->
  
      <!-- Association News Details Section  -->
-      <div v-if="!loading" class="announcements-details-section-wrapper">
+      <div  class="announcements-details-section-wrapper">
          <div class="top-section">
              <div class="container-fluid">
                  <div class="top-inner">
                      <div class="top-date-category-wrapper">
                          <div class="date-wrapper">
                              <!-- <h6>2024년 9월 18일</h6> -->
-                              <h6>{{  formatTimestamp(announcement.created_at) }}</h6>
+                              <h6>{{  formatTimestamp(announcement?.created_at) }}</h6>
                          </div>
                          <!-- <div class="category-wrapper">
                              <h6>모범 사례</h6>
@@ -19,7 +19,7 @@
                      </div>
                      <div class="news-title">
                          <!-- <h2>건물 관리자를 위한 새로운<br/> 교육 프로그램 출시</h2> -->
-                          <h2>{{announcement.topic  }}</h2>
+                          <h2>{{announcement?.topic  }}</h2>
                      </div>
                  </div>
              </div>
@@ -39,7 +39,7 @@
                          </div> -->
                          <div class="key-recommendation-wrapper">
 
-                            <div v-html="styledBody"></div>
+                            <div v-if="!loading" v-html="styledBody"></div>
                              <!-- <h3>프로그램 하이라이트:</h3>
                              <ul>
                                  <li><p><span>정기 감사 및 보고</span> 정기적으로 내부 감사를 실시하고 그 결과를 주민과 공유함으로써 책임감을 강화할 수 있습니다.</p></li>
@@ -54,33 +54,18 @@
                              <h5>협회의 다른 소식 확인하기</h5>
                              <p>협회의 최신 소식과 업데이트를 확인해보세요.</p>
                              <div class="related-news-box">
-                                 <a href="./association-news-details.html">
-                                     멤버십을 위한 새로운 혜택 및 서비스
+                                 <a style="cursor: pointer;" v-for="data in homepageData?.slice(0, 3)" @click = "toDetails(data.id)">
+                                     <h6>{{ data.topic }}</h6>
                                      <div class="icon">
                                          <span class="material-symbols-outlined">
                                              arrow_right_alt
                                          </span>
                                      </div>
                                  </a>
-                                 <a href="./association-news-details.html">
-                                     최근 정부 정책 변화에서 얻은 10가지 주요 통찰력
-                                     <div class="icon">
-                                         <span class="material-symbols-outlined">
-                                             arrow_right_alt
-                                         </span>
-                                     </div>
-                                 </a>
-                                 <a href="./association-news-details.html">
-                                     투명경영을 위한 새로운 디지털 플랫폼 출시
-                                     <div class="icon">
-                                         <span class="material-symbols-outlined">
-                                             arrow_right_alt
-                                         </span>
-                                     </div>
-                                 </a>
+
                              </div>
                              <div class="explore-more-btn">
-                                 <a href="./association-news-details.html">모든 협회소식 보기</a>
+                                 <a @click="toMain()">모든 협회소식 보기</a>
                              </div>
                          </div>
                      </div>
@@ -141,15 +126,37 @@ const runtimeConfig = useRuntimeConfig();
 const id = route.params.id
 const loading = ref(true)
 const announcement = ref(null)
-
+const router = useRouter()
+const homepageData = ref(null)
 const imageWidth = ref("740px");
 
 
 onMounted(() => {
     updateImageWidth();
+    getHomepageData();
   getData(id);
   window.addEventListener("resize", updateImageWidth);
 })
+
+const getHomepageData = async () => {
+
+    try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}announcements`, {
+            method: 'GET',
+        })
+
+        homepageData.value = await res.data.reverse()
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+
+}
 
 async function getData(id){
 
@@ -167,6 +174,15 @@ announcement.value = await res.data
   }
 
 }
+
+function toDetails(id){
+    router.push(`/announcements-details/${id}`)
+}
+
+function toMain (){
+    router.push('/announcement')
+}
+
 
 function styleImages(html, styles) {
   const styleString = Object.entries(styles)

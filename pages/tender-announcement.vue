@@ -38,7 +38,7 @@
                                                 fill="black" />
                                         </g>
                                     </svg></button>
-                                <input type="text" class="form-control" placeholder="입찰공고 검색 ...">
+                                <input v-model="searchText" type="text" class="form-control" placeholder="입찰공고 검색 ...">
                             </div>
                         </form>
                     </div>
@@ -61,8 +61,16 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
+                                                <li class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link" :class="{ active: !selectedCategory }"
+                                                        id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        aria-controls="pills" @click="selectCategory('')">
+                                                        모두
+                                                    </button>
+                                                </li>
                                                 <li v-for="category in categories" :key="category.id"
-                                                    class="nav-item ProductNav_Link" role="presentation">
+                                                    class="nav-item ProductNav_Link"  role="presentation">
                                                     <button class="nav-link"
                                                         :class="{ active: category.id == selectedCategory }"
                                                         :id="category.id" data-bs-toggle="pill"
@@ -97,10 +105,11 @@
                                         </div>
                                         <div class="select-filter">
                                             <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>최신</option>
-                                                    <option>오래된 순</option>
-                                                </select>
+                                                <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example"  @change="getAnnouncement()" >
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -127,9 +136,10 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for = "data in homepageData">
-                                                                    <td>{{ data?.category?.name }}</td>
+                                                                    <td></td>
+                                                                    <td>{{ data?.topic }}</td>
                                                                     <td>{{ data?.user?.name }}</td>
-                                                                    <td>김성진</td>
+                
                                                                     <td>{{ formatTimestamp(data?.created_at) }}</td>
                                                                     <td><a @click = "handleDetails(data?.id)">자세히 보기 <span
                                                                                 class="material-symbols-outlined">
@@ -146,76 +156,16 @@
                                                                 <h5>모집부문</h5>
                                                             </div>
                                                             <div class="table-mobile-data-wrapper">
-                                                                <div class="table-data-box">
+                                                                <div v-for = "data in homepageData" class="table-data-box">
                                                                     <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
+                                                                        <h6>{{ data?.category?.name }}</h6>
+                                                                        <h6>{{ formatTimestamp(data?.created_at) }}</h6>
                                                                     </div>
                                                                     <div class="data-link-wrapper">
                                                                         <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
+                                                                            <h5>{{ data?.topic }}</h5>
                                                                         </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
-                                                                                class="material-symbols-outlined">
-                                                                                arrow_right_alt
-                                                                            </span></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="table-data-box">
-                                                                    <div class="top-writer-date-wrapper">
-                                                                        <h6>Category</h6>
-                                                                        <h6>18/08/2024</h6>
-                                                                    </div>
-                                                                    <div class="data-link-wrapper">
-                                                                        <div class="announcemnts-wrapper">
-                                                                            <h5>에너지 효율 개선 프로젝트</h5>
-                                                                        </div>
-                                                                        <a href="#"><span
+                                                                        <a @click = "handleDetails(data?.id)"><span
                                                                                 class="material-symbols-outlined">
                                                                                 arrow_right_alt
                                                                             </span></a>
@@ -226,7 +176,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- Pagination Wrapper  -->
-                                                <div class="paginations-outer-wrappers">
+                                                <!-- <div class="paginations-outer-wrappers">
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination">
                                                             <li class="page-item"><a class="page-link" href="#"><span
@@ -245,6 +195,48 @@
                                                                         class="material-symbols-outlined mobile-version">
                                                                         arrow_right_alt
                                                                     </span></a></li>
+                                                        </ul>
+                                                    </nav>
+                                                </div> -->
+                                                <div v-if="pagination?.links?.length > 0 && homepageData.length > 0"
+                                                    class="paginations-outer-wrappers">
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination">
+                                                            <!-- Previous Page -->
+                                                            <li class="page-item"
+                                                                :class="{ disabled: !pagination.links[0].url }">
+                                                                <a class="page-link" href="#"
+                                                                    @click.prevent="changePage(pagination.current_page - 1)">
+
+                                                                    <span class="desktop-version">이전 페이지</span> <span
+                                                                        class="material-symbols-outlined mobile-version">
+                                                                        arrow_left_alt
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <!-- Page Numbers -->
+                                                            <li v-for="link in pagination.links.slice(1, -1)"
+                                                                :key="link.label" class="page-item"
+                                                                :class="{ active: link.active }">
+                                                                <a class="page-link" href="#"
+                                                                    @click.prevent="changePage(link.label)">
+                                                                    {{ link.label }}
+                                                                </a>
+                                                            </li>
+
+                                                            <!-- Next Page -->
+                                                            <li class="page-item"
+                                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                                <a class="page-link" href="#"
+                                                                    @click.prevent="changePage(pagination.current_page + 1)">
+
+                                                                    <span class="desktop-version">다음 페이지</span> <span
+                                                                        class="material-symbols-outlined mobile-version">
+                                                                        arrow_right_alt
+                                                                    </span>
+                                                                </a>
+                                                            </li>
                                                         </ul>
                                                     </nav>
                                                 </div>
@@ -341,7 +333,7 @@ const { authToken } = await useAuth();
 const homepageData = ref([]);
 const categories = ref([])
 const loading = ref(true)
-const selectedCategory = ref('1')
+const selectedCategory = ref('')
 const searchText = ref('')
 const sortOrder = ref('latest')
 const pagination = ref(null)
@@ -495,14 +487,13 @@ const geCategories = async () => {
     }
 }
 
-const getAnnouncement = async () =>{
-    try {
+const getAnnouncement = async (page=1) =>{
+    if(!selectedCategory.value){
+
+        try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?page=${page}&sort=${sortOrder.value}`, {
             method: 'GET',
-            // headers: {
-            //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-            // }
         });
 
         homepageData.value = await res.data
@@ -514,19 +505,37 @@ const getAnnouncement = async () =>{
         console.error(e)
         loading.value = false
     }
+
+    }
+    else{
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}&page=${page}&sort=${sortOrder.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+    }
+
 
 }
 
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    try {
+    if(!selectedCategory.value){
+        try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/`, {
             method: 'GET',
-            // headers: {
-            //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-            // }
         });
 
         homepageData.value = await res.data
@@ -538,10 +547,59 @@ async function selectCategory(id) {
         console.error(e)
         loading.value = false
     }
+    }
+    else{
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?category_id=${selectedCategory.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+    }
+
 }
 function  formatTimestamp(timestamp) {
       return new Date(timestamp).toLocaleString(); 
 }
 
+async function changePage(page) {
+    if (page < 1 || page > pagination.last_page) return;
+    getAnnouncement(page);
+}
+
+watch(searchText, async (newSearchText) => {
+    //   if (newSearchText.trim() === '') {
+    //     homepageData.value = []; 
+    //     return;
+    //   }
+
+    loading.value = true;
+
+
+    try {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/?search=${newSearchText}&sort=${sortOrder.value}`, {
+            method: 'GET',
+        });
+
+        homepageData.value = await res.data;  // Assuming the response has a 'data' field with the results
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loading.value = false;
+    }
+});
+
+function handleDetails(id){
+    router.push(`/tender-announcement-details/${id}`)
+}
 
 </script>

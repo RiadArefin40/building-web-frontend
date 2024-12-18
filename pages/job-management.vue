@@ -38,6 +38,14 @@
                                     <div class="ProductNav_Wrapper">
                                         <nav id="ProductNav" class="ProductNav dragscroll mouse-scroll" role="tablist">
                                             <div id="ProductNavContents" class="nav ProductNav_Contents">
+                                                <li class="nav-item ProductNav_Link" role="presentation">
+                                                    <button class="nav-link" :class="{ active: !selectedCategory }"
+                                                        id="category.id" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-home" type="button" role="tab"
+                                                        aria-controls="pills" @click="selectCategory('')">
+                                                        모두
+                                                    </button>
+                                                </li>
                                                 <li v-for="category in categories" :key="category.id"
                                                     class="nav-item ProductNav_Link" role="presentation">
                                                     <button class="nav-link"
@@ -400,7 +408,7 @@ const { authToken } = await useAuth();
 const homepageData = ref([]);
 const categories = ref([])
 const loading = ref(true)
-const selectedCategory = ref('1')
+const selectedCategory = ref('')
 const searchText = ref('')
 const sortOrder = ref('latest')
 const pagination = ref(null)
@@ -579,7 +587,31 @@ const geCategories = async () => {
 }
 
 const getHomepageData = async (page=1) => {
-    try {
+    if(!selectedCategory.value){
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        homepageData.value = await res.data.reverse()
+        pagination.value = await res.meta
+        console.log(pagination.value)
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+    }
+    else{
+
+        try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}&category_id=${selectedCategory.value}`, {
             method: 'GET',
@@ -598,11 +630,38 @@ const getHomepageData = async (page=1) => {
         console.error(e)
         loading.value = false
     }
+
+    }
+
 }
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    try {
+    if(!selectedCategory.value){
+
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        });
+
+        homepageData.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+    }
+    else{
+
+        try {
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?category_id=${selectedCategory.value}`, {
             method: 'GET',
@@ -620,6 +679,9 @@ async function selectCategory(id) {
         console.error(e)
         loading.value = false
     }
+
+    }
+   
 }
 
 function formatTimestamp(timestamp) {
