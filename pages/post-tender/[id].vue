@@ -150,6 +150,7 @@ import Toast from 'primevue/toast';
 import useAuth from '@/composables/useAuth';
 const { authToken } = await useAuth();
 const loading = ref(false)
+import axios from 'axios'
 const router  = useRouter()
 const route = useRoute()
 const id = route.params.id
@@ -212,48 +213,51 @@ onMounted(()=>{
 const onSubmit = async () =>{
     if(id){
         try {
+          const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, {
-            method: 'PUT',
+        const res = await axios.put(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, body, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+           
         })
 
         loading.value = false
-        toast.add({ detail:"Post Submitted!" , life: 3000 });
-        console.log('resasas', res)
+        toast.add({ detail:res?.data?.message , life: 3000 });
         title.value = '';
         message.value = ''
-        router.push('/tender-management')
+        setTimeout(()=>{
+            router.push('/tender-management')
+        },800)
+        
     }
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
     else{
 
         try {
+            const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/`, {
-            method: 'POST',
+        const res = await axios.post(`${runtimeConfig.public.apiBase}tender-announcements/`, body,{
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+           
         })
 
         loading.value = false
-        toast.add({ detail:"Dispute Request Submitted!" , life: 3000 });
-        console.log('resasas', res)
+        toast.add({ detail:res?.data?.message , life: 3000 });
         title.value = '';
         message.value = ''
     }
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
 

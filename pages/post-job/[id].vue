@@ -157,7 +157,7 @@ const message = ref('')
 const title = ref('')
 const selectedCategory = ref('')
 const categories = ref([])
-
+import axios from 'axios'
 onMounted( async ()=>{
 
 
@@ -212,41 +212,46 @@ onMounted(()=>{
 const onSubmit = async () =>{
     if(id){
         try {
+          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/${id}`, {
-            method: 'PUT',
+        const res = await axios.put(`${runtimeConfig.public.apiBase}jobs/${id}`, body, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+           
         })
 
         loading.value = false
-        toast.add({ detail:"Post Submitted!" , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         console.log('resasas', res)
         title.value = '';
         message.value = ''
-        router.push('/job-management')
+        setTimeout(()=>{
+            router.push('/job-management')
+        },800)
+        
+      
     }
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
     else{
 
         try {
+          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/`, {
-            method: 'POST',
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/`, body, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+           
         })
 
         loading.value = false
-        toast.add({ detail:"Dispute Request Submitted!" , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         console.log('resasas', res)
         title.value = '';
         message.value = ''
@@ -254,6 +259,7 @@ const onSubmit = async () =>{
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
 

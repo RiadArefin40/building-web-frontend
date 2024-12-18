@@ -149,7 +149,7 @@ const message = ref('')
 const title = ref('')
 const selectedCategory = ref('')
 const categories = ref([])
-
+import axios from 'axios'
 onMounted( async ()=>{
 
 
@@ -204,49 +204,55 @@ onMounted(()=>{
 const onSubmit = async () =>{
  if(id){
      try {
+      const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
      loading.value = true
-     const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, {
-         method: 'PUT',
+     const res = await axios.put(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, body, {
          headers: {
              Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
          },
-         body:{announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+        
      })
 
      loading.value = false
-     toast.add({ detail:"Tender Created!" , life: 3000 });
-     console.log('resasas', res)
+     toast.add({ detail:res?.data?.message , life: 3000 });
      title.value = '';
      message.value = ''
-     router.push('/tender-management')
+     setTimeout(()=>{
+        router.push('/tender-management')
+        },800)
+        
+
  }
  catch (e) {
      console.error(e)
      loading.value = false
+     toast.add({ detail:e?.response?.data?.message , life: 3000 });
  }
  }
  else{
 
      try {
+        const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
      loading.value = true
-     const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/`, {
-         method: 'POST',
+     const res = await axios.post(`${runtimeConfig.public.apiBase}tender-announcements/`,body, {
          headers: {
              Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
          },
-         body:{announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+        
      })
 
      loading.value = false
-     toast.add({ detail:"Tender Created!" , life: 3000 });
-     console.log('resasas', res)
+     toast.add({ detail:res?.data?.message , life: 3000 });
      title.value = '';
      message.value = '';
-     router.push('/tender-management')
+     setTimeout(()=>{
+        router.push('/tender-management')
+        },800)
  }
  catch (e) {
      console.error(e)
      loading.value = false
+     toast.add({ detail:e?.response?.data?.message , life: 3000 });
  }
  }
 
@@ -256,14 +262,13 @@ const onSubmit = async () =>{
 const geCategories = async () => {
  try {
      loading.value = true
-     const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+     const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcement-categories`, {
          method: 'GET',
      })
 
      categories.value = await res.data
      selectedCategory.value = categories.value[0].id
      loading.value = false
-     console.log('resasas', res,selectedCategory.value)
  }
  catch (e) {
      console.error(e)

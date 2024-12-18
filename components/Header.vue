@@ -366,7 +366,7 @@ const router = useRouter();
 
 
 const handleLogout = () =>{
-  toast.add({ detail:'Successfuly Loged Out' , life: 500 });
+  // toast.add({ detail:'Successfuly Loged Out' , life: 500 });
   logout()
   const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
   router.push(redirectTo);

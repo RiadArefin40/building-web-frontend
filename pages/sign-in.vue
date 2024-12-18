@@ -109,6 +109,7 @@
 
 
 <script setup>
+import axios from 'axios'
 import useAuth from '@/composables/useAuth';
 const { login } = useAuth();
 const runtimeConfig = useRuntimeConfig();
@@ -126,20 +127,20 @@ onMounted(()=>{
 
 const onLogin = async () => {
     try {
-        loading.value = true;
-        const res = await $fetch(`${runtimeConfig.public.apiBase}auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json', // Specify the content type
-            },
-            body: {
+        const body = {
                 username: userName.value,
                 password: password.value
             }
+        loading.value = true;
+        const res = await axios.post(`${runtimeConfig.public.apiBase}auth/login`,body, {
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type
+            },
+        
         })
 
-        if (res.token) {
-            login(res.token,res.data );
+        if (res?.data?.token) {
+            login(res?.data?.token,res?.data?.data );
             const redirectTo = localStorage.getItem('redirectTo');
             // const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
             if(redirectTo){
@@ -152,13 +153,13 @@ const onLogin = async () => {
 
      
         loading.value = false
-        toast.add({ detail:res.message , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         console.log('res', res)
     }
     catch (e) {
 
         console.log('erroe', e)
-        toast.add({ detail:'Something Went Wrong' , life: 3000 });
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
         loading.value = false
     }
 

@@ -53,7 +53,7 @@
                                                         data-bs-target="#pills-home" type="button" role="tab"
                                                         :aria-controls="'pills-' + category.id"
                                                         @click="selectCategory(category.id)">
-                                                        {{ category.name }}
+                                                        {{ category?.name }}
                                                     </button>
                                                 </li>
 
@@ -112,10 +112,10 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for="job in homepageData">
-                                                                    <td>{{ job.id }}</td>
-                                                                    <td v-html="job.topic"></td>
-                                                                    <td>{{ job.user.name }}</td>
-                                                                    <td>{{ formatTimestamp(job.created_at) }}</td>
+                                                                    <td>{{ job?.id }}</td>
+                                                                    <td v-html="job?.topic"></td>
+                                                                    <td>{{ job?.user?.name }}</td>
+                                                                    <td>{{ formatTimestamp(job?.created_at) }}</td>
                                                                     <td>
                                                                         <div class="buttons-wrapper">
                                                                             <button class="btn edit-btn"
@@ -194,8 +194,8 @@
                                                                 <div v-for="job in homepageData" class="table-data-box">
                                                                     <div class="top-writer-date-wrapper">
                                                                         <!-- <h6>범주</h6> -->
-                                                                        <h6>{{ job.category.name }}</h6>
-                                                                        <h6>1{{ job.created_at }}</h6>
+                                                                        <h6>{{ job?.category?.name }}</h6>
+                                                                        <h6>1{{ job?.created_at }}</h6>
                                                                     </div>
                                                                     <div class="data-link-wrapper">
                                                                         <div class="announcemnts-wrapper">
@@ -400,7 +400,7 @@
 import Dialog from 'primevue/dialog';
 
 import Button from 'primevue/button';
-
+import axios from 'axios'
 import ProgressSpinner from 'primevue/progressspinner';
 const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
@@ -551,19 +551,18 @@ const handleDelete = async (id) => {
 const confirmDelete = async () => {
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/${deleteId.value}`, {
-            method: 'DELETE',
+        const res = await axios.delete(`${runtimeConfig.public.apiBase}tender-announcements/${deleteId.value}`, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             }
         })
 
-        toast.add({ detail: "Deleted Successfully!", life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         getHomepageData();
         confirmModal.value = false
     }
     catch (e) {
-        toast.add({ detail: e, life: 3000 });
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
         console.error(e)
         loading.value = false
     }

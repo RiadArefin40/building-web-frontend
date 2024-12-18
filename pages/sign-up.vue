@@ -118,7 +118,7 @@ import { useToast } from "primevue/usetoast";
 const toast = useToast();
 import Toast from 'primevue/toast';
 const router = useRouter();
-
+import axios from 'axios'
 const userName = ref('')
 const name = ref('')
 const email = ref('')
@@ -132,36 +132,37 @@ const loading = ref(false)
 const onSignUp = async ()=>{
 
     try {
-        loading.value = true;
-        const res = await $fetch(`${runtimeConfig.public.apiBase}auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json', // Specify the content type
-            },
-            body: {username:userName.value,
+       const  body = {username:userName.value,
                     name:name.value,
                     email:email.value,
                     position:position.value,
                     password:password.value,
                     password_confirmation:confirmPassword.value,
                     phone_number:phone_number.value}
+        loading.value = true;
+        const res = await axios.post(`${runtimeConfig.public.apiBase}auth/register`, body, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type
+            },
+        
         })
 
-        if (res.token) {
-            login(res.token,res.data );
+        if (res?.data?.token) {
+            login(res?.data?.token,res?.data?.data );
             const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/';
             router.push(redirectTo);
         }
 
      
         loading.value = false
-        toast.add({ detail:res.message , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         console.log('res', res)
     }
     catch (e) {
 
         console.log('erroe', e)
-        toast.add({ detail:'Something Went Wrong' , life: 3000 });
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
         loading.value = false
     }
 

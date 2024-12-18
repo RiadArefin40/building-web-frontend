@@ -400,6 +400,7 @@ import Button from 'primevue/button';
 
 import ProgressSpinner from 'primevue/progressspinner';
 const runtimeConfig = useRuntimeConfig();
+import axios from 'axios'
 import { nextTick } from 'vue';
 const toast = useToast();
 import Toast from 'primevue/toast';
@@ -548,19 +549,18 @@ const handleDelete = async (id) =>{
 const confirmDelete = async () =>{
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/${deleteId.value}`, {
-            method: 'DELETE',
+        const res = await axios.delete(`${runtimeConfig.public.apiBase}jobs/${deleteId.value}`, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             }
         })
 
-        toast.add({ detail:"Deleted Successfully!" , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         getHomepageData();
         confirmModal.value = false
     }
     catch (e) {
-        toast.add({ detail:e , life: 3000 });
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
         console.error(e)
         loading.value = false
     }

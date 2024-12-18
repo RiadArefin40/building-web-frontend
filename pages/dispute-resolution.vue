@@ -652,6 +652,7 @@ const disputeType = ref([]);
 const disputeTypeData = ref('')
 const name = ref('')
 const address = ref('')
+import axios from 'axios'
 const pagination = ref (null)
 const status = ref('all')
    
@@ -730,20 +731,20 @@ function formatTimestamp(timestamp) {
 async function onSubmit () {
  
     try {
-        loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}disputes`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-            },
-            body:{
+        const body = {
                 dispute_type_id: disputeTypeData.value,
                 name:name.value,
                 address:address.value,
                 message:message.value
             }
+        loading.value = true
+        const res = await axios.post(`${runtimeConfig.public.apiBase}disputes`, body,{
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            },
+     
         })
-        toast.add({ detail:"Dispute Request Submitted!" , life: 3000 });
+        toast.add({ detail:res?.data?.message , life: 3000 });
         getDisputeData()
         loading.value = false
         name.value=''
@@ -753,6 +754,7 @@ async function onSubmit () {
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
 
 }

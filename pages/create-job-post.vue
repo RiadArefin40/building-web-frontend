@@ -67,7 +67,7 @@
 </div>
     <!-- Post Wrapepr  -->
 
-
+<Toast/>
     <!-- Footer  -->
     <footer class="footer-section">
         <div class="container-fluid">
@@ -149,7 +149,7 @@ const message = ref('')
 const title = ref('')
 const selectedCategory = ref('')
 const categories = ref([])
-
+import axios from 'axios'
 onMounted( async ()=>{
 
 
@@ -205,48 +205,55 @@ const onSubmit = async () =>{
     if(id){
         try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/${id}`, {
-            method: 'PUT',
+       const body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+        const res = await axios.put(`${runtimeConfig.public.apiBase}jobs/${id}`,body, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+            
         })
 
         loading.value = false
-        toast.add({ detail:"Dispute Request Submitted!" , life: 3000 });
-        console.log('resasas', res)
+        toast.add({ detail:res?.data?.message , life: 3000 });
         title.value = '';
         message.value = ''
-        router.push('/job-management')
+        setTimeout(()=>{
+            router.push('/job-management')
+        },800)
+        
     }
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
     else{
 
         try {
+          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/`, {
-            method: 'POST',
+        const res = await axios.post(`${runtimeConfig.public.apiBase}jobs/`,body, {
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             },
-            body:{job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+            
         })
 
         loading.value = false
-        toast.add({ detail:"Dispute Request Submitted!" , life: 3000 });
-        console.log('resasas', res)
+        
+        toast.add({ detail:res?.data?.message , life: 3000 });
         title.value = '';
         message.value = '';
-        router.push('/job-management')
+        setTimeout(()=>{
+            router.push('/job-management')
+        },800)
+  
     }
     catch (e) {
         console.error(e)
         loading.value = false
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
     }
     }
 
@@ -263,7 +270,6 @@ const geCategories = async () => {
         categories.value = await res.data
         selectedCategory.value = categories.value[0].id
         loading.value = false
-        console.log('resasas', res,selectedCategory.value)
     }
     catch (e) {
         console.error(e)
