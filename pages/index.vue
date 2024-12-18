@@ -570,8 +570,8 @@
                       <img src="/assets/images/user1.png" alt="">
                     </div>
                     <div class="designation-content">
-                      <h6>박철민</h6>
-                      <p>회원</p>
+                      <h6>{{ data?.author_name }}</h6>
+                      <p style="max-width: fit-content;">{{ data?.author_occupation }}</p>
                     </div>
                   </div>
                 </div>
