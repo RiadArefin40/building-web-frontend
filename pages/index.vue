@@ -247,8 +247,8 @@
         <div class="who-we-are-inner">
           <div class="left-box">
             <h6>협회 소개</h6>
-            <h2>건물 관리의<br />
-              새로운 표준을 제시합니다.</h2>
+            <!-- <h2>건물 관리의<br />
+              새로운 표준을 제시합니다.</h2> -->
               <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4'].title"></h2>
               <p class="rendered-p" v-html="homepageData['section-4'].subtitle"></p>
             <!-- <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
