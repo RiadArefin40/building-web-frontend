@@ -66,7 +66,7 @@
                                                         id="category.id" data-bs-toggle="pill"
                                                         data-bs-target="#pills-home" type="button" role="tab"
                                                         aria-controls="pills" @click="selectCategory('')">
-                                                        모두
+                                                        전체보기
                                                     </button>
                                                 </li>
                                                 <li v-for="category in categories" :key="category.id"
@@ -96,8 +96,8 @@
                                     </div>
                                 </div>
                                 <div class="right-box-button-filter-wrapper tender-announcements-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
+                                    <div class="button-wrapper" style="cursor: pointer;">
+                                        <a @click="toTenderManagement()">글쓰기</a>
                                     </div>
                                     <div class="right-select-filter-wrapper">
                                         <div class="left-title">
@@ -127,17 +127,19 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th></th>
+                                                                    <th>아니요</th>
                                                                     <th>모집 부문</th>
+                                                                    <th>게시물</th>
                                                                     <th>작성자</th>
                                                                     <th>날짜</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr v-for = "data in homepageData">
-                                                                    <td></td>
-                                                                    <td>{{ data?.topic }}</td>
+                                                                <tr v-for = "(data,i) in homepageData">
+                                                                    <td>{{ i+1 }}</td>
+                                                                    <td @click = "handleDetails(data?.id)" style="cursor: pointer;">{{ data?.topic }}</td>
+                                                                    <td class="truncate-des" v-html="data?.body"></td>
                                                                     <td>{{ data?.user?.name }}</td>
                 
                                                                     <td>{{ formatTimestamp(data?.created_at) }}</td>
@@ -198,7 +200,7 @@
                                                         </ul>
                                                     </nav>
                                                 </div> -->
-                                                <div v-if="pagination?.links?.length > 0 && homepageData.length > 0"
+                                                <div v-if=" homepageData.length > 0"
                                                     class="paginations-outer-wrappers">
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination">
@@ -219,7 +221,7 @@
                                                             <li v-for="link in pagination.links.slice(1, -1)"
                                                                 :key="link.label" class="page-item"
                                                                 :class="{ active: link.active }">
-                                                                <a class="page-link" href="#"
+                                                                <a class="page-link" :class="{ active: link.active }" href="#"
                                                                     @click.prevent="changePage(link.label)">
                                                                     {{ link.label }}
                                                                 </a>
@@ -320,6 +322,7 @@
         </div>
        
     </div>
+    <Toast/>
     <!-- Login Modal  -->
 </template>
 <script setup>
@@ -485,6 +488,16 @@ const geCategories = async () => {
         console.error(e)
         loading.value = false
     }
+}
+
+const toTenderManagement = () =>{
+    if(authToken?.value){
+        router.push('/tender-management')
+    }
+    else{
+        toast.add({ detail:"관리자 승인을 받은 유저만 가능합니다." , life: 3000 });
+    }
+  
 }
 
 const getAnnouncement = async (page=1) =>{

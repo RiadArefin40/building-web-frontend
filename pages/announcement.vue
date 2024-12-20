@@ -188,7 +188,7 @@
                                         </nav>
                                     </div> -->
 
-                                    <div v-if="pagination?.links?.length > 0 && homepageData?.data?.length > 0"
+                                    <div v-if=" homepageData?.data?.length > 0"
                                     class="pagination-outer-wrappers">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
@@ -207,7 +207,7 @@
                                             <!-- Page Numbers -->
                                             <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
                                                 class="page-item" :class="{ active: link.active }">
-                                                <a class="page-link" href="#" @click.prevent="changePage(link.label)">
+                                                <a class="page-link" :class="{ active: link.active }" href="#" @click.prevent="changePage(link.label)">
                                                     {{ link.label }}
                                                 </a>
                                             </li>
@@ -570,7 +570,6 @@ watch(searchText, async (newSearchText) => {
 
 
 function removeImageTags(html) {
-  // Remove all <img> tags using a regular expression
   return html.replace(/<img[^>]*>/gi, "");
 }
 async function changePage(page) {
@@ -594,5 +593,15 @@ async function changePage(page) {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.pagination-outer-wrappers ul .active{
+    /* background-color: #4182FF; */
+}
+.page-link.active{
+    background-color: #4182FF !important;
+    color: white !important;
+}
+.related-content-wrapper{
+  min-width: 410px !important;
 }
 </style>

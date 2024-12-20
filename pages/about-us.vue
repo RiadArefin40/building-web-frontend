@@ -1,8 +1,8 @@
 <template>
 
- <!-- Header  -->
- <Header />
-    <!-- Header  -->
+  <!-- Header  -->
+  <Header />
+  <!-- Header  -->
 
   <!-- About top Section  -->
   <div v-if="!loading" class="about-top-section-wrapper">
@@ -11,13 +11,13 @@
         <div class="about-top-inner-wrapper">
           <div class="top-section">
             <div class="left-section">
-              <h2 v-html="aboutPageData['section-1'].title"></h2>
+              <h2 v-html="aboutPageData['section-1']?.title"></h2>
 
               <!-- <h2>건물 관리의<br />
                 새로운 시대를 열어갑니다.</h2> -->
             </div>
             <div class="right-section">
-              <p v-html="aboutPageData['section-1'].subtitle"></p>
+              <p v-html="aboutPageData['section-1']?.subtitle"></p>
               <!-- <p>대한건물관리협회는 건물 관리 업체들이 직면한 복잡한 문제에 대해 전문적인 조언과 해결책을 제시합니다. 법적 분쟁 예방부터 효율적인 관리 방안까지, 협회는 회원들이 더 나은 관리 기준을
                 확립할 수 있도록 돕고, 효율적이고 안전한 운영 환경을 구축하는 데 있어 중요한 파트너 역할을 합니다.</p> -->
             </div>
@@ -45,17 +45,17 @@
     <div class="container-fluid">
       <div class="greeting-section-inner">
         <div class="left-section">
-          <h2 style="margin-bottom: 43px;" v-html="aboutPageData['section-3'].left_title"></h2>
+          <h2 style="margin-bottom: 43px;" v-html="aboutPageData['section-3']?.left_title"></h2>
           <!-- <h2>모두가 믿을 수 있는 건물 관리, <br />확실한 기준으로 <br />건물의 가치를 높입니다.</h2> -->
           <div class="image-wrapper">
             <img src="/assets/images/about/greeting-quote.svg" alt="">
           </div>
         </div>
         <div class="right-section">
-          <span ></span>
-          <h4  v-html="aboutPageData['section-3'].right_title"></h4>
+          <span></span>
+          <h4 v-html="aboutPageData['section-3']?.right_title"></h4>
           <!-- <h4>투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4> -->
-           <p v-html="aboutPageData['section-3'].right_subtitle"></p>
+          <p v-html="aboutPageData['section-3']?.right_subtitle"></p>
           <!-- <p>대한건물관리협회는 투명하고 신뢰성 있는 관리 기준을 최우선으로 두고 있습니다. 공정한 관리 체계를 통해 모든 이해관계자가 안심하고 신뢰할 수 있는 환경을 조성합니다. 협회는 회원들에게 법적
             자문과 체계적인 솔루션을 제공하여 복잡한 관리 문제를 해결하고, 건물의 가치를 지속적으로 향상시킬 수 있도록 지원합니다.</p>
           <p>회원들은 협회의 법률 자문과 체계적인 컨설팅을 통해, 건물 관리의 모든 단계에서 확실한 기준을 세우고 운영 효율성을 극대화할 수 있습니다. 협회의 지원을 통해, 더 나은 운영 환경을 만들고
@@ -76,66 +76,41 @@
             <h2>협회 소식</h2>
           </div>
           <div class="right-link">
-            <a href="#">더 알아보기 <span class="material-symbols-outlined">
+            <a @click="toNews()">더 알아보기 <span class="material-symbols-outlined">
                 arrow_right_alt
               </span></a>
           </div>
         </div>
         <div class="latest-news-inner-box">
-          <div class="news-box">
+          <div v-if="loading" class="d-flex align-items-center justify-content-center">
+            <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="transparent"
+              animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+
+          </div>
+ 
+          <div v-else v-for="data in homepageData?.slice(0, 3)" class="news-box">
             <div class="image-wrapper">
-              <img src="/assets/images/about/news1.png" alt="">
+              <img style="max-height: 260px; max-height: 260px; object-fit: cover;" :src="`https://testingpro.xyz/storage/${data?.thumbnail}`" alt="">
             </div>
-            <div class="title">
-              <h4>멤버십을 위한 새로운 혜택 및 서비스</h4>
+            <div class="title truncate-title">
+              <h4>{{ data?.topic }}</h4>
             </div>
-            <div class="content">
-              <p>저희는 회원 여러분을 지원하기 위해 고안된 다양한 새로운 혜택과 서비스를 소개하게 되어 기쁩니다.</p>
+            <div class="content truncate">
+              <p v-html="data?.body"></p>
             </div>
             <div class="link-wrapper">
-              <a href="#"><span class="underline">자세히 보기</span> <span class="material-symbols-outlined">
+              <a @click="toDetails(data?.id)"><span class="underline">자세히 보기</span> <span class="material-symbols-outlined">
                   arrow_right_alt
                 </span></a>
             </div>
           </div>
-          <div class="news-box">
-            <div class="image-wrapper">
-              <img src="/assets/images/about/news2.png" alt="">
-            </div>
-            <div class="title">
-              <h4>건물 유지관리의 모범 사례</h4>
-            </div>
-            <div class="content">
-              <p>효과적인 건물 유지관리는 장수, 안전 및 가치를 보장하는 데 중요합니다. Korea Building에서...</p>
-            </div>
-            <div class="link-wrapper">
-              <a href="#"><span class="underline">자세히 보기</span> <span class="material-symbols-outlined">
-                  arrow_right_alt
-                </span></a>
-            </div>
-          </div>
-          <div class="news-box">
-            <div class="image-wrapper">
-              <img src="/assets/images/about/news3.png" alt="">
-            </div>
-            <div class="title">
-              <h4>최근 정책 변화에서 얻은 주요 통찰력</h4>
-            </div>
-            <div class="content">
-              <p>최근 정부 정책의 변화는 건물 관리 산업에 상당한 영향을 미칠 것으로 예상됩니다...</p>
-            </div>
-            <div class="link-wrapper">
-              <a href="#"><span class="underline">자세히 보기</span> <span class="material-symbols-outlined">
-                  arrow_right_alt
-                </span></a>
-            </div>
-          </div>
+
         </div>
-        <div class="bottom-mobile-link">
-          <a href="#">더 알아보기 <span class="material-symbols-outlined">
-            arrow_right_alt
-          </span></a>
-        </div>
+        <!-- <div class="bottom-mobile-link">
+          <a @click="toDetails(data?.id)">더 알아보기 <span class="material-symbols-outlined">
+              arrow_right_alt
+            </span></a>
+        </div> -->
       </div>
     </div>
   </div>
@@ -182,59 +157,94 @@
     </div>
   </footer>
   <!-- Footer  -->
-       <!-- Modal -->
-    <!-- Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="login-popup-inner-wrapper">
-                        <div class="top-image-box">
-                            <img src="/assets/images/login-popup-image.svg" alt="">
-                        </div>
-                        <div class="center-content">
-                            <h3>분쟁 해결 요청을 위해 <br />로그인이 필요합니다.</h3>
-                            <p>요청을 제출하려면 로그인이 필요합니다. <br />계속 진행하려면 로그인하거나 회원가입을 해주세요.</p>
-                        </div>
-                        <div class="login-signup-btn-wrapper">
-                            <a href="/sign-in">로그인</a>
-                            <a href="/sign-up">회원가입</a>
-                        </div>
-                    </div>
-                </div>
+  <!-- Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="login-popup-inner-wrapper">
+            <div class="top-image-box">
+              <img src="/assets/images/login-popup-image.svg" alt="">
             </div>
+            <div class="center-content">
+              <h3>분쟁 해결 요청을 위해 <br />로그인이 필요합니다.</h3>
+              <p>요청을 제출하려면 로그인이 필요합니다. <br />계속 진행하려면 로그인하거나 회원가입을 해주세요.</p>
+            </div>
+            <div class="login-signup-btn-wrapper">
+              <a href="/sign-in">로그인</a>
+              <a href="/sign-up">회원가입</a>
+            </div>
+          </div>
         </div>
-       
+      </div>
     </div>
-    <!-- Login Modal  -->
+
+  </div>
+  <!-- Login Modal  -->
 </template>
 
 
 <script setup>
+import ProgressSpinner from 'primevue/progressspinner';
 const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
 const aboutPageData = ref([]);
 const loading = ref(true)
+const homepageData = ref([]);
+const router = useRouter()
 
 
 onMounted(() => {
   getaboutPageData();
-
+  getHomepageData()
 })
 
-const getaboutPageData = async () =>{
-  try{
+function toDetails (id) {
+  router.push(`/association-news-details/${id}`)
+} 
+function toNews(){
+  router.push('/association-news')
+}
+const getaboutPageData = async () => {
+  try {
     const res = await $fetch(`${runtimeConfig.public.apiBase}page/about`, {
-        method: 'GET',
+      method: 'GET',
     })
 
     aboutPageData.value = await res
     loading.value = false
-    console.log('res',res)
+    console.log('res', res)
   }
-  catch (e){
-     console.error(e)
-     loading.value = false
+  catch (e) {
+    console.error(e)
+    loading.value = false
   }
 }
+
+const getHomepageData = async (page = 1) => {
+  try {
+
+    loading.value = true
+    const res = await $fetch(`${runtimeConfig.public.apiBase}news/`, {
+      method: 'GET',
+      // headers: {
+      //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+      // }
+    })
+    homepageData.value = await res.data
+    loading.value = false
+ 
+
+
+  }
+  catch (e) {
+    console.error(e)
+    loading.value = false
+  }
+}
+function formatTimestamp(timestamp) {
+    return new Date(timestamp).toLocaleString();
+}
+
 </script>

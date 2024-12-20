@@ -15,8 +15,8 @@
                     <div class="content-para">
                         <p>지금 협회에 가입해 더 나은 관리 환경을 만드세요. <br />효율적인 관리와 공정한 환경을 함께 만들어갑니다.</p>
                     </div>
-                    <div class="link-wrapper">
-                        <a href="#">가입 신청하기 <span class="material-symbols-outlined">
+                    <div class="link-wrapper" style="cursor:pointer">
+                        <a @click="scrollToSection"  >가입 신청하기 <span class="material-symbols-outlined">
                                 arrow_right_alt
                             </span></a>
                     </div>
@@ -161,7 +161,7 @@
     <!-- Benifits Member Section  -->
 
     <!-- Membership Form Section  -->
-     <div class="membership-section-wrapper">
+     <div class="membership-section-wrapper" ref="membershipSection">
         <div class="container-fluid">
             <div class="membership-section-inner">
                 <div class="membershi-left">
@@ -270,79 +270,32 @@
                 </div>
                 <div class="success-stories-slider-wrapper">
                     <div class="success-stories-slider owl-carousel owl-theme">
-                        <div class="item">
-                            <div class="item-inner">
-                                <div class="item-inner-top-wrapper">
-                                    <div class="quote-box">
-                                        <img src="/assets/images/quote.svg" alt="">
-                                    </div>
-                                    <div class="title-box">
-                                        <h4>대한건물관리협회에 감사의 말씀을 전하고 싶습니다.</h4>
-                                    </div>
-                                    <div class="paragraph-content">
-                                        <p>관리 솔루션 덕분에 비용을 대폭 줄일 수 있었어요. 맞춤형 컨설팅으로 관리 업무가 효율적이고 체계적으로 개선되었습니다.</p>
-                                    </div>
-                                </div>
-                                <div class="user-designation-box">
-                                    <div class="user-image">
-                                        <img src="/assets/images/user1.png" alt="">
-                                    </div>
-                                    <div class="designation-content">
-                                        <h6>박철민</h6>
-                                        <p>회원</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-inner">
-                                <div class="item-inner-top-wrapper">
-                                    <div class="quote-box">
-                                        <img src="/assets/images/quote.svg" alt="">
-                                    </div>
-                                    <div class="title-box">
-                                        <h4>긴 법적 분쟁을 빠르게 해결해 주셔서 감사합니다.</h4>
-                                    </div>
-                                    <div class="paragraph-content">
-                                        <p>대한건물관리협회의 도움 덕분에 오랜 법적 분쟁을 빠르게 해결할 수 있었습니다. 협회의 전문적인 중재와 법률 지원 덕분에, 시간과 비용을
-                                            크게 절감할 수 있었습니다.</p>
-                                    </div>
-                                </div>
-                                <div class="user-designation-box">
-                                    <div class="user-image">
-                                        <img src="/assets/images/user2.png" alt="">
-                                    </div>
-                                    <div class="designation-content">
-                                        <h6>이영희</h6>
-                                        <p>회원</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-inner">
-                                <div class="item-inner-top-wrapper">
-                                    <div class="quote-box">
-                                        <img src="/assets/images/quote.svg" alt="">
-                                    </div>
-                                    <div class="title-box">
-                                        <h4>복잡한 규제 문제를 한 번에 해결했어요.</h4>
-                                    </div>
-                                    <div class="paragraph-content">
-                                        <p>복잡한 규제 문제를 협회와 함께 해결했습니다. 덕분에 모든 법적 요구 사항을 충족하고, 안정성을 높일 수 있었습니다.</p>
-                                    </div>
-                                </div>
-                                <div class="user-designation-box">
-                                    <div class="user-image">
-                                        <img src="/assets/images/user3.png" alt="">
-                                    </div>
-                                    <div class="designation-content">
-                                        <h6>이영희</h6>
-                                        <p>회원</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        < <div v-for="data in testimonials" class="item">
+                <div class="item-inner">
+                  <div class="item-inner-top-wrapper">
+                    <div class="quote-box">
+                      <img src="/assets/images/quote.svg" alt="">
+                    </div>
+                    <div class="title-box">
+                      <!-- <h4>대한건물관리협회에 감사의 말씀을 전하고 싶습니다.</h4> -->
+                       <h4 class="truncate-title">{{ data?.title }}</h4>
+                    </div>
+                    <div class="paragraph-content">
+                      <!-- <p>관리 솔루션 덕분에 비용을 대폭 줄일 수 있었어요. 맞춤형 컨설팅으로 관리 업무가 효율적이고 체계적으로 개선되었습니다.</p> -->
+                       <p class="truncate" style="max-width: fit-content;">{{ data?.description }}</p>
+                    </div>
+                  </div>
+                  <div class="user-designation-box">
+                    <div class="user-image">
+                      <img :src="`https://testingpro.xyz/${data?.icon}`" alt="">
+                    </div>
+                    <div class="designation-content">
+                      <h6>{{ data?.author_name }}</h6>
+                      <p style="max-width: fit-content;">{{ data?.author_occupation }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
                     </div>
                 </div>
             </div>
@@ -432,6 +385,7 @@ const loading = ref(false)
 
 onMounted(()=>{
     getMemberFormData()
+    getTestimonialData();
 })
 
 
@@ -493,5 +447,78 @@ const handleSubmit = async () => {
    }
 };
 
+const membershipSection = ref(null);
+
+const scrollToSection = () => {
+  if (membershipSection.value) {
+    const offset = 100; // Adjust this value to control the scroll position
+    const elementPosition = membershipSection.value.getBoundingClientRect().top + window.scrollY;
+    const scrollTo = elementPosition - offset;
+
+    window.scrollTo({
+      top: scrollTo,
+      behavior: 'smooth', // Enable smooth scrolling
+    });
+  }
+};
+
+
+const initializeCarousel = () => {
+  nextTick(() => {})
+      if (typeof $ !== 'undefined' && $.fn.owlCarousel) {
+        console.log('$.fn.owlCarousel',$.fn.owlCarousel)
+        const prevIcon = '<span class="material-symbols-outlined">arrow_left_alt</span>';
+        const nextIcon = '<span class="material-symbols-outlined">arrow_right_alt</span>';
+
+        $('.success-stories-slider').owlCarousel({
+          loop: true,
+          margin: 20,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          nav: true,
+          center: false,
+          navText: [prevIcon, nextIcon],
+          dots: false,
+          responsive: {
+            0: { items: 1 },
+            260: { items: 1 },
+            380: { items: 1 },
+            768: { items: 1.5 },
+            992: { items: 2.2 },
+            1300: { items: 2.5 },
+            1441: { items: 2.8 },
+          },
+        });
+      }
+    }
+const testimonials = ref([])
+const getTestimonialData = async () =>{
+  try{
+    const res = await $fetch(`${runtimeConfig.public.apiBase}testimonials`, {
+        method: 'GET',
+    })
+
+    testimonials.value = await res.data
+    loading.value = false
+    setTimeout(()=>{
+      initializeCarousel();
+    },500)
+  
+  }
+  catch (e){
+     console.error(e)
+     loading.value = false
+  }
+}
 
 </script>
+
+<style scoped>
+
+.membership-section-wrapper {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+}
+
+</style>

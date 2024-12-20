@@ -39,7 +39,7 @@
                   </div>
                   <div class="related-content-wrapper">
                       <div class="related-inner-wrapper">
-                          <h5>다른 공지사항 확인하기</h5>
+                          <h5>다른 입찰공고 확인하기</h5>
                           <p>한국건물관리협회 입찰에 대한 최신 소식을 받아보세요.</p>
                           <div class="related-news-box">
                             <a style="cursor: pointer;" v-for="data in homepageData?.slice(0, 3)" @click = "toDetails(data.id)">
@@ -158,7 +158,7 @@ const getHomepageData = async () => {
             method: 'GET',
         })
 
-        homepageData.value = await res.data.reverse()
+        homepageData.value = await res.data
         loading.value = false
         console.log('res', res)
     }

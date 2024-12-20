@@ -254,7 +254,7 @@ const getJobData = async (page = 1) => {
             }
         })
 
-        jobs.value = await res.data.reverse();
+        jobs.value = await res.data;
         loading.value = false
 
 

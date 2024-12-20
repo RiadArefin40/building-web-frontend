@@ -26,7 +26,7 @@
             <p v-html="homepageData['section-1']?.subtitle" class="mobile-title"></p>
           
             <div class="link-wrapper">
-              <a href="#">중재 요청하기 <span class="material-symbols-outlined">
+              <a @click = handleDispute()>중재 요청하기 <span class="material-symbols-outlined">
                   arrow_right_alt
                 </span></a>
               <a href="#about">더 알아보기</a>
@@ -172,7 +172,7 @@
                       <p>전기요금<br /><span class="span1">면적 </span><span class="span2">기준</span></p>
                       <h5></h5>
                     </div>
-                  </div>, 
+                  </div>
                   <div class="bill-count-box">
                     <h4>200,000 원</h4>
                   </div>
@@ -255,7 +255,7 @@
             <p class="last-p">협회는 공정한 중재와 신뢰할 수 있는 상담을 통해,<br /> 건물 관리가 투명하게 이루어지도록 지원합니다.<br /> 모든 이해관계자에게 합당한 기준을
               제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p> -->
             <div class="link-wrapper">
-              <a href="#">협회 가입신청 <span class="material-symbols-outlined">
+              <a @click = "membershipRequest()">협회 가입신청 <span class="material-symbols-outlined">
                   arrow_right_alt
                 </span></a>
             </div>
@@ -594,7 +594,7 @@
             <h4><span>지금 점검해보세요!</span></h4>
             <p>현재 귀하의 건물에서 발생할 수 있는 문제들을 점검해보세요. 공실 전기료, 관리비 분쟁, 법률적 문제 등 협회의 도움을 받을 수 있는 다양한 상황을 확인하십시오.</p>
             <div class="link-wrapper">
-              <a href="#">중재 요청하기 <span class="material-symbols-outlined">
+              <a @click="handleDispute()">중재 요청하기 <span class="material-symbols-outlined">
                   arrow_right_alt
                 </span></a>
             </div>
@@ -778,6 +778,14 @@ onMounted(() => {
   
   getTestimonialData();
 })
+
+const handleDispute = () =>{
+  router.push('/dispute-resolution')
+}
+const membershipRequest = () =>{
+  router.push('/membership-guide')
+}
+
 const initializeCarousel = () => {
   nextTick(() => {})
       if (typeof $ !== 'undefined' && $.fn.owlCarousel) {

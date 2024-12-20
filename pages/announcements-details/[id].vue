@@ -146,7 +146,7 @@ const getHomepageData = async () => {
             method: 'GET',
         })
 
-        homepageData.value = await res.data.reverse()
+        homepageData.value = await res.data
         loading.value = false
         console.log('res', res)
     }

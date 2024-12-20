@@ -10,7 +10,7 @@
         <div class="top-back-link">
             <a href="javascript:history.back();"><span class="material-symbols-outlined">
                     arrow_left_alt
-                </span> 입찰 공고 게시물로 돌아가기</a>
+                </span> 돌아가기 </a>
         </div>
         
         <div class="post-inner">

@@ -10,7 +10,8 @@
                      <div class="top-logo-section">
                          <a href="#">
                   
-                            대한건물관리협회
+                            개인정보 업데이트
+
                          </a>
                      </div>
                      <!-- Form Section  -->

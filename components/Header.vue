@@ -237,7 +237,7 @@
             <div class="dropdown">
               <a class="dropdown-btn btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <div class="userdetails-inner">
+                <div class="userdetails-inner" style="margin: 9px 9px;">
                   <div class="user-image">
                     <img src="/assets/images/user1.png" alt="">
                   </div>
@@ -251,9 +251,9 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">마이 페이지</a></li>
                 <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handlePostManagement()">
-                  직무관리</a></li>
+                  구인공고 글 관리</a></li>
                   <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handleTenderManagement()">
-                    입찰 관리
+                    입찰공고 글 관리
 
 </a></li>
 <li v-if="isAuthenticated"><a  class="dropdown-item" @click ="handleMyProfile()">

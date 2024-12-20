@@ -147,7 +147,7 @@ const getHomepageData = async (page = 1) => {
             const res = await $fetch(`${runtimeConfig.public.apiBase}news/`, {
                 method: 'GET',
             })
-            homepageData.value = await res.data.reverse()
+            homepageData.value = await res.data
             loading.value = false
 
         }

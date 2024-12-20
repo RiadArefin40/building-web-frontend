@@ -1513,7 +1513,7 @@ function (t, e, n) {
         }), n(t).on("hashchange.fb", function () {
             var t = o(),
                 e = null;
-            n.each(n(".fancybox-container").get().reverse(), function (t, o) {
+            n.each(n(".fancybox-container").get(), function (t, o) {
                 var i = n(o).data("FancyBox");
                 if (i && i.currentHash) return e = i, !1
             }), e ? e.currentHash === t.gallery + "-" + t.index || 1 === t.index && e.currentHash == t.gallery || (e.currentHash = null, e.close()) : "" !== t.gallery && i(t)

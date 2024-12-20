@@ -9,7 +9,7 @@
             <div class="announcements-top-inner">
                 <div class="title-search-wrapper">
                     <div class="left-title">
-                        <h2>입찰 공고 게시물</h2>
+                        <h2>입찰공고 게시물 관리</h2>
                     </div>
                     <div class="right-search-wrapper">
                         <div class="link-wrapper">
@@ -73,9 +73,9 @@
                                     </div>
                                 </div>
                                 <div class="right-box-button-filter-wrapper tender-announcements-filter-wrapper">
-                                    <div class="button-wrapper">
+                                    <!-- <div class="button-wrapper">
                                         <a href="#">글쓰기</a>
-                                    </div>
+                                    </div> -->
                                     <div class="right-select-filter-wrapper">
                                         <div class="left-title">
                                             <h5>정렬 기준:</h5>
@@ -103,17 +103,19 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th></th>
+                                                                    <th>아니요</th>
                                                                     <th>모집 부문</th>
+                                                                    <th>게시물</th>
                                                                     <th>작성자</th>
                                                                     <th>날짜</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr v-for="job in homepageData">
-                                                                    <td>{{ job?.id }}</td>
+                                                                <tr v-for="(job,i) in homepageData">
+                                                                    <td>{{ i+1 }}</td>
                                                                     <td v-html="job?.topic"></td>
+                                                                    <td class="truncate-des" v-html="job?.body"></td>
                                                                     <td>{{ job?.user?.name }}</td>
                                                                     <td>{{ formatTimestamp(job?.created_at) }}</td>
                                                                     <td>
@@ -261,7 +263,7 @@
 
                                                 <!-- Pagination Wrapper  -->
 
-                                                <div v-if="pagination?.links?.length > 0 && homepageData.length > 0"
+                                                <div v-if=" homepageData.length > 0"
                                                     class="paginations-outer-wrappers">
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination">
@@ -282,7 +284,7 @@
                                                             <li v-for="link in pagination.links.slice(1, -1)"
                                                                 :key="link.label" class="page-item"
                                                                 :class="{ active: link.active }">
-                                                                <a class="page-link" href="#"
+                                                                <a class="page-link" :class="{ active: link.active }" href="#"
                                                                     @click.prevent="changePage(link.label)">
                                                                     {{ link.label }}
                                                                 </a>
@@ -599,7 +601,7 @@ const getHomepageData = async (page = 1) => {
                 }
             })
 
-            homepageData.value = await res.data.reverse()
+            homepageData.value = await res.data
             pagination.value = await res.meta
             console.log(pagination.value)
             loading.value = false
@@ -621,7 +623,7 @@ const getHomepageData = async (page = 1) => {
                 }
             })
 
-            homepageData.value = await res.data.reverse()
+            homepageData.value = await res.data
             pagination.value = await res.meta
             console.log(pagination.value)
             loading.value = false

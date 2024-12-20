@@ -95,8 +95,8 @@
                             aria-labelledby="v-pills-one-tab" tabindex="0">
                             <div class="inner-tab-content">
                                 <div class="right-box-button-filter-wrapper">
-                                    <div class="button-wrapper">
-                                        <a href="#">글쓰기</a>
+                                    <div class="button-wrapper" style="cursor: pointer;">
+                                        <a @click="toTenderManagement()">글쓰기</a>
                                     </div>
                                     <div class="right-select-filter-wrapper">
                                         <div class="left-title">
@@ -117,7 +117,7 @@
                                                     strokeWidth="8" fill="transparent" animationDuration=".5s"
                                                     aria-label="Custom ProgressSpinner" />
                                 <div v-else class="inner-tab-content-wrapper">
-                                    <div v-for="job in jobs" class="content-box">
+                                    <div v-for="job in jobs" class="content-box" style="max-width: 484px;">
                                         <NuxtLink :to="`/joblisting-details/${job.id}`">
                                             <div class="top-box-wrapper">
                                                 <div class="top-writer-box">
@@ -130,7 +130,7 @@
                                                 </div>
                                                 <div class="job-description truncate-description">
                                                     <!-- <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p> -->
-                                                    <p v-html="job?.description"></p>
+                                                    <p class="" v-html="removeImageTags(job?.description)"></p>
                                                 </div>
                                                 <div class="category-wrapper">
                                                     <!-- <p>작성자: <span>한국경영관</span></p> -->
@@ -145,7 +145,7 @@
                                 </div>
                                 <!-- Pagination Wrapper  -->
 
-                                <div v-if="pagination?.links?.length > 0 && jobs.length > 0"
+                                <div v-if="jobs.length > 0"
                                     class="pagination-outer-wrappers">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
@@ -164,7 +164,7 @@
                                             <!-- Page Numbers -->
                                             <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
                                                 class="page-item" :class="{ active: link.active }">
-                                                <a class="page-link" href="#" @click.prevent="changePage(link.label)">
+                                                <a class="page-link" :class="{ active: link.active }" href="#" @click.prevent="changePage(link.label)">
                                                     {{ link.label }}
                                                 </a>
                                             </li>
@@ -390,7 +390,7 @@
 
     </div>
     <!-- Login Modal  -->
-
+<Toast/>
 </template>
 
 <script setup>
@@ -405,7 +405,7 @@ const { isAuthenticated } = useAuth();
 const runtimeConfig = useRuntimeConfig();
 const { authToken } = await useAuth();
 const loading = ref(false)
-const selectedCategory = ref('1')
+const selectedCategory = ref('')
 const pagination = ref(null);
 const type = ref('')
 const searchText = ref('')
@@ -427,13 +427,14 @@ onMounted(() => {
 
 async function selectCategory(id) {
     selectedCategory.value = id
-    try {
+    if(!selectedCategory.value){
+        try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?category_id=${selectedCategory.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?`, {
             method: 'GET',
         });
 
-        jobs.value = await res.data.reverse()
+        jobs.value = await res.data
         pagination.value = await res.meta
         loading.value = false
         console.log('res', res)
@@ -442,11 +443,64 @@ async function selectCategory(id) {
         console.error(e)
         loading.value = false
     }
+    }
+    else{
+        try {
+        loading.value = true
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?category_id=${selectedCategory.value}`, {
+            method: 'GET',
+        });
+
+        jobs.value = await res.data
+        pagination.value = await res.meta
+        loading.value = false
+        console.log('res', res)
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+    }
+
 
 }
-
+const toTenderManagement = () =>{
+    if(authToken?.value){
+        router.push('/job-management')
+    }
+    else{
+        toast.add({ detail:"관리자 승인을 받은 유저만 가능합니다." , life: 3000 });
+    }
+  
+}
 const getJobData = async (page = 1) => {
-    try {
+    if(!selectedCategory.value){
+        try {
+        loading.value = true
+
+
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs?page=${page}&sort=${sortOrder.value}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+
+        jobs.value = await res.data;
+        pagination.value = await res.meta
+        loading.value = false
+
+
+
+    }
+    catch (e) {
+        console.error(e)
+        loading.value = false
+    }
+
+    }
+    else{
+        try {
         loading.value = true
 
 
@@ -457,7 +511,7 @@ const getJobData = async (page = 1) => {
             }
         })
 
-        jobs.value = await res.data.reverse();
+        jobs.value = await res.data;
         pagination.value = await res.meta
         loading.value = false
 
@@ -468,6 +522,8 @@ const getJobData = async (page = 1) => {
         console.error(e)
         loading.value = false
     }
+    }
+
 
 }
 
@@ -523,7 +579,9 @@ watch(searchText, async (newSearchText) => {
     }
 });
 
-
+function removeImageTags(html) {
+  return html.replace(/<img[^>]*>/gi, "");
+}
 
 
 </script>

@@ -100,14 +100,15 @@
                         <div class="title-wrapper">
                             <h3>{{ homepageData[0]?.topic }}</h3>
                         </div>
-                        <div class="conttent-wrapper">
-                            <p>한국건물관리협회는 회원들이 보다 큰 효율성과 법적 안정성을 달성할 수 있도록 지원하기 위해 고안된 다양한 새로운 혜택과 서비스를 소개하게 되어 기쁘게
-                                생각합니다.</p>
+                        <div class="conttent-wrapper truncate ">
+                            <p v-html="homepageData[0]?.body"></p>
+                            <!-- <p>한국건물관리협회는 회원들이 보다 큰 효율성과 법적 안정성을 달성할 수 있도록 지원하기 위해 고안된 다양한 새로운 혜택과 서비스를 소개하게 되어 기쁘게
+                                생각합니다.</p> -->
                         </div>
                         <div class="link-wrapper">
-                            <a href="#">자세히 보기 <span class="material-symbols-outlined">
+                            <NuxtLink :to="`/association-news-details/${homepageData[0]?.id}`">자세히 보기 <span class="material-symbols-outlined">
                                     arrow_right_alt
-                                </span></a>
+                                </span></NuxtLink>
                         </div>
                     </div>
                 </div>
@@ -137,7 +138,7 @@
                                                         id="category.id" data-bs-toggle="pill"
                                                         data-bs-target="#pills-home" type="button" role="tab"
                                                         aria-controls="pills" @click="selectCategory('')">
-                                                        모두
+                                                        전체보기
                                                     </button>
                                                 </li>
                                                 <li v-for="category in categories" :key="category.id"
@@ -198,7 +199,7 @@
                                                 <div v-else v-for="data in homepageData" class="news-box">
                                                     <NuxtLink :to="`/association-news-details/${data?.id}`">
                                                         <div class="image-box">
-                                                            <img style="max-height: 280px; object-fit: cover;"
+                                                            <img style="max-height: 260px; max-height: 260px; object-fit: cover;"
                                                                 :src="`https://testingpro.xyz/storage/${data?.thumbnail}`"
                                                                 alt="">
                                                         </div>
@@ -245,7 +246,7 @@
                                                 <!-- Page Numbers -->
                                                 <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
                                                     class="page-item" :class="{ active: link.active }">
-                                                    <a class="page-link" href="#"
+                                                    <a class="page-link" :class="{ active: link.active }" href="#"
                                                         @click.prevent="changePage(link.label)">
                                                         {{ link.label }}
                                                     </a>
@@ -523,11 +524,11 @@ const getHomepageData = async (page = 1) => {
             console.log('category', selectedCategory.value)
             const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
                 method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-                }
+                // headers: {
+                //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                // }
             })
-            homepageData.value = await res.data.reverse()
+            homepageData.value = await res.data
             pagination.value = await res.meta
             loading.value = false
 
@@ -536,11 +537,11 @@ const getHomepageData = async (page = 1) => {
             loading.value = true
             const res = await $fetch(`${runtimeConfig.public.apiBase}news/?page=${page}&sort=${sortOrder.value}`, {
                 method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-                }
+                // headers: {
+                //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                // }
             })
-            homepageData.value = await res.data.reverse()
+            homepageData.value = await res.data
             pagination.value = await res.meta
             loading.value = false
 
@@ -563,9 +564,9 @@ async function selectCategory(id) {
             loading.value = true
             const res = await $fetch(`${runtimeConfig.public.apiBase}news/?category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
                 method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-                }
+                // headers: {
+                //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                // }
             });
 
             homepageData.value = await res.data
@@ -577,9 +578,9 @@ async function selectCategory(id) {
             loading.value = true
             const res = await $fetch(`${runtimeConfig.public.apiBase}news/?sort=${sortOrder.value}`, {
                 method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
-                }
+                // headers: {
+                //     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+                // }
             });
 
             homepageData.value = await res.data

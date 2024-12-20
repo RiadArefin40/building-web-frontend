@@ -15,7 +15,7 @@
 	&::before {
 		// background: linear-gradient(180deg, rgba(65, 130, 255, 0.20) 0%, rgba(65, 130, 255, 0.00) 100%);
 		// background: linear-gradient(180deg, rgba(65, 130, 255, 0.00) 100%, rgba(65, 130, 255, 0.20) 0%);
-		background-image: url(../assets/images/associationnews/community-bg.png);
+		background-image: url(/assets/images/associationnews/community-bg.png);
 		position: absolute;
 		left: 0;
 		bottom: 121px;
@@ -136,7 +136,7 @@
 			.left-image-wrapper {
 				border-radius: 12px;
 				overflow: hidden;
-				max-width: 566px;
+				// max-width: 566px;
 				@media(max-width: 1399px){
 					max-width: 100%;
 				}

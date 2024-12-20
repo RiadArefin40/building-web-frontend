@@ -35,17 +35,17 @@
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('all')" class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                        aria-selected="true">모든 요청 보기 <span>3</span></button>
+                                        aria-selected="true">모든 요청 보기 <span>{{ allDisputeCount }}</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('pending')" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-profile" type="button" role="tab"
-                                        aria-controls="pills-profile" aria-selected="false">진행중 <span>2</span></button>
+                                        aria-controls="pills-profile" aria-selected="false">진행중 <span>{{ inProgressDisputeCount }}</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('completed')" class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-contact" type="button" role="tab"
-                                        aria-controls="pills-contact" aria-selected="false">답변완료 <span>1</span></button>
+                                        aria-controls="pills-contact" aria-selected="false">답변완료 <span>{{ answerDisputeCount }}</span></button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
@@ -120,7 +120,7 @@
                                                         class="collapse" :class="['collapse', { show: dispute.comments.length > 0 && index == 0 }]" :id="'collapse-' + index">
                                                         <div class="card card-body">
                                                             <div class="content-wrapper">
-                                                                <div class="content pt-4">
+                                                                <div class="content" style="padding-top: 32px;">
                             
                                                                     <p>{{ comment.comment }}</p>
                                                                 </div>
@@ -650,6 +650,9 @@ const runtimeConfig = useRuntimeConfig();
 const { authToken } = await useAuth();
 const disputeType = ref([]);
 const disputeTypeData = ref('')
+const allDisputeCount = ref('')
+const inProgressDisputeCount = ref('')
+const answerDisputeCount = ref('')
 const name = ref('')
 const address = ref('')
 import axios from 'axios'
@@ -676,7 +679,6 @@ onMounted(() => {
 })
 
 const changeStatus = (e) =>{
-    console.log('e')
   status.value = e
 }
 watch(status, async (newValue) => {
@@ -695,8 +697,10 @@ const getDisputeData = async (page=1) => {
             }
         })
 
-        disputes.value = await res.data.reverse();
+        disputes.value = await res.data;
         pagination.value = await res.meta
+        allDisputeCount.value = await res.meta.total
+        console.log('total', allDisputeCount.value, await res.meta.total)
         loading.value = false
             
         }
@@ -707,9 +711,24 @@ const getDisputeData = async (page=1) => {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
             }
         })
-
-        disputes.value = await res.data.reverse();
+        const res1 = await $fetch(`${runtimeConfig.public.apiBase}disputes?page=${page}&status=pending`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+        const res2 = await $fetch(`${runtimeConfig.public.apiBase}disputes?page=${page}&status=completed`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
+            }
+        })
+        
+        disputes.value = await res.data;
         pagination.value = await res.meta
+        allDisputeCount.value = await res.meta.total
+        inProgressDisputeCount.value = await res1.meta.total
+        answerDisputeCount.value = await res2.meta.total
         loading.value = false
 
         }

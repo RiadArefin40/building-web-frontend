@@ -1484,7 +1484,7 @@ function walkPoint(startPoint, endPoint, handler, isSkipInnerOffset) {
  */
 function makeOffsetPath(ancestor, node) {
   var ancestors = listAncestor(node, func.eq(ancestor));
-  return ancestors.map(position).reverse();
+  return ancestors.map(position);
 }
 
 /**
@@ -1987,7 +1987,7 @@ var Context = /*#__PURE__*/function () {
     value: function _destroy() {
       var _this2 = this;
       // destroy modules with reversed order
-      Object.keys(this.modules).reverse().forEach(function (key) {
+      Object.keys(this.modules).forEach(function (key) {
         _this2.removeModule(key);
       });
       Object.keys(this.memos).forEach(function (key) {
@@ -2695,7 +2695,7 @@ var WrappedRange = /*#__PURE__*/function () {
       }
       if (topAncestor) {
         // siblings not in paragraph
-        var inlineSiblings = dom.listPrev(topAncestor, dom.isParaInline).reverse();
+        var inlineSiblings = dom.listPrev(topAncestor, dom.isParaInline);
         inlineSiblings = inlineSiblings.concat(dom.listNext(topAncestor.nextSibling, dom.isParaInline));
 
         // wrap with paragraph
@@ -2748,14 +2748,14 @@ var WrappedRange = /*#__PURE__*/function () {
       var rng = this;
       var reversed = false;
       if (rng.so >= 0) {
-        childNodes = childNodes.reverse();
+        childNodes = childNodes;
         reversed = true;
       }
       childNodes = childNodes.map(function (childNode) {
         return rng.insertNode(childNode, !dom.isInline(childNode));
       });
       if (reversed) {
-        childNodes = childNodes.reverse();
+        childNodes = childNodes;
       }
       return childNodes;
     }
@@ -3768,7 +3768,7 @@ var Bullet = /*#__PURE__*/function () {
               return dom.replace(para, 'P');
             });
           }
-          external_root_jQuery_commonjs_jquery_commonjs2_jquery_amd_jquery_default().each(lists.from(paras).reverse(), function (idx, para) {
+          external_root_jQuery_commonjs_jquery_commonjs2_jquery_amd_jquery_default().each(lists.from(paras), function (idx, para) {
             dom.insertAfter(para, headList);
           });
 
@@ -3776,7 +3776,7 @@ var Bullet = /*#__PURE__*/function () {
           var rootLists = lists.compact([headList, middleList, lastList]);
           external_root_jQuery_commonjs_jquery_commonjs2_jquery_amd_jquery_default().each(rootLists, function (idx, rootList) {
             var listNodes = [rootList].concat(dom.listDescendant(rootList, dom.isList));
-            external_root_jQuery_commonjs_jquery_commonjs2_jquery_amd_jquery_default().each(listNodes.reverse(), function (idx, listNode) {
+            external_root_jQuery_commonjs_jquery_commonjs2_jquery_amd_jquery_default().each(listNodes, function (idx, listNode) {
               if (!dom.nodeLength(listNode)) {
                 dom.remove(listNode, true);
               }
