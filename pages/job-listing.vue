@@ -106,7 +106,7 @@
                                             <div class="form-group">
                                                 <select class="form-select" v-model="sortOrder"
                                                 aria-label="Default select example"  @change="getJobData()" >
-                                                <option value="latest" selected>최신 순</option>
+                                                <option value="newest" selected>최신 순</option>
                                                 <option value="oldest">오래된 순</option>
                                             </select>
                                             </div>
@@ -411,7 +411,7 @@ const type = ref('')
 const searchText = ref('')
 const categories = ref(null)
 const jobs = ref([])
-const sortOrder = ref('latest')
+const sortOrder = ref('newest')
 
 onMounted(() => {
     getJobType()

@@ -103,7 +103,7 @@
                                         <div class="form-group">
                                             <select class="form-select" v-model="sortOrder"
                                                 aria-label="Default select example"  @change="getHomepageData()" >
-                                                <option value="latest" selected>최신 순</option>
+                                                <option value="newest" selected>최신 순</option>
                                                 <option value="oldest">오래된 순</option>
                                             </select>
                                         </div>
@@ -315,7 +315,7 @@ const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
 const loading = ref(true)
 const selectedCategory = ref('')
 const searchText = ref('')
-const sortOrder = ref('latest') 
+const sortOrder = ref('newest') 
 const router = useRouter()
 
 
