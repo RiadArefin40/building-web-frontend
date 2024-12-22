@@ -147,19 +147,19 @@
                             data-bs-parent="#accordionExamplemenu1">
                             <div class="accordion-body">
                               <ul>
-                                <li v-if="isAuthenticated"><a class="dropdown-item" @click="handleMyProfile()">
+                                <li v-if="isAuthenticated"><a class="dropdown-item" href="/my-profile">
                                   <div class="">
                                       <img src="/assets/images/my-page.svg" alt="">
                                     </div>
                                     내 프로필
 
                                   </a></li>
-                                <li v-if="isAuthenticated"><a class="dropdown-item" @click="handlePostManagement()">
+                                <li v-if="isAuthenticated"><a class="dropdown-item" href="/job-management">
                                   <div class="">
                                       <img src="/assets/images/file1.svg" alt="">
                                     </div>
                                     구인공고 글 관리</a></li>
-                                <li v-if="isAuthenticated"><a class="dropdown-item" @click="handleTenderManagement()">
+                                <li v-if="isAuthenticated"><a class="dropdown-item" href="/tender-management">
                                   <div class="">
                                       <img src="/assets/images/file1.svg" alt="">
                                     </div>
@@ -179,8 +179,8 @@
                         </div>
                       </div>
                     </li>
-                    <li><a @click="toAboutUs">협회 소개</a></li>
-                    <li><a @click="toDispute">분쟁해결요청</a></li>
+                    <li><a href="/about-us">협회 소개</a></li>
+                    <li><a  href="/dispute-resolution">분쟁해결요청</a></li>
                     <!-- <li><a href="#">커뮤니티</a></li> -->
                     <!-- Dropdown Link  -->
                     <li>
@@ -197,36 +197,36 @@
                             <div class="accordion-body">
                               <ul>
                       <li>
-                        <NuxtLink to="/announcement">
+                        <a href="/announcement">
                           <div class="image-box">
                             <img src="/assets/images/announcements.svg" alt="">
                           </div>
                           공지사항
-                        </NuxtLink>
+                        </a>
                       </li>
                       <li>
-                        <NuxtLink to="/association-news">
+                        <a href="/association-news">
                           <div class="image-box">
                             <img src="/assets/images/association-news.svg" alt="">
                           </div>
                           협회뉴스
-                        </NuxtLink>
+                        </a>
                       </li>
                       <li>
-                        <NuxtLink to="/tender-announcement">
+                        <a href="/tender-announcement">
                           <div class="image-box">
                             <img src="/assets/images/tender-announcements.svg" alt="">
                           </div>
                           입찰공고
-                        </NuxtLink>
+                        </a>
                       </li>
                       <li>
-                        <NuxtLink to="/job-listing">
+                        <a href="/job-listing">
                           <div class="image-box">
                             <img src="/assets/images/job-listing.svg" alt="">
                           </div>
                           구인공고
-                        </NuxtLink>
+                        </a>
                       </li>
                     </ul>
                             </div>
@@ -235,11 +235,11 @@
                       </div>
                     </li>
                     <!-- Dropdown Link  -->
-                    <li><a @click="toMemberShip">협회 가입안내</a></li>
+                    <li><a href="/membership-guide">협회 가입안내</a></li>
                   </ul>
                 </div>
                 <div v-show="!authToken" class="mobile-menu-link">
-                  <a  @click = "toSignIn">로그인 / 회원가입</a>
+                  <a  href="/sign-in">로그인 / 회원가입</a>
                 </div>
 
               </div>
