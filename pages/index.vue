@@ -232,10 +232,10 @@
             <!-- <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
               <br />이러한 불투명한 관리방식은 건물주와 관리 업체 간의 갈등을 심화시키고, <br />결국 법적 분쟁으로까지 이어질 위험이 큽니다.
             </p> -->
-            <p style="margin-bottom: -20px !important;" v-html="homepageData['section-3'] && homepageData['section-3']['text-1'] ? homepageData['section-3']['text-1'] : ''"
+            <p style="margin-bottom: -10px !important;" v-html="homepageData['section-3'] && homepageData['section-3']['text-1'] ? homepageData['section-3']['text-1'] : ''"
             ></p>
             <!-- <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6> -->
-             <h6 v-html="homepageData['section-3']['text-2']"></h6>
+             <h6 v-html="homepageData['section-3'] && homepageData['section-3']['text-2'] ? homepageData['section-3']['text-2'] : ''"></h6>
           </div>
         </div>
       </div>
@@ -675,7 +675,7 @@
             </div>
             <div class="mobile-link-wrapper">
               <div class="link-wrapper">
-                <a href="#">중재 요청하기 <span class="material-symbols-outlined">
+                <a @click="handleDispute()">중재 요청하기 <span class="material-symbols-outlined">
                     arrow_right_alt
                   </span></a>
               </div>

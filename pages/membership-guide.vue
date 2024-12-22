@@ -423,7 +423,7 @@ const getMemberFormData = async ()=>{
 }
 
 const handleSubmit = async () => {
-  console.log("Form Submitted", formValues.value);
+
   try {
        
        loading.value = true;
@@ -438,7 +438,12 @@ const handleSubmit = async () => {
 
 
        loading.value = false
+
        toast.add({ detail:res?.data?.message , life: 3000 });
+
+       Object.keys(formValues.value).forEach((key) => {
+    formValues.value[key] = ""; // Reset each value to an empty string
+  });
 
    }
    catch (e) {

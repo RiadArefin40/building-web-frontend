@@ -127,10 +127,10 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width: 10vw;">아니요</th>
+                                                                    <th style="width: 10vw;">No.</th>
                                                                     <th style="width: 30vw;">제목 </th>
                                                                     <th style="width: 12vw;">작성자</th>
-                                                                    <th style="width: 12vw;">날짜</th>
+                                                                    <th style="width: 15vw;">날짜</th>
                                                                     <th style="width: 12vw;"></th>
                                                                 </tr>
                                                             </thead>
@@ -157,7 +157,7 @@
                                                                 <h5>모집부문</h5>
                                                             </div>
                                                             <div class="table-mobile-data-wrapper">
-                                                                <div v-for = "data in homepageData" class="table-data-box">
+                                                                <div v-for = "data in homepageData" class="table-data-box" @click = "handleDetails(data?.id)">
                                                                     <div class="top-writer-date-wrapper">
                                                                         <h6>{{ data?.category?.name }}</h6>
                                                                         <h6>{{ formatTimestamp(data?.created_at) }}</h6>

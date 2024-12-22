@@ -131,7 +131,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div  class="offcanvas-body">
-                <div class="menu-wrapper">
+                <div class="menu-wrapper" style="margin-top: -15px;">
                   <ul>
                     <li v-show="authToken">
                       <div class="accordion" id="accordionExamplemenu1">
@@ -237,10 +237,11 @@
                     <!-- Dropdown Link  -->
                     <li><a href="/membership-guide">협회 가입안내</a></li>
                   </ul>
-                </div>
-                <div v-show="!authToken" class="mobile-menu-link">
+                  <div v-show="!authToken" class="mobile-menu-link" style="margin-top: 45px;">
                   <a  href="/sign-in">로그인 / 회원가입</a>
                 </div>
+                </div>
+           
 
               </div>
             </div>

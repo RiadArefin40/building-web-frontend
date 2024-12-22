@@ -8,7 +8,7 @@
              <div class="left-form-section">
                  <div class="left-inner-wrapper">
                      <div class="top-logo-section">
-                         <a href="#" style="cursor: default;">
+                         <a href="#" style="cursor: default; font-size: 28px;">
                   
                             개인정보 수정
 
@@ -174,18 +174,55 @@ const toast = useToast();
 import Toast from 'primevue/toast';
 const router = useRouter();
 import axios from 'axios'
-const userName = ref(authUser.value.username || '');
-const name = ref(authUser.value.name || '');
-const email = ref(authUser.value.email || '');
-const phone_number = ref(authUser.value.phone_number || '')
-const position = ref(authUser.value.position || '')
+const user = ref(null)
+const userName = ref(user?.value?.username || '');
+const name = ref(user?.value?.name || '');
+const email = ref(user?.value?.email || '');
+const phone_number = ref(user?.value?.phone_number || '')
+const position = ref(user?.value?.position || '')
 const password = ref('')
 const newPassword = ref('')
 const confirmPassword = ref('')
 const loading = ref(false)
 
 
+onMounted(()=>{
+    getProfileData()
+})
 
+const getProfileData =async () =>{
+
+    try {
+     
+        loading.value = true;
+        const res = await axios.get(`${runtimeConfig.public.apiBase}auth/user/`,{
+            headers: {
+                'Content-Type': 'application/json', 
+                Authorization: `Bearer ${authToken.value}` // Specify the content type
+            },
+
+        
+        })
+
+        loading.value = false
+  
+        console.log('res', res.data.data)
+        user.value = res?.data?.data
+
+        userName.value = user?.value?.username ;
+        name.value = user?.value?.name;
+        email.value = user?.value?.email;
+        phone_number.value = user?.value?.phone_number 
+        position.value = user?.value?.position
+    }
+    catch (e) {
+
+        console.log('erroe', e)
+        toast.add({ detail:e?.response?.data?.message , life: 3000 });
+        loading.value = false
+    }
+
+}
 
 const onSignUp = async ()=>{
 
@@ -209,6 +246,7 @@ const onSignUp = async ()=>{
         })
 
         loading.value = false
+        getProfileData()
         toast.add({ detail:res?.data?.message , life: 3000 });
         console.log('res', res)
     }

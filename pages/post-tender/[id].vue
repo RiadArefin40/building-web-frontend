@@ -67,7 +67,7 @@
                              </div>
                          </div> -->
                          <div class="submit-wrapper">
-                             <button class="submit_btn" type="submit">지금 게시 중 <span
+                             <button class="submit_btn" type="submit">게시하기 <span
                                      class="material-symbols-outlined">
                                      arrow_right_alt
                                  </span></button>
