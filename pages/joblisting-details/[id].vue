@@ -33,17 +33,17 @@
                                 </div>
                                 <div class="right-side">
                                     <!-- <h6>한국경영관</h6> -->
-                                     <h6>{{ job?.user?.name }}</h6>
+                                     <h6>{{ job?.author_name || job?.user?.name }}</h6>
                                 </div>
                             </div>
-                            <!-- <div class="box-wrapper">
+                            <div class="box-wrapper">
                                 <div class="left-side">
-                                    <h5>위치:</h5>
+                                    <h5>주소:</h5>
                                 </div>
                                 <div class="right-side">
-                                    <h6>서울, 한국</h6>
+                                    <h6> {{ job?.address }} </h6>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="related-content-wrapper">
                         <div class="related-inner-wrapper">
-                            <h3>다른 채용 공고 보기</h3>
+                            <h3 style="font-size: 28px;">다른 채용 공고 보기</h3>
                             <!-- {{ jobs }} -->
                             <div class="job-listing-related-wrapper">
                                 <div v-for="job in jobs?.slice(0, 3)" :key="job.id" class="content-box">
@@ -115,8 +115,9 @@
                                                  <p v-html ="job?.description"></p>
                                             </div>
                                             <div class="category-wrapper">
-                                                <p>작성자: <span>{{ job?.user?.name }}</span></p>
+                                                <p>작성자: <span>{{ job?.user?.name || job?.author_name}}</span></p>
                                             </div>
+                                            
                                         </div>
                                         <div class="bottom-date">
                                             <p>2일 전</p>

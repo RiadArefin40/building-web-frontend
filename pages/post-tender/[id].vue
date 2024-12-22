@@ -42,14 +42,20 @@
                              <div class="form-floating">
                                  <select v-model = "selectedCategory" class="form-select" id="floatingSelect"
                                      aria-label="Floating label select example">
-                                     <option v-for="category in categories" :key="category.id" :value="category.id">
-        {{ category.name }}
-      </option>
-                                  
+                                        <option v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.name }}
+        </option>
+                                    
                                  </select>
                                  <label for="floatingSelect">카테고리 선택</label>
                              </div>
                          </div>
+                         <!-- <div class="form-group">
+                            <div class="form-floating">
+                                <input v-model = "adress" type="text" class="form-control" id="floatinglastname" placeholder="제목 게시물">
+                                <label for="floatinglastname">주소</label>
+                            </div>
+                        </div> -->
                          <!-- <div class="form-group">
                              <div class="form-floating">
                                  <select class="form-select" id="floatingSelect"
@@ -158,6 +164,7 @@ const message = ref('')
 const title = ref('')
 const selectedCategory = ref('')
 const categories = ref([])
+const adress = ref('')
 
 onMounted( async ()=>{
 
@@ -195,6 +202,9 @@ onMounted( async ()=>{
         title.value  = post.topic 
         $('#summernote').summernote('code', post.body);
         message.value = post.body
+        adress.value = post.address
+        selectedCategory.value = post?.category?.id
+        console.log('category', selectedCategory.value)
         loading.value = false
     }
     catch (e) {
@@ -213,7 +223,7 @@ onMounted(()=>{
 const onSubmit = async () =>{
     if(id){
         try {
-          const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+          const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value , address:adress.value  }
         loading.value = true
         const res = await axios.put(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, body, {
             headers: {
@@ -240,7 +250,7 @@ const onSubmit = async () =>{
     else{
 
         try {
-            const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+            const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value , address:adress.value  }
         loading.value = true
         const res = await axios.post(`${runtimeConfig.public.apiBase}tender-announcements/`, body,{
             headers: {
@@ -267,12 +277,12 @@ const onSubmit = async () =>{
 const geCategories = async () => {
     try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}announcement-categories`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcement-categories`, {
             method: 'GET',
         })
 
         categories.value = await res.data
-        selectedCategory.value = categories.value[0].id
+        // selectedCategory.value = categories.value[0].id
         loading.value = false
     }
     catch (e) {

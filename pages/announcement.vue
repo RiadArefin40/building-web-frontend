@@ -126,7 +126,7 @@
                                                
                                           
                                                 <div v-else class="news-box" v-for="news in homepageData.data"
-                                                    :class="{ active: news.is_pinned }" style="max-width: 700px;">
+                                                    :class="{ active: news.is_pinned }">
                                                     <div class="category-date-wrapper">
                                                         <div class="category-wrapper">
                                                             <h5><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -193,7 +193,7 @@
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
                                             <!-- Previous Page -->
-                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                            <li class="page-item" :class="{ disabled: !pagination?.links[0]?.url }">
                                                 <a class="page-link" href="#"
                                                     @click.prevent="changePage(pagination.current_page - 1)">
 
@@ -205,18 +205,18 @@
                                             </li>
 
                                             <!-- Page Numbers -->
-                                            <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
-                                                class="page-item" :class="{ active: link.active }">
-                                                <a class="page-link" :class="{ active: link.active }" href="#" @click.prevent="changePage(link.label)">
-                                                    {{ link.label }}
+                                            <li v-for="link in pagination?.links.slice(1, -1)" :key="link?.label"
+                                                class="page-item" :class="{ active: link?.active }">
+                                                <a class="page-link" :class="{ active: link?.active }" href="#" @click.prevent="changePage(link.label)">
+                                                    {{ link?.label }}
                                                 </a>
                                             </li>
 
                                             <!-- Next Page -->
                                             <li class="page-item"
-                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                :class="{ disabled: !pagination?.links[pagination.links.length - 1].url }">
                                                 <a class="page-link" href="#"
-                                                    @click.prevent="changePage(pagination.current_page + 1)">
+                                                    @click.prevent="changePage(pagination?.current_page + 1)">
 
                                                     <span class="desktop-version">다음 페이지</span> <span
                                                         class="material-symbols-outlined mobile-version">
@@ -315,7 +315,7 @@ const categories = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'])
 const loading = ref(true)
 const selectedCategory = ref('')
 const searchText = ref('')
-const sortOrder = ref('latest')
+const sortOrder = ref('latest') 
 const router = useRouter()
 
 
@@ -604,4 +604,12 @@ async function changePage(page) {
 .related-content-wrapper{
   min-width: 410px !important;
 }
+.news-box{
+    max-width: 700px;
+}
+@media(max-width: 991px){
+    .news-box{
+       max-width: 92vw;
+     }
+    }
 </style>

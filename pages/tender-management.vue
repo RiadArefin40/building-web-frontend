@@ -82,10 +82,11 @@
                                         </div>
                                         <div class="select-filter">
                                             <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>최신</option>
-                                                    <option>오래된 순</option>
-                                                </select>
+                                                <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example"  @change="getHomepageData()" >
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -103,19 +104,18 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>아니요</th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>게시물</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
+                                                                    <th style="width: 10vw;">아니요</th>
+                                                                    <th style="width: 30vw;">제목 </th>
+                                                                    <th style="width: 12vw;">작성자</th>
+                                                                    <th style="width: 12vw;">날짜</th>
+                                                                    <th style="width: 12vw;"></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for="(job,i) in homepageData">
                                                                     <td>{{ i+1 }}</td>
-                                                                    <td v-html="job?.topic"></td>
-                                                                    <td class="truncate-des" v-html="job?.body"></td>
+                                                                    <td v-html="job?.topic" style="cursor: pointer;"></td>
+                                                                    <!-- <td class="truncate-des" v-html="job?.body"></td> -->
                                                                     <td>{{ job?.user?.name }}</td>
                                                                     <td>{{ formatTimestamp(job?.created_at) }}</td>
                                                                     <td>
@@ -594,7 +594,7 @@ const getHomepageData = async (page = 1) => {
     if (!selectedCategory.value) {
         try {
             loading.value = true
-            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}&sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -616,7 +616,7 @@ const getHomepageData = async (page = 1) => {
     else {
         try {
             loading.value = true
-            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}&category_id=${selectedCategory.value}`, {
+            const res = await $fetch(`${runtimeConfig.public.apiBase}tender-announcements/mine?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${authToken.value}` // Add the Bearer token here

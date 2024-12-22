@@ -8,9 +8,9 @@
              <div class="left-form-section">
                  <div class="left-inner-wrapper">
                      <div class="top-logo-section">
-                         <a href="#">
+                         <a href="#" style="cursor: default;">
                   
-                            개인정보 업데이트
+                            개인정보 수정
 
                          </a>
                      </div>
@@ -18,17 +18,17 @@
                      <div class="form-section-wrapper">
                          <div class="form-section-inner">
                              <form @submit.prevent="onSignUp">
-                                 <div class="form-group">
+                                 <!-- <div class="form-group">
                                      <div class="form-floating">
                                          <input type="text" class="form-control" v-model="name" id="floatingusername"
                                              placeholder="username">
                                          <label for="floatingusername">아이디</label>
                                      </div>
-                                 </div>
+                                 </div> -->
                                  <div class="form-group">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" v-model="userName" id="floatingusername"
-                                                placeholder="username">
+                                                placeholder="username" readonly>
                                             <label for="floatingusername">아이디</label>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                      </div>
                                  </div> -->
                                  <div class="form-group">
-                                     <button class="btn_submit" type="submit">편집하다</button>
+                                     <button class="btn_submit" type="submit">수정하기</button>
                                  </div>
                              </form>
                          </div>

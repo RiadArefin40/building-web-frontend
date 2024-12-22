@@ -71,7 +71,7 @@
             <h2 v-html="homepageData['section-2']?.title"></h2>
             <div class="note-box">
               <div class="star-image">
-                <img src="/assets/images/star.png" alt="star">
+                <img src="/assets/images/star.png" alt="star" style="margin-top: -10px;">
               </div>
               <p v-html="homepageData['section-2']?.subtitle"></p>
               <!-- <p>“이러한 문제들로 인해 관리자의 업무 부담이 늘어나고<br />건물의 가치가 저하될 수 있습니다.”</p> -->
@@ -98,13 +98,13 @@
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button v-html="homepageData['section-2'].dropdown_2_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2']?.dropdown_2_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     </button>
                   </h2>
                   <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                      <p v-html="homepageData['section-2'].dropdown_2_body"> </p>
+                      <p v-html="homepageData['section-2']?.dropdown_2_body"> </p>
                       <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
                       </p> -->
                     </div>
@@ -112,13 +112,13 @@
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button v-html="homepageData['section-2'].dropdown_3_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <button v-html="homepageData['section-2']?.dropdown_3_title" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     </button>
                   </h2>
                   <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">  
-                       <p v-html="homepageData['section-2'].dropdown_3_body"> </p>
+                       <p v-html="homepageData['section-2']?.dropdown_3_body"> </p>
                       <!-- <p>관리비 산정 및 집행의 불투명성은 입주자와 관리주체 간의 신뢰를 저해합니다. 명확한 공시와 투명한 회계처리가 부족하면 이해관계자 간의 불신과 분쟁을 유발할 수 있습니다.
                       </p> -->
                     </div>
@@ -224,15 +224,15 @@
           </div>
           <div v-if="!loading" class="right-section">
             <!-- <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2> -->
-             <h2  v-html="homepageData['section-3']?.title"></h2>
+             <h2 style="margin-bottom: -28px !important;" v-html="homepageData['section-3']?.title"></h2>
 
             <!-- <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5> -->
-            <h5 v-html="homepageData['section-3'].subtitle"></h5>
+            <h5 style="margin-bottom: -28px !important;" v-html="homepageData['section-3']?.subtitle"></h5>
 
             <!-- <p>하지만 일부 빌딩에서는 이를 사용량 기준으로 변경하면서, 공실 호수들은 전기료를 내지 않게 되어, 나머지 점유 호수들이 그 비용을 부담하게 되는 불공정한 상황이 발생하고 있습니다.
               <br />이러한 불투명한 관리방식은 건물주와 관리 업체 간의 갈등을 심화시키고, <br />결국 법적 분쟁으로까지 이어질 위험이 큽니다.
             </p> -->
-            <p  v-html="homepageData['section-3']['text-1']"></p>
+            <p style="margin-bottom: -20px !important;" v-html="homepageData['section-3']['text-1']"></p>
             <!-- <h6>“ 불투명한 관리에서 벗어나,<br /> 이제는 <span>명확한 해답</span>이 필요합니다. ”</h6> -->
              <h6 v-html="homepageData['section-3']['text-2']"></h6>
           </div>
@@ -249,8 +249,8 @@
             <h6>협회 소개</h6>
             <!-- <h2>건물 관리의<br />
               새로운 표준을 제시합니다.</h2> -->
-              <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4'].title"></h2>
-              <p class="rendered-p" v-html="homepageData['section-4'].subtitle"></p>
+              <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4']?.title"></h2>
+              <p class="rendered-p" v-html="homepageData['section-4']?.subtitle"></p>
             <!-- <p>대한건물관리협회는 복잡한 건물 관리 문제를 해결하고, <br />이해관계자 간의 원활한 소통을 이끌어내기 위해 설립되었습니다.</p>
             <p class="last-p">협회는 공정한 중재와 신뢰할 수 있는 상담을 통해,<br /> 건물 관리가 투명하게 이루어지도록 지원합니다.<br /> 모든 이해관계자에게 합당한 기준을
               제공함으로써, <br /><span>공공의 이익을 도모하는 것을 목표</span>로 합니다.</p> -->
@@ -401,8 +401,8 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4 v-html="homepageData['section-6'].list_1_title"></h4>
-                    <p v-html="homepageData['section-6'].list_1_subtitle"></p>
+                    <h4 v-html="homepageData['section-6']?.list_1_title"></h4>
+                    <p v-html="homepageData['section-6']?.list_1_subtitle"></p>
                            <!-- <h4>분쟁 중재</h4> -->
                     <!-- <p>관리 과정에서 발생하는 다양한 분쟁을 공정하게 중재합니다.</p> -->
                   </div>
@@ -416,8 +416,8 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4 v-html="homepageData['section-6'].list_2_title"></h4>
-                    <p v-html="homepageData['section-6'].list_2_subtitle"></p>
+                    <h4 v-html="homepageData['section-6']?.list_2_title"></h4>
+                    <p v-html="homepageData['section-6']?.list_2_subtitle"></p>
                     <!-- <h4>공실 관리 솔루션</h4>
                     <p>공실 발생 시, 공용전기료와 같은 문제를 투명하게 해결합니다.</p> -->
                   </div>
@@ -431,8 +431,8 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4 v-html="homepageData['section-6'].list_3_title"></h4>
-                    <p v-html="homepageData['section-6'].list_3_subtitle"></p>
+                    <h4 v-html="homepageData['section-6']?.list_3_title"></h4>
+                    <p v-html="homepageData['section-6']?.list_3_subtitle"></p>
                     <!-- <h4>관리비 및 공과금 상담</h4>
                     <p>관리비와 공과금의 투명한 부과를 돕기 위해 전문가의 상담 서비스를 제공합니다.</p> -->
                   </div>
@@ -446,8 +446,8 @@
                     </svg>
                   </div>
                   <div class="right-content-box">
-                    <h4 v-html="homepageData['section-6'].list_4_title"></h4>
-                    <p v-html="homepageData['section-6'].list_4_subtitle"></p>
+                    <h4 v-html="homepageData['section-6']?.list_4_title"></h4>
+                    <p v-html="homepageData['section-6']?.list_4_subtitle"></p>
                     <!-- <h4>법률 분쟁 지원</h4>
                     <p>건물 관리와 법률적인 분쟁을 신속하고 공정하게 해결하는 데 도움을 드립니다.</p> -->
                   </div>
@@ -485,12 +485,12 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4 v-html="homepageData['section-7'].list_1_title"></h4>
+                <h4 v-html="homepageData['section-7']?.list_1_title"></h4>
                 <!-- <h4>전문 중재 및 상담 서비스</h4> -->
               </div>
             </div>
             <div class="content-box">
-              <p v-html="homepageData['section-7'].list_1_subtitle"></p>
+              <p v-html="homepageData['section-7']?.list_1_subtitle"></p>
               <!-- <p><span>중재와 분쟁 해결: </span>전문가의 중재와 상담을 통해 건물 관리 <br />에서 발생하는 분쟁을 효과적으로 해결하세요.</p>
               <p class="last-para"><span>맞춤형 컨설팅: </span>전문 컨설팅을 통해 관리 비용을 절감하고, <br />효율적인 운영 방안을 제시해 드립니다.</p> -->
             </div>
@@ -505,12 +505,12 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4 v-html="homepageData['section-7'].list_2_title"></h4>
+                <h4 v-html="homepageData['section-7']?.list_2_title"></h4>
                 <!-- <h4>최적화된 관리 솔루션</h4> -->
               </div>
             </div>
             <div class="content-box">
-              <p v-html="homepageData['section-7'].list_2_subtitle"></p>
+              <p v-html="homepageData['section-7']?.list_2_subtitle"></p>
               <!-- <p><span>관리 절감 솔루션: </span>최신 관리 도구를 활용하여 건물 관리 비 <br />용을 절감하고, 운영 효율성을 극대화합니다.</p>
               <p class="last-para"><span>사례 연구 제공: </span>성공적인 관리 사례를 통해, 비용 절감과 <br />효율적인 운영 방안을 확인하고 적용해 보세요.</p> -->
             </div>
@@ -525,12 +525,12 @@
                 </svg>
               </div>
               <div class="title-content">
-                <h4 v-html="homepageData['section-7'].list_3_title"></h4>
+                <h4 v-html="homepageData['section-7']?.list_3_title"></h4>
                 <!-- <h4>법적 보호 및 산업 네트워킹</h4> -->
               </div>
             </div>
             <div class="content-box">
-              <p v-html="homepageData['section-7'].list_3_subtitle"></p>
+              <p v-html="homepageData['section-7']?.list_3_subtitle"></p>
               <!-- <p><span>법적 안정성 확보: </span>법적 분쟁 및 이슈를 예방하고 해결하기 <br />위해, 전문가의 법률 자문을 제공합니다.</p>
               <p class="last-para"><span>협회 네트워킹 혜택: </span>회원 간의 네트워킹을 통해, 산업 내에 <br />서 입지를 강화하고, 새로운 협력 기회를 발굴해 보세요.
               </p> -->

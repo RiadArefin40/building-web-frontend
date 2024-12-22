@@ -44,6 +44,12 @@
                          </div>
                      </div>
                      <!-- <div class="form-group">
+                            <div class="form-floating">
+                                <input v-model = "adress" type="text" class="form-control" id="floatinglastname" placeholder="제목 게시물">
+                                <label for="floatinglastname">주소</label>
+                            </div>
+                        </div> -->
+                     <!-- <div class="form-group">
                          <div class="form-floating">
                              <select class="form-select" id="floatingSelect"
                                  aria-label="Floating label select example">
@@ -148,6 +154,7 @@ const id = route.params.id
 const message = ref('')
 const title = ref('')
 const selectedCategory = ref('')
+const adress = ref('')
 const categories = ref([])
 import axios from 'axios'
 onMounted( async ()=>{
@@ -204,7 +211,7 @@ onMounted(()=>{
 const onSubmit = async () =>{
  if(id){
      try {
-      const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+      const  body = {announcement_category_id:selectedCategory.value, topic: title.value, body:message.value, address:adress.value  }
      loading.value = true
      const res = await axios.put(`${runtimeConfig.public.apiBase}tender-announcements/${id}`, body, {
          headers: {
@@ -232,7 +239,7 @@ const onSubmit = async () =>{
  else{
 
      try {
-        const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value  }
+        const  body={announcement_category_id:selectedCategory.value, topic: title.value, body:message.value, address:adress.value  }
      loading.value = true
      const res = await axios.post(`${runtimeConfig.public.apiBase}tender-announcements/`,body, {
          headers: {

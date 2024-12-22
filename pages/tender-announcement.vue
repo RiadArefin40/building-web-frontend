@@ -127,20 +127,19 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>아니요</th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>게시물</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
+                                                                    <th style="width: 10vw;">아니요</th>
+                                                                    <th style="width: 30vw;">제목 </th>
+                                                                    <th style="width: 12vw;">작성자</th>
+                                                                    <th style="width: 12vw;">날짜</th>
+                                                                    <th style="width: 12vw;"></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for = "(data,i) in homepageData">
                                                                     <td>{{ i+1 }}</td>
                                                                     <td @click = "handleDetails(data?.id)" style="cursor: pointer;">{{ data?.topic }}</td>
-                                                                    <td class="truncate-des" v-html="data?.body"></td>
-                                                                    <td>{{ data?.user?.name }}</td>
+                                                                    <!-- <td class="truncate-des" v-html="data?.body"></td> -->
+                                                                    <td>{{ data?.user?.name || data?.author_name }}</td>
                 
                                                                     <td>{{ formatTimestamp(data?.created_at) }}</td>
                                                                     <td><a @click = "handleDetails(data?.id)">자세히 보기 <span
@@ -206,7 +205,7 @@
                                                         <ul class="pagination">
                                                             <!-- Previous Page -->
                                                             <li class="page-item"
-                                                                :class="{ disabled: !pagination.links[0].url }">
+                                                                :class="{ disabled: !pagination?.links[0]?.url }">
                                                                 <a class="page-link" href="#"
                                                                     @click.prevent="changePage(pagination.current_page - 1)">
 
@@ -218,7 +217,7 @@
                                                             </li>
 
                                                             <!-- Page Numbers -->
-                                                            <li v-for="link in pagination.links.slice(1, -1)"
+                                                            <li v-for="link in pagination?.links?.slice(1, -1)"
                                                                 :key="link.label" class="page-item"
                                                                 :class="{ active: link.active }">
                                                                 <a class="page-link" :class="{ active: link.active }" href="#"
@@ -229,7 +228,7 @@
 
                                                             <!-- Next Page -->
                                                             <li class="page-item"
-                                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                                :class="{ disabled: !pagination?.links[pagination?.links?.length - 1].url }">
                                                                 <a class="page-link" href="#"
                                                                     @click.prevent="changePage(pagination.current_page + 1)">
 

@@ -42,7 +42,8 @@
                         </form>
                     </div>
                 </div>
-                <div v-if="homepageData.length > 0" class="left-image-right-content-wrapper">
+                <div v-if="homepageData.length > 0" class="left-image-right-content-wrapper" @click="toDetails(homepageData[0]?.id)">
+                    
                     <div class="left-image-wrapper">
                         <img class="custom-img-width"  :src="`https://testingpro.xyz/storage/${homepageData[0]?.thumbnail}`" alt="">
                     </div>
@@ -232,7 +233,7 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <!-- Previous Page -->
-                                                <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                                <li class="page-item" :class="{ disabled: !pagination?.links[0].url }">
                                                     <a class="page-link" href="#"
                                                         @click.prevent="changePage(pagination.current_page - 1)">
 
@@ -244,19 +245,19 @@
                                                 </li>
 
                                                 <!-- Page Numbers -->
-                                                <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
-                                                    class="page-item" :class="{ active: link.active }">
-                                                    <a class="page-link" :class="{ active: link.active }" href="#"
-                                                        @click.prevent="changePage(link.label)">
-                                                        {{ link.label }}
+                                                <li v-for="link in pagination?.links.slice(1, -1)" :key="link.label"
+                                                    class="page-item" :class="{ active: link?.active }">
+                                                    <a class="page-link" :class="{ active: link?.active }" href="#"
+                                                        @click.prevent="changePage(link?.label)">
+                                                        {{ link?.label }}
                                                     </a>
                                                 </li>
 
                                                 <!-- Next Page -->
                                                 <li class="page-item"
-                                                    :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                    :class="{ disabled: !pagination?.links[pagination.links?.length - 1].url }">
                                                     <a class="page-link" href="#"
-                                                        @click.prevent="changePage(pagination.current_page + 1)">
+                                                        @click.prevent="changePage(pagination?.current_page + 1)">
 
                                                         <span class="desktop-version">다음 페이지</span> <span
                                                             class="material-symbols-outlined mobile-version">
@@ -603,8 +604,12 @@ async function changePage(page) {
     if (page < 1 || page > pagination.last_page) return;
     getHomepageData(page);
 }
+
 const handleEdit = (id) => {
     router.push(`post-job/${id}`)
+}
+const toDetails = (id) => {
+    router.push(`association-news-details/${id}`)
 }
 const handleCreate = () => {
     router.push('/create-job-post')

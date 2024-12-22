@@ -153,11 +153,11 @@
                                         <nav aria-label="Page navigation example">
                                         <ul class="paginations">
                                             <!-- Previous Page -->
-                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                            <li class="page-item" :class="{ disabled: !pagination?.links[0].url }">
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page - 1)"
+                                                @click.prevent="changePage(pagination?.current_page - 1)"
                                             >
                                     
                                                 <span class="material-symbols-outlined mobile-version">
@@ -168,29 +168,29 @@
 
                                             <!-- Page Numbers -->
                                             <li
-                                            v-for="link in pagination.links.slice(1, -1)"
+                                            v-for="link in pagination?.links.slice(1, -1)"
                                             :key="link.label"
                                             class="page-item"
-                                            :class="{ active: link.active }"
+                                            :class="{ active: link?.active }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
                                                 @click.prevent="changePage(link.label)"
                                             >
-                                                {{ link.label }}
+                                                {{ link?.label }}
                                             </a>
                                             </li>
 
                                             <!-- Next Page -->
                                             <li
                                             class="page-item"
-                                            :class="{ disabled: !pagination.links[pagination.links.length - 1].url }"
+                                            :class="{ disabled: !pagination?.links[pagination.links.length - 1].url }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page + 1)"
+                                                @click.prevent="changePage(pagination?.current_page + 1)"
                                             >
                                             
                                                 <span class="material-symbols-outlined mobile-version">
@@ -299,11 +299,11 @@
                                         <nav aria-label="Page navigation example">
                                         <ul class="paginations">
                                             <!-- Previous Page -->
-                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                            <li class="page-item" :class="{ disabled: !pagination?.links[0].url }">
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page - 1)"
+                                                @click.prevent="changePage(pagination?.current_page - 1)"
                                             >
                                     
                                                 <span class="material-symbols-outlined mobile-version">
@@ -314,7 +314,7 @@
 
                                             <!-- Page Numbers -->
                                             <li
-                                            v-for="link in pagination.links.slice(1, -1)"
+                                            v-for="link in pagination?.links.slice(1, -1)"
                                             :key="link.label"
                                             class="page-item"
                                             :class="{ active: link.active }"
@@ -331,12 +331,12 @@
                                             <!-- Next Page -->
                                             <li
                                             class="page-item"
-                                            :class="{ disabled: !pagination.links[pagination.links.length - 1].url }"
+                                            :class="{ disabled: !pagination?.links[pagination?.links.length - 1].url }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page + 1)"
+                                                @click.prevent="changePage(pagination?.current_page + 1)"
                                             >
                                             
                                                 <span class="material-symbols-outlined mobile-version">
@@ -699,7 +699,7 @@ const getDisputeData = async (page=1) => {
 
         disputes.value = await res.data;
         pagination.value = await res.meta
-        allDisputeCount.value = await res.meta.total
+        // allDisputeCount.value = await res.meta.total
         console.log('total', allDisputeCount.value, await res.meta.total)
         loading.value = false
             

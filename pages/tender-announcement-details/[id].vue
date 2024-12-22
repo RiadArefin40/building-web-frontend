@@ -40,7 +40,7 @@
                   <div class="related-content-wrapper">
                       <div class="related-inner-wrapper">
                           <h5>다른 입찰공고 확인하기</h5>
-                          <p>한국건물관리협회 입찰에 대한 최신 소식을 받아보세요.</p>
+                          <p>다른 입찰공고의 최신 정보를 확인해보세요.</p>
                           <div class="related-news-box">
                             <a style="cursor: pointer;" v-for="data in homepageData?.slice(0, 3)" @click = "toDetails(data.id)">
                                      <h6>{{ data.topic }}</h6>
@@ -52,7 +52,7 @@
                                  </a>
                           </div>
                           <div class="explore-more-btn">
-                              <a @click="toMain()">모든 공지사항 보기</a>
+                              <a @click="toMain()">모든 입찰공고 보기</a>
                           </div>
                       </div>
                   </div>

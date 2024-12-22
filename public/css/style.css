@@ -2451,13 +2451,13 @@ header .scrolled {
   }
 }
 .fusion-section .fusion-inner .left-section p::before {
-  position: absolute;
+  /* position: absolute;
   left: 0;
   top: 13px;
   height: 1px;
   content: "";
   width: 52px;
-  background-color: white;
+  background-color: white; */
 }
 .fusion-section .fusion-inner .left-section h2 {
   color: white;
@@ -8616,12 +8616,12 @@ header .scrolled {
   font-weight: 400;
 }
 .outer-wrapper .tender-announcements-inner-wrapper .table-responsive table tbody tr td:first-child {
-  font-size: 20px;
-  font-weight: 500;
+  /* font-size: 20px;
+  font-weight: 500; */
 }
 .outer-wrapper .tender-announcements-inner-wrapper .table-responsive table tbody tr td:nth-child(2) {
-  font-size: 20px;
-  font-weight: 400;
+  /* font-size: 20px;
+  font-weight: 400; */
 }
 .outer-wrapper .tender-announcements-inner-wrapper .table-responsive table tbody tr td a {
   padding: 8px 20px;

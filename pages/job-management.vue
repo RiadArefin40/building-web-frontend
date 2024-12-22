@@ -83,10 +83,11 @@
                                         </div>
                                         <div class="select-filter">
                                             <div class="form-group">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>최신</option>
-                                                    <option>오래된 순</option>
-                                                </select>
+                                                <select class="form-select" v-model="sortOrder"
+                                                aria-label="Default select example"  @change="getHomepageData()" >
+                                                <option value="latest" selected>최신 순</option>
+                                                <option value="oldest">오래된 순</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -104,19 +105,19 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>아니요</th>
-                                                                    <th>모집 부문</th>
-                                                                    <th>게시물</th>
-                                                                    <th>작성자</th>
-                                                                    <th>날짜</th>
-                                                                    <th></th>
+                                                            
+                                                                    <th style="width: 10vw;">아니요</th>
+                                                                    <th style="width: 30vw;">제목 </th>
+                                                                    <th style="width: 12vw;">작성자</th>
+                                                                    <th style="width: 12vw;">날짜</th>
+                                                                    <th style="width: 12vw;"></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr v-for="(job,i) in homepageData">
                                                                     <td>{{ i+1 }}</td>
-                                                                    <td v-html ="job.title"></td>
-                                                                    <td class="truncate-des" v-html="job?.description"></td>
+                                                                    <td v-html ="job.title" style="cursor: pointer;"></td>
+                                                                    <!-- <td class="truncate-des" v-html="job?.description"></td> -->
                                                                     <td>{{ job.user.name }}</td>
                                                                     <td>{{ formatTimestamp(job.created_at) }}</td>
                                                                     <td>
@@ -266,7 +267,7 @@
                                                         <ul class="pagination">
                                                             <!-- Previous Page -->
                                                             <li class="page-item"
-                                                                :class="{ disabled: !pagination.links[0].url }">
+                                                                :class="{ disabled: !pagination?.links[0].url }">
                                                                 <a class="page-link" href="#"
                                                                     @click.prevent="changePage(pagination.current_page - 1)">
 
@@ -278,18 +279,18 @@
                                                             </li>
 
                                                             <!-- Page Numbers -->
-                                                            <li v-for="link in pagination.links.slice(1, -1)"
+                                                            <li v-for="link in pagination?.links?.slice(1, -1)"
                                                                 :key="link.label" class="page-item"
                                                                 :class="{ active: link.active }">
-                                                                <a class="page-link" :class="{ active: link.active }" href="#"
-                                                                    @click.prevent="changePage(link.label)">
-                                                                    {{ link.label }}
+                                                                <a class="page-link" :class="{ active: link?.active }" href="#"
+                                                                    @click.prevent="changePage(link?.label)">
+                                                                    {{ link?.label }}
                                                                 </a>
                                                             </li>
 
                                                             <!-- Next Page -->
                                                             <li class="page-item"
-                                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                                :class="{ disabled: !pagination?.links[pagination?.links?.length - 1].url }">
                                                                 <a class="page-link" href="#"
                                                                     @click.prevent="changePage(pagination.current_page + 1)">
 
@@ -592,7 +593,7 @@ const getHomepageData = async (page=1) => {
     if(!selectedCategory.value){
         try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}&sort=${sortOrder.value}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here
@@ -615,7 +616,7 @@ const getHomepageData = async (page=1) => {
 
         try {
         loading.value = true
-        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}&category_id=${selectedCategory.value}`, {
+        const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/mine?page=${page}&category_id=${selectedCategory.value}&sort=${sortOrder.value}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken.value}` // Add the Bearer token here

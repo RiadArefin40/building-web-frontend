@@ -50,6 +50,12 @@
                                  <label for="floatingSelect">카테고리 선택</label>
                              </div>
                          </div>
+                         <div class="form-group">
+                            <div class="form-floating">
+                                <input v-model = "adress" type="text" class="form-control" id="floatinglastname" placeholder="제목 게시물">
+                                <label for="floatinglastname">주소</label>
+                            </div>
+                        </div>
                          <!-- <div class="form-group">
                              <div class="form-floating">
                                  <select class="form-select" id="floatingSelect"
@@ -152,6 +158,7 @@ const { authToken } = await useAuth();
 const loading = ref(false)
 const router  = useRouter()
 const route = useRoute()
+const adress = ref('')
 const id = route.params.id
 const message = ref('')
 const title = ref('')
@@ -193,6 +200,8 @@ onMounted( async ()=>{
         const  post = await res.data
         title.value  = post.title 
         $('#summernote').summernote('code', post.description);
+        adress.value = post.address
+        selectedCategory.value = post?.category?.id
         message.value = post.title
         loading.value = false
     }
@@ -212,7 +221,7 @@ onMounted(()=>{
 const onSubmit = async () =>{
     if(id){
         try {
-          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value, address:adress.value  }
         loading.value = true
         const res = await axios.put(`${runtimeConfig.public.apiBase}jobs/${id}`, body, {
             headers: {
@@ -241,7 +250,7 @@ const onSubmit = async () =>{
     else{
 
         try {
-          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value  }
+          const  body = {job_category_id:selectedCategory.value, title: title.value, description:message.value, address:adress.value   }
         loading.value = true
         const res = await $fetch(`${runtimeConfig.public.apiBase}jobs/`, body, {
             headers: {

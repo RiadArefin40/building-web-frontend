@@ -145,14 +145,14 @@
                                 </div>
                                 <!-- Pagination Wrapper  -->
 
-                                <div v-if="jobs.length > 0"
+                                <div v-if="jobs?.length > 0"
                                     class="pagination-outer-wrappers">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination">
                                             <!-- Previous Page -->
-                                            <li class="page-item" :class="{ disabled: !pagination.links[0].url }">
+                                            <li class="page-item" :class="{ disabled: !pagination?.links[0].url }">
                                                 <a class="page-link" href="#"
-                                                    @click.prevent="changePage(pagination.current_page - 1)">
+                                                    @click.prevent="changePage(pagination?.current_page - 1)">
 
                                                     <span class="desktop-version">이전 페이지</span> <span
                                                         class="material-symbols-outlined mobile-version">
@@ -162,7 +162,7 @@
                                             </li>
 
                                             <!-- Page Numbers -->
-                                            <li v-for="link in pagination.links.slice(1, -1)" :key="link.label"
+                                            <li v-for="link in pagination?.links.slice(1, -1)" :key="link.label"
                                                 class="page-item" :class="{ active: link.active }">
                                                 <a class="page-link" :class="{ active: link.active }" href="#" @click.prevent="changePage(link.label)">
                                                     {{ link.label }}
@@ -171,7 +171,7 @@
 
                                             <!-- Next Page -->
                                             <li class="page-item"
-                                                :class="{ disabled: !pagination.links[pagination.links.length - 1].url }">
+                                                :class="{ disabled: !pagination?.links[pagination?.links?.length - 1].url }">
                                                 <a class="page-link" href="#"
                                                     @click.prevent="changePage(pagination.current_page + 1)">
 
@@ -571,7 +571,7 @@ watch(searchText, async (newSearchText) => {
             method: 'GET',
         });
 
-        homepageData.value = await res.data;  // Assuming the response has a 'data' field with the results
+        jobs.value = await res.data;  // Assuming the response has a 'data' field with the results
     } catch (err) {
         console.error(err);
     } finally {
