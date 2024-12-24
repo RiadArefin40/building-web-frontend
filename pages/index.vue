@@ -243,10 +243,10 @@
     <!-- Billing Section  -->
 
     <!-- Who wr are Section  -->
-    <section  v-if="!loading" class="who-we-are-section">
+    <section   class="who-we-are-section">
       <div class="container-fluid">
         <div class="who-we-are-inner">
-          <div class="left-box">
+          <div  class="left-box">
             <h6>협회 소개</h6>
             <!-- <h2>건물 관리의<br />
               새로운 표준을 제시합니다.</h2> -->
@@ -265,7 +265,7 @@
             <div class="transparency-outer-box">
               <div class="transparency-inner-box">
                 <div class="top-transparency-box">
-                  <div class="inner-box top-btn-box">
+                  <div class="inner-box top-btn-box btn-1">
                     <div class="image-box">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -762,6 +762,7 @@
 <script setup>
 const runtimeConfig = useRuntimeConfig();
 import { nextTick } from 'vue';
+const rotationAngle = ref(0);
 const homepageData = ref([]);
 const loading = ref(true)
 const router = useRouter();
@@ -778,6 +779,105 @@ onMounted(() => {
   getHomepageData();
   
   getTestimonialData();
+  // const animatedBox = document.querySelector('.animated-border-box:before');
+  //   // Trigger updates based on animation frames
+  //   const trackRotation = () => {
+  //   // Increment the rotation angle
+  //   rotationAngle.value = (rotationAngle.value + 0.5) % 360;
+
+  //   // Check button positions
+  //   checkButtonIntersection();
+
+  //   // Loop the animation
+  //   requestAnimationFrame(trackRotation);
+  //   console.log('rotationAngle.value',rotationAngle.value)
+  // };
+
+  // const checkButtonIntersection = () => {
+  //   const topButton = document.querySelector('.top-transparency-box');
+  //   // const bottomButton = document.getElementById('bottomButton');
+
+  //   // Example: Update based on specific angles (adjust based on your gradient design)
+  //   if (rotationAngle.value > 45 && rotationAngle.value < 135) {
+  //     topButton?.classList.add('active');
+  //     console.log('ok')
+  //   } else {
+  //     console.log('nok')
+  //     topButton?.classList.remove('active');
+  //   }
+
+  // };
+
+  // trackRotation();
+
+
+
+
+  nextTick(() => {
+  const animatedBox = document.querySelector('.animated-border-box'); // Parent element
+  const topButton = document.querySelector('.btn-1');
+
+  if (!animatedBox) {
+    console.error('animated-border-box element not found');
+    return;
+  }
+
+  // Function to extract rotation from the `::before` pseudo-element
+  const getPseudoElementRotation = () => {
+    const pseudoStyle = getComputedStyle(animatedBox, '::before');
+
+    if (!pseudoStyle) {
+      console.error('Failed to get computed style for ::before');
+      return 0;
+    }
+
+    const transform = pseudoStyle.getPropertyValue('transform');
+    if (transform && transform !== 'none') {
+      // The matrix(4, 0, 0, 4, 0, 0) transformation contains values for scaling, rotation, and translation.
+      // In this case, we are interested in the rotation part of the matrix.
+      const values = transform.match(/matrix\(([^)]+)\)/)[1].split(', ');
+      const a = parseFloat(values[0]);
+      const b = parseFloat(values[1]);
+
+      // Calculate the rotation angle in degrees based on the matrix
+      let angle = Math.atan2(b, a) * (180 / Math.PI);
+      if (angle < 0) angle += 360; // Ensure angle is in the range [0, 360]
+
+      return angle;
+    }
+    return 0; // Default to 0 if no transform is applied
+  };
+
+  // Function to check button intersection based on the rotation angle
+  const checkButtonIntersection = () => {
+    const rotationAngle = getPseudoElementRotation();
+    console.log('rotation-angle', rotationAngle);
+
+    // Adjust the conditions based on the range of rotation you want to detect
+    if (rotationAngle <= 34 ) {
+      topButton?.classList.add('black');
+      console.log('Active: Rotation angle is within range:', rotationAngle);
+    } else {
+      topButton?.classList.remove('black');
+      // console.log('Inactive: Rotation angle is outside range:', rotationAngle);
+    }
+  };
+
+  // Function to track the rotation
+  const trackRotation = () => {
+    checkButtonIntersection();
+    requestAnimationFrame(trackRotation); // Continuously check
+  };
+
+  // Start tracking
+  trackRotation();
+});
+
+
+
+
+  
+
 })
 
 const handleDispute = () =>{
@@ -857,5 +957,8 @@ const getTestimonialData = async () =>{
 .rendered-h p{
   margin-bottom: 0px !important;
 }
-
+.black{
+  background-color: #23282F !important;
+  color:white !important;
+}
 </style>
