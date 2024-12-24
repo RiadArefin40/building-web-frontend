@@ -586,7 +586,7 @@ function removeImageTags(html) {
 
 </script>
 
-<style>
+<style scoped>
 .truncate-description {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -601,5 +601,8 @@ function removeImageTags(html) {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.top-box-wrapper{
+    min-height: 236px;
 }
 </style>
