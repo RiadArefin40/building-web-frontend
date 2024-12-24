@@ -854,7 +854,7 @@ onMounted(() => {
     console.log('rotation-angle', rotationAngle);
 
     // Adjust the conditions based on the range of rotation you want to detect
-    if (rotationAngle <= 34 ) {
+    if (!(rotationAngle >= 50 && rotationAngle <= 300) ) {
       topButton?.classList.add('black');
       console.log('Active: Rotation angle is within range:', rotationAngle);
     } else {
