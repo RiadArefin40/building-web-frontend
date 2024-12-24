@@ -2116,7 +2116,7 @@ header .scrolled {
   flex-direction: row;
   align-items: center;
   gap: 15px;
-  background: #23282F;
+  /* background: #23282F; */
 }
 @media (max-width: 1350px) {
   .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .bottom-fairness-relaibility-box .fairness-box {
@@ -2165,7 +2165,7 @@ header .scrolled {
   font-style: normal;
   font-weight: 500;
   line-height: 34px;
-  color: white;
+  /* color: white; */
 }
 @media (max-width: 1350px) {
   .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .bottom-fairness-relaibility-box .fairness-box h5 {

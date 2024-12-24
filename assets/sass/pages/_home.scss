@@ -2531,7 +2531,8 @@ header {
               flex-direction: row;
               align-items: center;
               gap: 15px;
-              background: #23282F;
+              // color: #000 !important;
+              // background: #23282F;
 
 
               @media(max-width: 1350px) {
@@ -2555,9 +2556,9 @@ header {
                 padding: 12px;
                 border-radius: 4px;
                 // border: 1px solid #ddd;
-                border: 0.578px solid rgba(255, 255, 255, 0.10);
+                border: 0.578px solid rgba(31, 30, 30, 0.1);
                 // background: #F5F6F8;
-                background: rgba(255, 255, 255, 0.10);
+                background: rgba(180, 177, 177, 0.1);
 
                 @media(max-width: 1350px) {
                   width: 28px;
@@ -2565,9 +2566,9 @@ header {
                   padding: 6px;
                 }
 
-                svg {
-                  color: #fff;
-                }
+                // svg {
+                //   color: #fff;
+                // }
 
                 img {
                   @media(max-width: 1350px) {
@@ -2584,7 +2585,7 @@ header {
                 font-style: normal;
                 font-weight: 500;
                 line-height: 34px;
-                color: $white;
+                // color: $white;
 
                 @media(max-width: 1350px) {
                   font-size: 14px;

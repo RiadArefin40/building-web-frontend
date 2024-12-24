@@ -299,7 +299,7 @@
                   </div>
                 </div>
                 <div class="bottom-fairness-relaibility-box">
-                  <div class="fairness-box">
+                  <div class="fairness-box btn-2">
                     <div class="image-box">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -816,6 +816,8 @@ onMounted(() => {
   nextTick(() => {
   const animatedBox = document.querySelector('.animated-border-box'); // Parent element
   const topButton = document.querySelector('.btn-1');
+  const leftButton = document.querySelector('.btn-2');
+  // const rightButton = document.querySelector('.btn-3'); // Ensure you have the correct class for the right button
 
   if (!animatedBox) {
     console.error('animated-border-box element not found');
@@ -833,13 +835,10 @@ onMounted(() => {
 
     const transform = pseudoStyle.getPropertyValue('transform');
     if (transform && transform !== 'none') {
-      // The matrix(4, 0, 0, 4, 0, 0) transformation contains values for scaling, rotation, and translation.
-      // In this case, we are interested in the rotation part of the matrix.
       const values = transform.match(/matrix\(([^)]+)\)/)[1].split(', ');
       const a = parseFloat(values[0]);
       const b = parseFloat(values[1]);
 
-      // Calculate the rotation angle in degrees based on the matrix
       let angle = Math.atan2(b, a) * (180 / Math.PI);
       if (angle < 0) angle += 360; // Ensure angle is in the range [0, 360]
 
@@ -853,14 +852,32 @@ onMounted(() => {
     const rotationAngle = getPseudoElementRotation();
     console.log('rotation-angle', rotationAngle);
 
-    // Adjust the conditions based on the range of rotation you want to detect
-    if (!(rotationAngle >= 50 && rotationAngle <= 300) ) {
+    // Adjust the conditions based on the range of rotation you want to detect for the top button
+    if (!(rotationAngle >= 50 && rotationAngle <= 300)) {
       topButton?.classList.add('black');
-      console.log('Active: Rotation angle is within range:', rotationAngle);
+      console.log('Top button active: Rotation angle is within range:', rotationAngle);
     } else {
       topButton?.classList.remove('black');
-      // console.log('Inactive: Rotation angle is outside range:', rotationAngle);
+      console.log('Top button inactive: Rotation angle is outside range:', rotationAngle);
     }
+
+    // Check for left button
+    if (rotationAngle >= 150 && rotationAngle <= 220) {
+      leftButton?.classList.add('black');
+      console.log('Left button active');
+    } else {
+      leftButton?.classList.remove('black');
+      console.log('Left button inactive');
+    }
+
+    // You can add similar logic for the rightButton
+    // if (rotationAngle >= 240 && rotationAngle <= 300) {
+    //   rightButton?.classList.add('black');
+    //   console.log('Right button active');
+    // } else {
+    //   rightButton?.classList.remove('black');
+    //   console.log('Right button inactive');
+    // }
   };
 
   // Function to track the rotation
@@ -872,6 +889,7 @@ onMounted(() => {
   // Start tracking
   trackRotation();
 });
+
 
 
 
@@ -962,7 +980,6 @@ const getTestimonialData = async () =>{
 
 }
 .black h5{
-
   color:white !important;
 }
 </style>
