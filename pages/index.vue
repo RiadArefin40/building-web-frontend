@@ -356,10 +356,10 @@
           <div class="left-section">
             <p>차별화</p>
             <!-- <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2> -->
-             <h2 v-html="homepageData['section-5'].left"></h2>
+             <h2 v-html="homepageData['section-5']?.left"></h2>
           </div>
           <div class="right-section">
-            <p v-html="homepageData['section-5'].right"></p>
+            <p v-html="homepageData['section-5']?.right"></p>
             <!-- <p>대한건물관리협회는 집합건물법에 대한 깊은 이해와 경험을 바탕으로, 법적 안정성을 제공합니다. 또한, 최신 기술을 활용하여 투명한 관리 솔루션을 제공하며, 모든 회원사들이 신뢰할 수 있는
               환경을
               조성합니다.</p>
@@ -466,11 +466,11 @@
       <div class="container-fluid">
         <div class="benifits-member-inner">
           <div class="left-section">
-            <h2 v-html="homepageData['section-7'].top_left"></h2>
+            <h2 v-html="homepageData['section-7']?.top_left"></h2>
             <!-- <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2> -->
           </div>
           <div class="right-section">
-            <p  v-html="homepageData['section-7'].top_right"></p>
+            <p  v-html="homepageData['section-7']?.top_right"></p>
             <!-- <p>협회 회원이 되시면, 공정한 중재와 상담 서비스, 최신 관리 솔루션 제공, 법적 안정성 확보, 업계 네트워킹 기회 등 다양한 혜택을 누리실 수 있습니다.</p>
             <p class="last-para">협회 가입 후 관리비 절감 및 공실 관리 문제 해결로 <br />연간 수익이 개선된 실제 사례를 확인해보세요.</p> -->
           </div>
@@ -614,8 +614,8 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p v-html="homepageData['section-9'].list_1_text" class="desktop-title" ></p>
-                  <p v-html="homepageData['section-9'].list_1_text" class="mobile-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_1_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_1_text" class="mobile-title" ></p>
                   <!-- <p class="desktop-title">관리비 부과 기준이 명확하고 투명하게 공개되고 있습니까?</p>
                   <p class="mobile-title">관리비 부과 기준이 명확하고<br /> 투명하게 공개되고 있습니까?</p> -->
                 </div>
@@ -632,8 +632,8 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p v-html="homepageData['section-9'].list_2_text" class="desktop-title" ></p>
-                  <p v-html="homepageData['section-9'].list_2_text" class="mobile-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_2_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_2_text" class="mobile-title" ></p>
                   <!-- <p class="desktop-title">건물 내 주요 시설의 유지보수가 정기적으로 이루어지고 있나요?</p>
                   <p class="mobile-title">건물 내 주요 시설의 유지보수가<br /> 정기적으로 이루어지고 있나요?</p> -->
                 </div>
@@ -650,8 +650,8 @@
                   </svg>
                 </div>
                 <div class="content-box">
-                  <p v-html="homepageData['section-9'].list_3_text" class="desktop-title" ></p>
-                  <p v-html="homepageData['section-9'].list_3_text" class="mobile-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_3_text" class="desktop-title" ></p>
+                  <p v-html="homepageData['section-9']?.list_3_text" class="mobile-title" ></p>
                   <!-- <p class="desktop-title">건물 관리와 관련된 법적 분쟁을 예방하기 위한 대비가 되어 있나요?</p>
                   <p class="mobile-title">건물 관리와 관련된 법적 분쟁을<br /> 예방하기 위한 대비가 되어 있나요?</p> -->
                 </div>
