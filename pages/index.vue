@@ -853,14 +853,14 @@ onMounted(() => {
     console.log('rotation-angle', rotationAngle);
 
     // Adjust the conditions based on the range of rotation you want to detect for the top button
-    if (!(rotationAngle >= 40 && rotationAngle <= 300)) {
+    if (!(rotationAngle >= 20 && rotationAngle <= 300)) {
       rightButton?.classList.remove('black');
       topButton?.classList.add('black');
       console.log('Top button active: Rotation angle is within range:', rotationAngle);
     } 
 
     // Check for left button
-    if (rotationAngle >= 150 && rotationAngle <= 230) {
+    if (rotationAngle >= 130 && rotationAngle <= 210) {
       topButton?.classList.remove('black');
       leftButton?.classList.add('black');
       console.log('Left button active');
@@ -868,7 +868,7 @@ onMounted(() => {
       // leftButton?.classList.remove('black');
       console.log('Left button inactive');
     }
-    if (rotationAngle >= 130 && rotationAngle <= 160) {
+    if (rotationAngle >= 110 && rotationAngle <= 140) {
       leftButton?.classList.remove('black');
       rightButton?.classList.add('black');
       console.log('Left button active');
@@ -979,14 +979,19 @@ const getTestimonialData = async () =>{
 .rendered-h p{
   margin-bottom: 0px !important;
 }
-.black{
+/* .black{
   background-color: #23282F !important;
 
-}
+} */
 .black h5{
   color:white !important;
 }
 .image-box{
   background-color:rgb(248, 248, 248) !important;
+}
+.black {
+  background-color: #23282F !important;
+  opacity: 1; /* Fully visible */
+  transition: opacity 0.8s ease, background-color 0.8s ease; /* Smooth transition */
 }
 </style>
