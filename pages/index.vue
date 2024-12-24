@@ -959,6 +959,10 @@ const getTestimonialData = async () =>{
 }
 .black{
   background-color: #23282F !important;
+
+}
+.black h5{
+
   color:white !important;
 }
 </style>
