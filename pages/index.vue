@@ -310,7 +310,7 @@
                     </div>
                     <h5>공정성</h5>
                   </div>
-                  <div class="relaibility-box">
+                  <div class="relaibility-box btn-3">
                     <div class="image-box">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -817,7 +817,7 @@ onMounted(() => {
   const animatedBox = document.querySelector('.animated-border-box'); // Parent element
   const topButton = document.querySelector('.btn-1');
   const leftButton = document.querySelector('.btn-2');
-  // const rightButton = document.querySelector('.btn-3'); // Ensure you have the correct class for the right button
+  const rightButton = document.querySelector('.btn-3'); // Ensure you have the correct class for the right button
 
   if (!animatedBox) {
     console.error('animated-border-box element not found');
@@ -853,23 +853,26 @@ onMounted(() => {
     console.log('rotation-angle', rotationAngle);
 
     // Adjust the conditions based on the range of rotation you want to detect for the top button
-    if (!(rotationAngle >= 50 && rotationAngle <= 300)) {
+    if (!(rotationAngle >= 40 && rotationAngle <= 300)) {
+      rightButton?.classList.remove('black');
       topButton?.classList.add('black');
       console.log('Top button active: Rotation angle is within range:', rotationAngle);
-    } else {
-      // topButton?.classList.remove('black');
-      console.log('Top button inactive: Rotation angle is outside range:', rotationAngle);
-    }
+    } 
 
     // Check for left button
-    if (rotationAngle >= 150 && rotationAngle <= 220) {
+    if (rotationAngle >= 150 && rotationAngle <= 230) {
       topButton?.classList.remove('black');
       leftButton?.classList.add('black');
       console.log('Left button active');
     } else {
-      leftButton?.classList.remove('black');
+      // leftButton?.classList.remove('black');
       console.log('Left button inactive');
     }
+    if (rotationAngle >= 130 && rotationAngle <= 160) {
+      leftButton?.classList.remove('black');
+      rightButton?.classList.add('black');
+      console.log('Left button active');
+    } 
 
     // You can add similar logic for the rightButton
     // if (rotationAngle >= 240 && rotationAngle <= 300) {
@@ -982,5 +985,8 @@ const getTestimonialData = async () =>{
 }
 .black h5{
   color:white !important;
+}
+.image-box{
+  background-color:rgb(248, 248, 248) !important;
 }
 </style>

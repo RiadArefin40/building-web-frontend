@@ -1996,7 +1996,7 @@ header .scrolled {
   background: rgba(255, 255, 255, 0.1);
 }
 .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .top-transparency-box .btn-bg .image-box svg {
-  color: #fff;
+  /* color: #fff; */
 }
 .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .top-transparency-box .btn-bg h5 {
   color: white;
@@ -2141,7 +2141,7 @@ header .scrolled {
   padding: 12px;
   border-radius: 4px;
   border: 0.578px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(163, 161, 161, 0.1); */
 }
 @media (max-width: 1350px) {
   .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .bottom-fairness-relaibility-box .fairness-box .image-box {
@@ -2151,7 +2151,7 @@ header .scrolled {
   }
 }
 .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .bottom-fairness-relaibility-box .fairness-box .image-box svg {
-  color: #fff;
+  /* color: #fff; */
 }
 @media (max-width: 1350px) {
   .who-we-are-section .who-we-are-inner .right-box .transparency-outer-box .transparency-inner-box .bottom-fairness-relaibility-box .fairness-box .image-box img {
