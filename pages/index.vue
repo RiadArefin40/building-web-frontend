@@ -857,12 +857,13 @@ onMounted(() => {
       topButton?.classList.add('black');
       console.log('Top button active: Rotation angle is within range:', rotationAngle);
     } else {
-      topButton?.classList.remove('black');
+      // topButton?.classList.remove('black');
       console.log('Top button inactive: Rotation angle is outside range:', rotationAngle);
     }
 
     // Check for left button
     if (rotationAngle >= 150 && rotationAngle <= 220) {
+      topButton?.classList.remove('black');
       leftButton?.classList.add('black');
       console.log('Left button active');
     } else {
