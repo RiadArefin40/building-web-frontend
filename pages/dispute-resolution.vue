@@ -628,8 +628,8 @@
                             <p>요청을 제출하려면 로그인이 필요합니다. <br />계속 진행하려면 로그인하거나 회원가입을 해주세요.</p>
                         </div>
                         <div class="login-signup-btn-wrapper">
-                            <a href="./sign-in.html">로그인</a>
-                            <a href="./sign-up.html">회원가입</a>
+                            <a href="./sign-in">로그인</a>
+                            <a href="./sign-up">회원가입</a>
                         </div>
                     </div>
                 </div>

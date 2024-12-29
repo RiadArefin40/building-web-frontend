@@ -244,7 +244,7 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn_submit">
-            Submit Application
+            가입 신청하기
             <span class="material-symbols-outlined">arrow_right_alt</span>
           </button>
         </div>

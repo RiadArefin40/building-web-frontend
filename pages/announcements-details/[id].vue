@@ -39,7 +39,7 @@
                          </div> -->
                          <div class="key-recommendation-wrapper">
 
-                            <div v-if="!loading" v-html="styledBody"></div>
+                            <div  v-if="!loading" v-html="styledBody" ></div>
                              <!-- <h3>프로그램 하이라이트:</h3>
                              <ul>
                                  <li><p><span>정기 감사 및 보고</span> 정기적으로 내부 감사를 실시하고 그 결과를 주민과 공유함으로써 책임감을 강화할 수 있습니다.</p></li>
@@ -199,7 +199,7 @@ function  formatTimestamp(timestamp) {
    // Function to update image width based on screen size
    const updateImageWidth = () => {
       if (window.innerWidth <= 991) {
-        imageWidth.value = "390px";
+        imageWidth.value = "90vw";
       } else {
         imageWidth.value = "740px";
       }
@@ -217,4 +217,15 @@ function  formatTimestamp(timestamp) {
   img {
     width: 200px;
   }
+@media(max-width: 521px){
+           .announcements-details-inner-wrapper{
+            max-width: 90vw !important;
+           }
+           .key-recommendation-wrapper{
+            max-width: 90vw !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            word-wrap: break-word !important;
+           }
+        }
 </style>

@@ -273,3 +273,15 @@ const toJobListing = () =>{
 
 
 </script>
+
+<style scoped>
+@media (max-width: 991px) {
+    .news-content-related-content-wrapper{
+    max-width: 90vw !important;
+}
+
+}
+
+
+
+</style>

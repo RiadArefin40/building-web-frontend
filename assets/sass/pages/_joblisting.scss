@@ -51,10 +51,11 @@
                     gap: 10px;
                     margin-right: 0;
                     @media(max-width: 767px){
-                        display: grid !important;
+                        // display: grid !important;
                         // flex-direction: grid !important;
-                        grid-template-columns: repeat(3, 1fr);
-                        flex-wrap: wrap;
+                        // grid-template-columns: repeat(3, 1fr);
+                        display: flex !important;
+                       
                     }
 
                     .nav-link {

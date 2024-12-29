@@ -13,6 +13,15 @@ export default defineNuxtConfig({
         // { httpEquiv: 'X-UA-Compatible', content: 'ie=edge' },
       ],
       link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined',
+        },
         // Favicon
         { rel: 'shortcut icon', type: 'image/png', href: '/assets/images/home/favIcon.png' },
   
@@ -70,13 +79,13 @@ export default defineNuxtConfig({
         { src: 'https://kit.fontawesome.com/e2e8628afd.js', crossorigin: 'anonymous' },
   
         // jQuery
-        { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', type: 'text/javascript', body: true },
+        { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', type: 'text/javascript' },
   
         // Bootstrap Bundle JS
-        { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js', integrity: 'sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8', crossorigin: 'anonymous', type: 'text/javascript', body: true },
+        { src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js', integrity: 'sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8', crossorigin: 'anonymous', type: 'text/javascript' },
     
         // AOS (Animate On Scroll)
-        { src: 'https://unpkg.com/aos@2.3.1/dist/aos.js', type: 'text/javascript', body: true },
+        { src: 'https://unpkg.com/aos@2.3.1/dist/aos.js', type: 'text/javascript' },
     
         {src:'https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js',type: 'text/javascript',defer: true },
     
@@ -90,10 +99,10 @@ export default defineNuxtConfig({
         { src: '/js/owl.carousel.min.js', type: 'text/javascript',defer: true, },
     
         // Fancybox JS
-        { src: '/js/fancybox.js', type: 'text/javascript', body: true,defer: true, },
+        { src: '/js/fancybox.js', type: 'text/javascript',defer: true, },
     
         // Custom JS (Your custom script)
-        { src: '/js/custom.js', type: 'text/javascript', body: true,defer: true, },
+        { src: '/js/custom.js', type: 'text/javascript',defer: true, },
 
         // Google reCAPTCHA API (async to avoid blocking page rendering)
         { src: 'https://www.google.com/recaptcha/api.js', async: true, defer: true, }
