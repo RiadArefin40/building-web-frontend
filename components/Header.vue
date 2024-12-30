@@ -281,8 +281,9 @@ const toAboutUs = () =>{
 }
 const toDispute = () =>{
   router.push('/dispute-resolution')
-  // window.location.href = '/dispute-resolution';
-
+  if(authToken.value){
+    window.location.href = '/dispute-resolution';
+  }
 }
 const toMemberShip = () =>{
   router.push('/membership-guide')

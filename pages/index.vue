@@ -770,10 +770,12 @@ const testimonials = ref([])
 const toSignin = () =>{
   $('#loginModal').modal('hide');
   router.push('/sign-in')
+  window.location.href = '/sign-in';
 }
 const toSignup = () =>{
   $('#loginModal').modal('hide');
   router.push('/sign-up')
+  window.location.href = '/sign-up';
 }
 onMounted(() => {
   getHomepageData();
