@@ -35,17 +35,17 @@
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('all')" class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                        aria-selected="true">모든 요청 보기 <span>{{ allDisputeCount }}</span></button>
+                                        aria-selected="true">모든 요청 보기 <span v-if="allDisputeCount">{{ allDisputeCount }}</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('pending')" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-profile" type="button" role="tab"
-                                        aria-controls="pills-profile" aria-selected="false">진행중 <span>{{ inProgressDisputeCount }}</span></button>
+                                        aria-controls="pills-profile" aria-selected="false">진행중 <span v-if="inProgressDisputeCount">{{ inProgressDisputeCount }}</span></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button @click = "changeStatus('completed')" class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-contact" type="button" role="tab"
-                                        aria-controls="pills-contact" aria-selected="false">답변완료 <span>{{ answerDisputeCount }}</span></button>
+                                        aria-controls="pills-contact" aria-selected="false">답변완료 <span v-if="answerDisputeCount">{{ answerDisputeCount }}</span></button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
@@ -61,8 +61,8 @@
                                             class="requests-wrapper " :class="{ 'latest-request' : index == 0 }">
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
-                                                    <h6 class="dispute-issues">{{ dispute.dispute_type.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute.status }}
+                                                    <h6 class="dispute-issues">{{ dispute?.dispute_type.name }}</h6>
+                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -70,13 +70,13 @@
                                                 </div>
                                             </div>
                                             <div class="issues-content">
-                                                <p>{{ dispute.message }}</p>
+                                                <p>{{ dispute?.message }}</p>
                                             </div>
                                             <div class="replies-wrapper">
                                                 <div class="replies-inner">
                                                     <button class="btn btn-primary" type="button"
                                                         data-bs-toggle="collapse" :data-bs-target="'#collapse-' + index"
-                                                        :aria-expanded="dispute.comments.length > 0 && index == 0" :aria-controls="'collapse-' + index">
+                                                        :aria-expanded="dispute?.comments?.length > 0 && index == 0" :aria-controls="'collapse-' + index">
                                                         <div class="replies-header">
 
                                                             <div class="circle"></div>
@@ -90,7 +90,7 @@
                                                                 </svg>
                                                             </div>
                                                             <div class="replies-count">
-                                                                <h6><span>{{ dispute.comment_count }}</span> 답변</h6>
+                                                                <h6><span>{{ dispute?.comment_count }}</span> 답변</h6>
                                                             </div>
                                                             <div class="arrow-wrapper">
                                                                 <div class="arrow-down">
@@ -116,20 +116,20 @@
                                                             </div>
                                                         </div>
                                                     </button>
-                                                    <div v-for="(comment, commentIndex) in dispute.comments"
-                                                        class="collapse" :class="['collapse', { show: dispute.comments.length > 0 && index == 0 }]" :id="'collapse-' + index">
+                                                    <div v-for="(comment, commentIndex) in dispute?.comments"
+                                                        class="collapse" :class="['collapse', { show: dispute?.comments?.length > 0 && index == 0 }]" :id="'collapse-' + index">
                                                         <div class="card card-body">
                                                             <div class="content-wrapper">
                                                                 <div class="content" style="padding-top: 32px;">
                             
-                                                                    <p>{{ comment.comment }}</p>
+                                                                    <p>{{ comment?.comment }}</p>
                                                                 </div>
                                                                 <!-- <div class="help-text">
                                                                     <a href="#">더 많은 도움이 필요하세요? 즉시 저희에게 연락하세요.</a>
                                                                 </div> -->
                                                                 <div class="replies-time">
                                                                     <!-- <h6>2일 전</h6> -->
-                                                                     <h6>{{formatTimestamp(comment.updated_at)  }}</h6>
+                                                                     <h6>{{formatTimestamp(comment?.updated_at)  }}</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -176,7 +176,7 @@
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(link.label)"
+                                                @click.prevent="changePage(link?.label)"
                                             >
                                                 {{ link?.label }}
                                             </a>
@@ -216,8 +216,8 @@
                                             class="requests-wrapper " :class="{ 'latest-request' : index == 0 }">
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
-                                                    <h6 class="dispute-issues">{{ dispute.dispute_type.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute.status }}
+                                                    <h6 class="dispute-issues">{{ dispute?.dispute_type.name }}</h6>
+                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -225,7 +225,7 @@
                                                 </div>
                                             </div>
                                             <div class="issues-content">
-                                                <p>{{ dispute.message }}</p>
+                                                <p>{{ dispute?.message }}</p>
                                             </div>
                                             <div class="replies-wrapper">
                                                 <div class="replies-inner">
@@ -245,7 +245,7 @@
                                                                 </svg>
                                                             </div>
                                                             <div class="replies-count">
-                                                                <h6><span>{{ dispute.comment_count }}</span> 답변</h6>
+                                                                <h6><span>{{ dispute?.comment_count }}</span> 답변</h6>
                                                             </div>
                                                             <div class="arrow-wrapper">
                                                                 <div class="arrow-down">
@@ -277,14 +277,14 @@
                                                             <div class="content-wrapper">
                                                                 <div class="content pt-4">
                             
-                                                                    <p>{{ comment.comment }}</p>
+                                                                    <p>{{ comment?.comment }}</p>
                                                                 </div>
                                                                 <!-- <div class="help-text">
                                                                     <a href="#">더 많은 도움이 필요하세요? 즉시 저희에게 연락하세요.</a>
                                                                 </div> -->
                                                                 <div class="replies-time">
                                                                     <!-- <h6>2일 전</h6> -->
-                                                                     <h6>{{formatTimestamp(comment.updated_at)  }}</h6>
+                                                                     <h6>{{formatTimestamp(comment?.updated_at)  }}</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -317,21 +317,21 @@
                                             v-for="link in pagination?.links.slice(1, -1)"
                                             :key="link.label"
                                             class="page-item"
-                                            :class="{ active: link.active }"
+                                            :class="{ active: link?.active }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(link.label)"
+                                                @click.prevent="changePage(link?.label)"
                                             >
-                                                {{ link.label }}
+                                                {{ link?.label }}
                                             </a>
                                             </li>
 
                                             <!-- Next Page -->
                                             <li
                                             class="page-item"
-                                            :class="{ disabled: !pagination?.links[pagination?.links.length - 1].url }"
+                                            :class="{ disabled: !pagination?.links[pagination?.links?.length - 1].url }"
                                             >
                                             <a
                                                 class="page-link"
@@ -362,8 +362,8 @@
                                             class="requests-wrapper " :class="{ 'latest-request' : index == 0 }">
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
-                                                    <h6 class="dispute-issues">{{ dispute.dispute_type.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute.status }}
+                                                    <h6 class="dispute-issues">{{ dispute?.dispute_type?.name }}</h6>
+                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -371,13 +371,13 @@
                                                 </div>
                                             </div>
                                             <div class="issues-content">
-                                                <p>{{ dispute.message }}</p>
+                                                <p>{{ dispute?.message }}</p>
                                             </div>
                                             <div class="replies-wrapper">
                                                 <div class="replies-inner">
                                                     <button class="btn btn-primary" type="button"
                                                         data-bs-toggle="collapse" :data-bs-target="'#collapse-' + index"
-                                                        :aria-expanded="dispute.comments.length > 0 && index == 0" :aria-controls="'collapse-' + index">
+                                                        :aria-expanded="dispute?.comments?.length > 0 && index == 0" :aria-controls="'collapse-' + index">
                                                         <div class="replies-header">
 
                                                             <div class="circle"></div>
@@ -391,7 +391,7 @@
                                                                 </svg>
                                                             </div>
                                                             <div class="replies-count">
-                                                                <h6><span>{{ dispute.comment_count }}</span> 답변</h6>
+                                                                <h6><span>{{ dispute?.comment_count }}</span> 답변</h6>
                                                             </div>
                                                             <div class="arrow-wrapper">
                                                                 <div class="arrow-down">
@@ -417,20 +417,20 @@
                                                             </div>
                                                         </div>
                                                     </button>
-                                                    <div v-for="(comment, commentIndex) in dispute.comments"
-                                                        class="collapse" :class="['collapse', { show: dispute.comments.length > 0 && index == 0 }]" :id="'collapse-' + index">
+                                                    <div v-for="(comment, commentIndex) in dispute?.comments"
+                                                        class="collapse" :class="['collapse', { show: dispute?.comments?.length > 0 && index == 0 }]" :id="'collapse-' + index">
                                                         <div class="card card-body">
                                                             <div class="content-wrapper">
                                                                 <div class="content pt-4">
                             
-                                                                    <p>{{ comment.comment }}</p>
+                                                                    <p>{{ comment?.comment }}</p>
                                                                 </div>
                                                                 <!-- <div class="help-text">
                                                                     <a href="#">더 많은 도움이 필요하세요? 즉시 저희에게 연락하세요.</a>
                                                                 </div> -->
                                                                 <div class="replies-time">
                                                                     <!-- <h6>2일 전</h6> -->
-                                                                     <h6>{{formatTimestamp(comment.updated_at)  }}</h6>
+                                                                     <h6>{{formatTimestamp(comment?.updated_at)  }}</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -449,7 +449,7 @@
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page - 1)"
+                                                @click.prevent="changePage(pagination?.current_page - 1)"
                                             >
                                     
                                                 <span class="material-symbols-outlined mobile-version">
@@ -460,29 +460,29 @@
 
                                             <!-- Page Numbers -->
                                             <li
-                                            v-for="link in pagination.links.slice(1, -1)"
+                                            v-for="link in pagination?.links?.slice(1, -1)"
                                             :key="link.label"
                                             class="page-item"
-                                            :class="{ active: link.active }"
+                                            :class="{ active: link?.active }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(link.label)"
+                                                @click.prevent="changePage(link?.label)"
                                             >
-                                                {{ link.label }}
+                                                {{ link?.label }}
                                             </a>
                                             </li>
 
                                             <!-- Next Page -->
                                             <li
                                             class="page-item"
-                                            :class="{ disabled: !pagination.links[pagination.links.length - 1].url }"
+                                            :class="{ disabled: !pagination?.links[pagination?.links?.length - 1].url }"
                                             >
                                             <a
                                                 class="page-link"
                                                 href="#"
-                                                @click.prevent="changePage(pagination.current_page + 1)"
+                                                @click.prevent="changePage(pagination?.current_page + 1)"
                                             >
                                             
                                                 <span class="material-symbols-outlined mobile-version">
@@ -530,7 +530,7 @@
                                         <select v-model = "disputeTypeData" class="form-select" id="floatingSelect"
                                             aria-label="Floating label select example">
                                             <option v-for="dispute in disputeType" :key="dispute.id" :value="dispute.id">
-        {{ dispute.name }}
+        {{ dispute?.name }}
       </option>
                                         </select>
                                         <label for="floatingSelect">문제 유형</label>
