@@ -6413,7 +6413,7 @@ header .scrolled {
   }
 }
 .association-news-top-section-wrapper::before {
-  background-image: url(/assets/images/associationnews/community-bg.png);
+  /* background-image: url(/assets/images/associationnews/community-bg.png); */
   position: absolute;
   left: 0;
   bottom: 121px;
