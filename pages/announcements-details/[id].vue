@@ -217,15 +217,4 @@ function  formatTimestamp(timestamp) {
   img {
     width: 200px;
   }
-@media(max-width: 521px){
-           .announcements-details-inner-wrapper{
-            max-width: 90vw !important;
-           }
-           .key-recommendation-wrapper{
-            max-width: 90vw !important;
-            width: 100% !important;
-            overflow: hidden !important;
-            word-wrap: break-word !important;
-           }
-        }
 </style>

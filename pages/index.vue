@@ -1009,4 +1009,18 @@ const getTestimonialData = async () =>{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+@media(max-width: 521px){
+           .announcements-details-inner-wrapper{
+            max-width: 90vw !important;
+           }
+           .related-inner-wrapper{
+            max-width: 90vw !important;
+           }
+           .key-recommendation-wrapper{
+            max-width: 90vw !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            word-wrap: break-word !important;
+           }
+        }
 </style>

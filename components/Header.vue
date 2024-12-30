@@ -180,7 +180,7 @@
                       </div>
                     </li>
                     <li><a href="/about-us">협회 소개</a></li>
-                    <li><a  href="/dispute-resolution">분쟁해결요청</a></li>
+                    <li><a  @click = "toDispute">분쟁해결요청</a></li>
                     <!-- <li><a href="#">커뮤니티</a></li> -->
                     <!-- Dropdown Link  -->
                     <li>
