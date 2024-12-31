@@ -350,12 +350,12 @@
     <!-- Who wr are Section  -->
 
     <!-- Fusion Section  -->
-    <section  class="fusion-section">
+    <section id="section-4" ref="section4"  class="fusion-section">
       <div class="container-fluid">
         <div class="fusion-inner">
           <div class="left-section">
             <p>차별화</p>
-            <h2>법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2>
+            <h2 :class="{'animate': isSection1Visible4}" class="section">법률과 기술의 융합, <br />문제 해결의 새로운 패러다임.</h2>
              <!-- <h2 v-html="homepageData['section-5']?.left"></h2> -->
           </div>
           <div class="right-section">
@@ -849,6 +849,10 @@ onMounted(() => {
           isSection1Visible3.value = entry.isIntersecting;
          
         }
+        else if (entry.target.id === 'section-4') {
+          isSection1Visible4.value = entry.isIntersecting;
+         
+        }
       });
     },
     {
@@ -865,6 +869,9 @@ onMounted(() => {
   }
   if(section3.value){
     observer.observe(section3.value);
+  }
+  if(section4.value){
+    observer.observe(section4.value);
   }
 
 
@@ -1086,8 +1093,8 @@ const getTestimonialData = async () =>{
 
     .section {
         opacity: 0;
-        transform: translateY(100px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
       }
 
 .section.animate {
