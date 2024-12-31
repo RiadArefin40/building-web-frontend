@@ -216,13 +216,13 @@ onMounted(() => {
          
         }
         else if (entry.target.id === 'section-3') {
-          isSection1Visible2.value = entry.isIntersecting;
+          isSection1Visible3.value = entry.isIntersecting;
          
         }
       });
     },
     {
-      threshold: 0.01, // Trigger when 10% of the section is visible
+      threshold: 0.1, // Trigger when 10% of the section is visible
     }
   );
    
