@@ -63,11 +63,11 @@
     <!-- Top Banner Box  -->
 
     <!-- Why Box Section  -->
-    <section  class="why-box-wrapper section" id="about" ref="section2" :class="{'animate': isSection1Visible2}">
+    <section  class="why-box-wrapper " id="about" ref="section2">
       <div class="container-fluid">
         <div class="why-box-inner">
           <div class="left-box">
-            <h2><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2>
+            <h2 class="section" :class="{'animate': isSection1Visible2}"><span>왜</span> 건물 관리는<br />항상 그렇게 복잡하고<br />어려운 걸까요?</h2>
             <!-- <h2 v-html="homepageData['section-2']?.title"></h2> -->
             <div class="note-box">
               <div class="star-image">
@@ -144,7 +144,7 @@
     <!-- Why Box Section  -->
 
     <!-- Billing Section  -->
-    <section id="section-1" ref="section1"  class="billing-section-outer section"  :class="{'animate': isSection1Visible1}">
+    <section id="section-1" ref="section1"  class="billing-section-outer">
       <div class="container-fluid">
         <div class="billing-section-inner">
           <div class="left-section">
@@ -223,7 +223,7 @@
             </div>
           </div>
           <div  class="right-section">
-            <h2>가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2>
+            <h2 :class="{'animate': isSection1Visible1}" class="section">가장 큰 문제는<br /><span>투명성과 공정성</span> 의 부재입니다.</h2>
              <!-- <h2 style="margin-bottom: -28px !important;" v-html="homepageData['section-3']?.title"></h2> -->
 
             <h5>많은 건물에서 공실 호수의 전기료가<br /> <span>면적기준으로</span> 부과되는 것이 일반적입니다.</h5>
@@ -243,12 +243,12 @@
     <!-- Billing Section  -->
 
     <!-- Who wr are Section  -->
-    <section   class="who-we-are-section">
+    <section id="section-3" ref="section3"  class="who-we-are-section">
       <div class="container-fluid">
         <div class="who-we-are-inner">
           <div  class="left-box">
             <h6>협회 소개</h6>
-            <h2>건물 관리의<br />
+            <h2 :class="{'animate': isSection1Visible3}" class="section">건물 관리의<br />
               새로운 표준을 제시합니다.</h2>
               <!-- <h2 style="margin-bottom: 20px;" class="rendered-h" v-html="homepageData['section-4']?.title"></h2> -->
               <!-- <p class="rendered-p" v-html="homepageData['section-4']?.subtitle"></p> -->
@@ -837,26 +837,26 @@ onMounted(() => {
     const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        console.log('eeee', entry.target.id )
         if (entry.target.id === 'section-1') {
-          console.log('222')
           isSection1Visible1.value = entry.isIntersecting;
          
         }
        else if (entry.target.id === 'about') {
-          console.log('222')
+          isSection1Visible2.value = entry.isIntersecting;
+         
+        }
+        else if (entry.target.id === 'section-3') {
           isSection1Visible2.value = entry.isIntersecting;
          
         }
       });
     },
     {
-      threshold: 0.1, // Trigger when 10% of the section is visible
+      threshold: 0.2, // Trigger when 10% of the section is visible
     }
   );
    
   if (section1.value) {
-    console.log('okkkkkkk1')
     observer.observe(section1.value);
    
   }
@@ -1037,7 +1037,7 @@ const getTestimonialData = async () =>{
 .black h5{
   color:white !important;
 }
-.image-box{
+.image-box-custom{
   background-color:rgb(248, 248, 248) !important;
 }
 .black {
@@ -1083,8 +1083,8 @@ const getTestimonialData = async () =>{
 
     .section {
         opacity: 0;
-        transform: translateY(150px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(100px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
 
 .section.animate {
