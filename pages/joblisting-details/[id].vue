@@ -215,7 +215,8 @@ const { authToken } = await useAuth();
 
 onMounted(() => {
     getJobData() 
-  getData(id);
+    getData(id);
+    window.location.reload();
 })
 
 function toJobDetails(id){
