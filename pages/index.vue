@@ -462,12 +462,12 @@
     <!-- Key Services Section  -->
 
     <!-- Benifits Member Section  -->
-    <section  class="benifits-member-section">
+    <section id="section-5" ref="section5" class="benifits-member-section">
       <div class="container-fluid">
         <div class="benifits-member-inner">
           <div class="left-section">
             <!-- <h2 v-html="homepageData['section-7']?.top_left"></h2> -->
-            <h2>협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2>
+            <h2 :class="{'animate': isSection1Visible5}" class="section">협회 회원이 되면 <br />누릴 수 있는 <span>혜택</span></h2>
           </div>
           <div class="right-section">
             <!-- <p  v-html="homepageData['section-7']?.top_right"></p> -->
@@ -543,11 +543,11 @@
     <!-- Benifits Member Section  -->
 
     <!-- Success Stories Section  -->
-    <section  class="success-stories-section">
+    <section id="section-6" ref="section6"  class="success-stories-section">
       <div class="success-stories-inner">
         <div class="success-stories-container">
           <div class="success-stories-top-title-wrapper">
-            <h2>협회 회원들의 성공 사례</h2>
+            <h2 :class="{'animate': isSection1Visible6}" class="section">협회 회원들의 성공 사례</h2>
           </div>
           <div class="success-stories-slider-wrapper">
             <div class="success-stories-slider owl-carousel owl-theme">
@@ -587,12 +587,13 @@
     <!-- Success Stories Section  -->
 
     <!-- Management Issues Section  -->
-    <section v-if="!loading" class="management-issues-section">
+    <section id="section-7" ref="section7" class="management-issues-section">
       <div class="container-fluid">
         <div class="management-issues-inner">
           <div class="left-section">
-            <h2>건물 관리에서<br /> 놓치기 쉬운 문제들,</h2>
-            <h4><span>지금 점검해보세요!</span></h4>
+            <h2 :class="{'animate': isSection1Visible7}" class="section">건물 관리에서<br /> 놓치기 쉬운 문제들,</h2>
+            <h2 style="margin-top: -12px;" ><span style="background-color: rgba(196, 229, 15, 0.5);
+    padding: 0 8px;">지금 점검해보세요!</span></h2>
             <p>현재 귀하의 건물에서 발생할 수 있는 문제들을 점검해보세요. 공실 전기료, 관리비 분쟁, 법률적 문제 등 협회의 도움을 받을 수 있는 다양한 상황을 확인하십시오.</p>
             <div class="link-wrapper">
               <a @click="handleDispute()">중재 요청하기 <span v-if="!loading" class="material-symbols-outlined">
@@ -853,6 +854,18 @@ onMounted(() => {
           isSection1Visible4.value = entry.isIntersecting;
          
         }
+        else if (entry.target.id === 'section-5') {
+          isSection1Visible5.value = entry.isIntersecting;
+         
+        }
+        else if (entry.target.id === 'section-6') {
+          isSection1Visible6.value = entry.isIntersecting;
+         
+        }
+        else if (entry.target.id === 'section-7') {
+          isSection1Visible7.value = entry.isIntersecting;
+         
+        }
       });
     },
     {
@@ -872,6 +885,15 @@ onMounted(() => {
   }
   if(section4.value){
     observer.observe(section4.value);
+  }
+  if(section5.value){
+    observer.observe(section5.value);
+  }
+  if(section6.value){
+    observer.observe(section6.value);
+  }
+  if(section7.value){
+    observer.observe(section7.value);
   }
 
 
