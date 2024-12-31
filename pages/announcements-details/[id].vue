@@ -136,7 +136,7 @@ onMounted(() => {
     getHomepageData();
   getData(id);
   window.addEventListener("resize", updateImageWidth);
-  window.location.reload();
+  
 })
 
 const getHomepageData = async () => {

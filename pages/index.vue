@@ -1023,6 +1023,10 @@ const getTestimonialData = async () =>{
             width: 100% !important;
             overflow: hidden !important;
             word-wrap: break-word !important;
+           } 
+           .md-custom-text-16 {
+            font-size: 16px !important;
+
            }
         }
 </style>
