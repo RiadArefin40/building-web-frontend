@@ -63,7 +63,7 @@
     <!-- Top Banner Box  -->
 
     <!-- Why Box Section  -->
-    <section v-if="!loading" class="why-box-wrapper" id="about">
+    <section  class="why-box-wrapper section" id="about" ref="section2" :class="{'animate': isSection1Visible2}">
       <div class="container-fluid">
         <div class="why-box-inner">
           <div class="left-box">
@@ -144,7 +144,7 @@
     <!-- Why Box Section  -->
 
     <!-- Billing Section  -->
-    <section  class="billing-section-outer">
+    <section id="section-1" ref="section1"  class="billing-section-outer section"  :class="{'animate': isSection1Visible1}">
       <div class="container-fluid">
         <div class="billing-section-inner">
           <div class="left-section">
@@ -767,6 +767,24 @@ const homepageData = ref([]);
 const loading = ref(true)
 const router = useRouter();
 const testimonials = ref([])
+const section1 = ref(null);
+const section2 = ref(null);
+const section3 = ref(null);
+const section4 = ref(null);
+const section5 = ref(null);
+const section6 = ref(null);
+const section7 = ref(null);
+const section8 = ref(null);
+const section9 = ref(null);
+const isSection1Visible1 = ref(false);
+const isSection1Visible2 = ref(false);
+const isSection1Visible3 = ref(false);
+const isSection1Visible4 = ref(false);
+const isSection1Visible5 = ref(false);
+const isSection1Visible6 = ref(false);
+const isSection1Visible7 = ref(false);
+const isSection1Visible8 = ref(false);
+const isSection1Visible9 = ref(false);
 const toSignin = () =>{
   $('#loginModal').modal('hide');
   router.push('/sign-in')
@@ -816,6 +834,37 @@ onMounted(() => {
 
 
   nextTick(() => {
+    const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        console.log('eeee', entry.target.id )
+        if (entry.target.id === 'section-1') {
+          console.log('222')
+          isSection1Visible1.value = entry.isIntersecting;
+         
+        }
+       else if (entry.target.id === 'about') {
+          console.log('222')
+          isSection1Visible2.value = entry.isIntersecting;
+         
+        }
+      });
+    },
+    {
+      threshold: 0.1, // Trigger when 10% of the section is visible
+    }
+  );
+   
+  if (section1.value) {
+    console.log('okkkkkkk1')
+    observer.observe(section1.value);
+   
+  }
+  if(section2.value){
+    observer.observe(section2.value);
+  }
+
+
   const animatedBox = document.querySelector('.animated-border-box'); // Parent element
   const topButton = document.querySelector('.btn-1');
   const leftButton = document.querySelector('.btn-2');
@@ -893,7 +942,7 @@ onMounted(() => {
   };
 
   // Start tracking
-  trackRotation();
+  // trackRotation();
 });
 
 
@@ -1029,4 +1078,19 @@ const getTestimonialData = async () =>{
 
            }
         }
+
+
+
+    .section {
+        opacity: 0;
+        transform: translateY(150px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+.section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 </style>
