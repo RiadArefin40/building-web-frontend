@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   plugins:["~/plugins/customHandler.js"],
   app:{
     head: {
-      title: 'Home :: Building Management',
+      title: '대한건물관리협회',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

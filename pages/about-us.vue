@@ -5,7 +5,7 @@
   <!-- Header  -->
 
   <!-- About top Section  -->
-  <div  class="about-top-section-wrapper">
+  <div id="section-1" ref="section1"  class="about-top-section-wrapper">
     <div class="about-top-section-inner">
       <div class="container-fluid">
         <div class="about-top-inner-wrapper">
@@ -13,12 +13,12 @@
             <div class="left-section">
               <!-- <h2 v-html="aboutPageData['section-1']?.title"></h2> -->
 
-              <h2>건물 관리의<br />
+              <h2 :class="{'animate': isSection1Visible1}" class="section">건물 관리의<br />
                 새로운 시대를 열어갑니다.</h2>
             </div>
             <div class="right-section">
               <!-- <p v-html="aboutPageData['section-1']?.subtitle"></p> -->
-              <p>대한건물관리협회는 건물 관리 업체들이 직면한 복잡한 문제에 대해 전문적인 조언과 해결책을 제시합니다. 법적 분쟁 예방부터 효율적인 관리 방안까지, 협회는 회원들이 더 나은 관리 기준을
+              <p :class="{'animate': isSection1Visible1}" class="section">대한건물관리협회는 건물 관리 업체들이 직면한 복잡한 문제에 대해 전문적인 조언과 해결책을 제시합니다. 법적 분쟁 예방부터 효율적인 관리 방안까지, 협회는 회원들이 더 나은 관리 기준을
                 확립할 수 있도록 돕고, 효율적이고 안전한 운영 환경을 구축하는 데 있어 중요한 파트너 역할을 합니다.</p>
             </div>
           </div>
@@ -41,12 +41,12 @@
   <!-- About top Section  -->
 
   <!-- Greeting Section  -->
-  <div  class="greeting-section-wrapper">
+  <div id="section-2" ref="section2" class="greeting-section-wrapper">
     <div class="container-fluid">
       <div class="greeting-section-inner">
         <div class="left-section">
           <!-- <h2 style="margin-bottom: 43px;" v-html="aboutPageData['section-3']?.left_title"></h2> -->
-          <h2>모두가 믿을 수 있는 건물 관리, <br />확실한 기준으로 <br />건물의 가치를 높입니다.</h2>
+          <h2 :class="{'animate': isSection1Visible2}" class="section">모두가 믿을 수 있는 건물 관리, <br />확실한 기준으로 <br />건물의 가치를 높입니다.</h2>
           <div class="image-wrapper">
             <img src="/assets/images/about/greeting-quote.svg" alt="">
           </div>
@@ -54,7 +54,7 @@
         <div class="right-section">
           <span></span>
           <!-- <h4 v-html="aboutPageData['section-3']?.right_title"></h4> -->
-          <h4>투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4>
+          <h4 :class="{'animate': isSection1Visible2}" class="section">투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4>
           <!-- <p v-html="aboutPageData['section-3']?.right_subtitle"></p> -->
           <p>대한건물관리협회는 투명하고 신뢰성 있는 관리 기준을 최우선으로 두고 있습니다. 공정한 관리 체계를 통해 모든 이해관계자가 안심하고 신뢰할 수 있는 환경을 조성합니다. 협회는 회원들에게 법적
             자문과 체계적인 솔루션을 제공하여 복잡한 관리 문제를 해결하고, 건물의 가치를 지속적으로 향상시킬 수 있도록 지원합니다.</p>
@@ -68,12 +68,12 @@
   <!-- Greeting Section  -->
 
   <!-- Latest News Section  -->
-  <div class="latest-news-section">
+  <div id="section-3" ref="section3" class="latest-news-section">
     <div class="container-fluid">
       <div class="latest-news-inner">
         <div class="top-title-link">
           <div class="left-title">
-            <h2>협회 소식</h2>
+            <h2 :class="{'animate': isSection1Visible2}" class="section">협회 소식</h2>
           </div>
           <div class="right-link">
             <a @click="toNews()">더 알아보기 <span class="material-symbols-outlined">
@@ -193,11 +193,53 @@ const aboutPageData = ref([]);
 const loading = ref(true)
 const homepageData = ref([]);
 const router = useRouter()
-
+const section1 = ref(null);
+const section2 = ref(null);
+const section3 = ref(null);
+const isSection1Visible1 = ref(false);
+const isSection1Visible2 = ref(false);
+const isSection1Visible3 = ref(false);
 
 onMounted(() => {
   getaboutPageData();
-  getHomepageData()
+  getHomepageData();
+  nextTick(() => {
+    const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.target.id === 'section-1') {
+          isSection1Visible1.value = entry.isIntersecting;
+         
+        }
+       else if (entry.target.id === 'section-2') {
+          isSection1Visible2.value = entry.isIntersecting;
+         
+        }
+        else if (entry.target.id === 'section-3') {
+          isSection1Visible2.value = entry.isIntersecting;
+         
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 10% of the section is visible
+    }
+  );
+   
+  if (section1.value) {
+    observer.observe(section1.value);
+   
+  }
+  if(section2.value){
+    observer.observe(section2.value);
+  }
+  if(section3.value){
+    observer.observe(section3.value);
+  }
+
+
+
+  })
 })
 
 function toDetails (id) {

@@ -375,7 +375,7 @@
     <!-- Fusion Section  -->
 
     <!-- Key Services Section  -->
-    <section  class="key-services-section">
+    <section id="section-8" ref="section8"  class="key-services-section">
       <div class="container-fluid">
         <div class="key-services-inner">
           <div class="left-section">
@@ -385,7 +385,7 @@
                 <img class="mobile-image" src="/assets/images/korean-building-mobile.png" alt="">
               </div>
               <div class="up-text-wrapper">
-                <h2>대한건물관리협회 <br />주요 서비스 안내</h2>
+                <h2 :class="{'animate': isSection1Visible8}" class="section">대한건물관리협회 <br />주요 서비스 안내</h2>
                 <p>모든 건물 관리 문제, <span>하나의 솔루션</span>으로 해결합니다.</p>
               </div>
             </div>
@@ -866,6 +866,10 @@ onMounted(() => {
           isSection1Visible7.value = entry.isIntersecting;
          
         }
+        else if (entry.target.id === 'section-8') {
+          isSection1Visible8.value = entry.isIntersecting;
+         
+        }
       });
     },
     {
@@ -894,6 +898,9 @@ onMounted(() => {
   }
   if(section7.value){
     observer.observe(section7.value);
+  }
+  if(section8.value){
+    observer.observe(section8.value);
   }
 
 
