@@ -592,7 +592,7 @@
         <div class="management-issues-inner">
           <div class="left-section">
             <h2 :class="{'animate': isSection1Visible7}" class="section">건물 관리에서<br /> 놓치기 쉬운 문제들,</h2>
-            <h2 style="margin-top: -12px;" ><span style="background-color: rgba(196, 229, 15, 0.5);
+            <h2 :class="{'animate': isSection1Visible7}" class="section" style="margin-top: -12px;" ><span style="background-color: rgba(196, 229, 15, 0.5);
     padding: 0 8px;">지금 점검해보세요!</span></h2>
             <p>현재 귀하의 건물에서 발생할 수 있는 문제들을 점검해보세요. 공실 전기료, 관리비 분쟁, 법률적 문제 등 협회의 도움을 받을 수 있는 다양한 상황을 확인하십시오.</p>
             <div class="link-wrapper">
