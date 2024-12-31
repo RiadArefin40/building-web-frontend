@@ -601,9 +601,12 @@ async function changePage(page) {
     background-color: #4182FF !important;
     color: white !important;
 }
-.related-content-wrapper{
-  min-width: 410px !important;
-}
+@media(min-width: 992px){
+    .related-content-wrapper{
+      min-width: 410px;
+  }
+    }
+
 .news-box{
     max-width: 700px;
 }
