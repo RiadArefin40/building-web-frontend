@@ -846,7 +846,7 @@ onMounted(() => {
          
         }
         else if (entry.target.id === 'section-3') {
-          isSection1Visible2.value = entry.isIntersecting;
+          isSection1Visible3.value = entry.isIntersecting;
          
         }
       });
@@ -862,6 +862,9 @@ onMounted(() => {
   }
   if(section2.value){
     observer.observe(section2.value);
+  }
+  if(section3.value){
+    observer.observe(section3.value);
   }
 
 
