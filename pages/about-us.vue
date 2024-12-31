@@ -54,7 +54,7 @@
         <div class="right-section">
           <span></span>
           <!-- <h4 v-html="aboutPageData['section-3']?.right_title"></h4> -->
-          <h4 :class="{'animate': isSection1Visible2}" class="section">투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4>
+          <h4 >투명한 기준과 전문성으로<br/> 안전한 운영을 지원합니다.</h4>
           <!-- <p v-html="aboutPageData['section-3']?.right_subtitle"></p> -->
           <p>대한건물관리협회는 투명하고 신뢰성 있는 관리 기준을 최우선으로 두고 있습니다. 공정한 관리 체계를 통해 모든 이해관계자가 안심하고 신뢰할 수 있는 환경을 조성합니다. 협회는 회원들에게 법적
             자문과 체계적인 솔루션을 제공하여 복잡한 관리 문제를 해결하고, 건물의 가치를 지속적으로 향상시킬 수 있도록 지원합니다.</p>
@@ -73,7 +73,7 @@
       <div class="latest-news-inner">
         <div class="top-title-link">
           <div class="left-title">
-            <h2 :class="{'animate': isSection1Visible2}" class="section">협회 소식</h2>
+            <h2>협회 소식</h2>
           </div>
           <div class="right-link">
             <a @click="toNews()">더 알아보기 <span class="material-symbols-outlined">
@@ -222,7 +222,7 @@ onMounted(() => {
       });
     },
     {
-      threshold: 0.2, // Trigger when 10% of the section is visible
+      threshold: 0.1, // Trigger when 10% of the section is visible
     }
   );
    
