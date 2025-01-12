@@ -116,7 +116,7 @@
                                                             <tbody>
                                                                 <tr v-for="(job,i) in homepageData">
                                                                     <td>{{ i+1 }}</td>
-                                                                    <td v-html ="job.title" style="cursor: pointer;"></td>
+                                                                    <td @click="handleEdit(job.id)" v-html ="job.title" style="cursor: pointer;"></td>
                                                                     <!-- <td class="truncate-des" v-html="job?.description"></td> -->
                                                                     <td>{{ job.user.name }}</td>
                                                                     <td>{{ formatTimestamp(job.created_at) }}</td>
@@ -385,10 +385,10 @@
         </div>
 
     </div>
-    <Dialog v-model:visible="confirmModal" modal header="Confirm Delete this Post?" :style="{ width: '25rem' }">
+    <Dialog v-model:visible="confirmModal" modal header="게시글을 삭제하시겠습니까?" :style="{ width: '25rem' }">
         <div class="d-flex justify-content-center gap-2">
-                <Button type="button"  label="Cancel" severity="secondary" @click="confirmModal = false"></Button>
-                <Button type="button" :loading="loading" label="Confirm" @click="confirmDelete"></Button>
+                <Button type="button"  label="취소" severity="secondary" @click="confirmModal = false"></Button>
+                <Button type="button" :loading="loading" label="삭제하기" @click="confirmDelete"></Button>
             </div>
     </Dialog>
     <Toast/>

@@ -45,7 +45,7 @@
                 <div v-if="homepageData.length > 0" class="left-image-right-content-wrapper" @click="toDetails(homepageData[0]?.id)">
                     
                     <div class="left-image-wrapper">
-                        <img class="custom-img-width"  :src="`https://testingpro.xyz/storage/${homepageData[0]?.thumbnail}`" alt="">
+                        <img class="custom-img-width"  :src="`${runtimeConfig.public.imageApi}/storage/${homepageData[0]?.thumbnail}`" alt="">
                     </div>
                     <div class="right-content-wrapper">
                         <div class="top-date">
@@ -157,14 +157,19 @@
                                             </div>
                                         </nav>
                                         <button id="AdvancerLeft" class="Advancer Advancer_Left" type="button">
-                                            <span class="material-symbols-outlined">
-                                                arrow_left_alt
+                                            <span >
+                                                <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.667 5.77136C14.667 5.45495 14.4319 5.19345 14.1268 5.15207L14.042 5.14636L1.54199 5.14636C1.19681 5.14636 0.916991 5.42618 0.916991 5.77136C0.916991 6.08778 1.15212 6.34927 1.45718 6.39066L1.54199 6.39636L14.042 6.39636C14.3872 6.39636 14.667 6.11654 14.667 5.77136Z" fill="black"/>
+<path d="M7.024 1.19393C7.2686 0.950377 7.26945 0.55465 7.0259 0.310048C6.80449 0.0876818 6.45731 0.0667629 6.21225 0.247781L6.14202 0.308145L1.10035 5.32814C0.877322 5.55022 0.857033 5.89864 1.03949 6.1437L1.10032 6.21389L6.14198 11.2347C6.38656 11.4783 6.78229 11.4775 7.02586 11.2329C7.24729 11.0105 7.26675 10.6633 7.08469 10.419L7.02403 10.349L2.42734 5.77079L7.024 1.19393Z" fill="black"/>
+</svg>
                                             </span>
                                         </button>
                                         <button id="AdvancerRight" class="Advancer Advancer_Right" type="button">
-                                            <span class="material-symbols-outlined">
-                                                arrow_right_alt
-                                            </span>
+                                            <span >
+                                                <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.333008 5.77136C0.333008 5.45495 0.568136 5.19345 0.873199 5.15207L0.958008 5.14636L13.458 5.14636C13.8032 5.14636 14.083 5.42618 14.083 5.77136C14.083 6.08778 13.8479 6.34927 13.5428 6.39066L13.458 6.39636L0.958008 6.39636C0.61283 6.39636 0.333008 6.11654 0.333008 5.77136Z" fill="black"/>
+<path d="M7.976 1.19393C7.7314 0.950377 7.73055 0.55465 7.9741 0.310048C8.19551 0.0876818 8.54269 0.0667629 8.78775 0.247781L8.85798 0.308145L13.8996 5.32814C14.1227 5.55022 14.143 5.89864 13.9605 6.1437L13.8997 6.21389L8.85802 11.2347C8.61344 11.4783 8.21771 11.4775 7.97414 11.2329C7.75271 11.0105 7.73325 10.6633 7.91531 10.419L7.97597 10.349L12.5727 5.77079L7.976 1.19393Z" fill="black"/>
+</svg>                                  </span>
                                         </button>
                                     </div>
                                 </div>
@@ -201,7 +206,7 @@
                                                     <NuxtLink :to="`/association-news-details/${data?.id}`">
                                                         <div class="image-box">
                                                             <img style="max-height: 260px; max-height: 260px; object-fit: cover;"
-                                                                :src="`https://testingpro.xyz/storage/${data?.thumbnail}`"
+                                                                :src="`${runtimeConfig.public.imageApi}/storage/${data?.thumbnail}`"
                                                                 alt="">
                                                         </div>
                                                         <div class="category-date-wrapper">

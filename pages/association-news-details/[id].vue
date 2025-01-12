@@ -4,7 +4,7 @@
      <!-- Header  -->
  
      <!-- Association News Details Section  -->
-      <div v-if="!loading" class="association-news-details-section-wrapper">
+      <div  class="association-news-details-section-wrapper">
          <div class="container-fluid">
              <div class="association-news-details-inner-wrapper">
                  <div class="top-date-category-wrapper">
@@ -12,7 +12,7 @@
                          <h6>{{  formatTimestamp(news?.created_at) }}</h6>
                      </div>
                      <div class="category-wrapper">
-                         <h6>{{ news.category.name }}</h6>
+                         <h6>{{ news?.category?.name }}</h6>
                      </div>
                  </div>
                  <div class="news-title">
@@ -20,7 +20,7 @@
                  </div>
                  <div class="news-image-wrapepr">
                      <!-- <img src="/assets/images/associationnewsdetails/association-news-details.png" alt=""> -->
-                      <img style="max-height: 440px; width: 100vw; object-fit: cover;" :src="`https://testingpro.xyz/storage/${news?.thumbnail}`" alt="">
+                      <img style="max-height: 440px; width: 100vw; object-fit: cover;" :src="`${runtimeConfig.public.imageApi}/storage/${news?.thumbnail}`" alt="">
           
                  </div>
                  <div class="news-content-related-content-wrapper">
@@ -35,7 +35,7 @@
                              <div class="related-news-box">
          
                                  <a style="cursor: pointer;" v-for="data in homepageData?.slice(0, 3)" @click = "toDetails(data.id)">
-                                    <h6>{{ data.topic }}</h6>
+                                    <h6>{{ data?.topic }}</h6>
                                      <div class="icon">
                                          <span class="material-symbols-outlined">
                                              arrow_right_alt
@@ -131,7 +131,7 @@ const id = route.params.id
 const loading = ref(true)
 const news = ref(null)
 const router = useRouter()
-const imageWidth = ref("740px");
+const imageWidth = ref("840px");
 const homepageData  = ref(null)
 
 onMounted(() => {
@@ -193,7 +193,7 @@ function  formatTimestamp(timestamp) {
       if (window.innerWidth <= 991) {
         imageWidth.value = "390px";
       } else {
-        imageWidth.value = "740px";
+        imageWidth.value = "840px";
       }
     };
 

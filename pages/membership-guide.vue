@@ -214,7 +214,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="membership-right">
+                <div class="membership-right" style="    height: fit-content;
+                     ">
 
                     <div class="membership-form-inner">
       <form @submit.prevent="handleSubmit">
@@ -242,6 +243,16 @@
             <label :for="`floating_${field.name}`">{{ field.label }}</label>
           </div>
         </div>
+
+        <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        서비스 약관, 일반 약관 및 개인정보 처리방침에 동의합니다.
+                                    </label>
+                                </div>
+                            </div>
         <div class="form-group">
           <button type="submit" class="btn_submit">
             가입 신청하기
@@ -287,7 +298,7 @@
                   </div>
                   <div class="user-designation-box">
                     <div class="user-image">
-                      <img :src="`https://testingpro.xyz/${data?.icon}`" alt="">
+                      <img :src="`${runtimeConfig.public.imageApi}/${data?.icon}`" alt="">
                     </div>
                     <div class="designation-content">
                       <h6>{{ data?.author_name }}</h6>
@@ -521,9 +532,12 @@ const getTestimonialData = async () =>{
 <style scoped>
 
 .membership-section-wrapper {
-  padding: 20px;
+  padding: 100px 0px;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
+}
+.membership-section-inner{
+    align-items: center;
 }
 
 </style>

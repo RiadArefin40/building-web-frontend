@@ -60,7 +60,7 @@
                          </div>
                      </div> -->
                      <div class="submit-wrapper">
-                         <button class="submit_btn" type="submit">지금 게시 중 <span
+                         <button :disabled="loading" class="submit_btn btn" type="submit">지금 게시 중 <span
                                  class="material-symbols-outlined">
                                  arrow_right_alt
                              </span></button>
@@ -220,12 +220,13 @@ const onSubmit = async () =>{
         
      })
 
-     loading.value = false
+  
      toast.add({ detail:res?.data?.message , life: 3000 });
      title.value = '';
      message.value = ''
      setTimeout(()=>{
         router.push('/tender-management')
+        loading.value = false
         },800)
         
 
@@ -248,12 +249,13 @@ const onSubmit = async () =>{
         
      })
 
-     loading.value = false
+    
      toast.add({ detail:res?.data?.message , life: 3000 });
      title.value = '';
      message.value = '';
      setTimeout(()=>{
         router.push('/tender-management')
+        loading.value = false
         },800)
  }
  catch (e) {

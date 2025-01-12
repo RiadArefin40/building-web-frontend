@@ -76,8 +76,11 @@
             <h2>협회 소식</h2>
           </div>
           <div class="right-link">
-            <a @click="toNews()">더 알아보기 <span class="material-symbols-outlined">
-                arrow_right_alt
+            <a @click="toNews()">더 알아보기 <span >
+              <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 7.72559C0 7.34589 0.282154 7.0321 0.648229 6.98243L0.75 6.97559L15.75 6.97559C16.1642 6.97559 16.5 7.31137 16.5 7.72559C16.5 8.10528 16.2178 8.41908 15.8518 8.46874L15.75 8.47559L0.75 8.47559C0.335786 8.47559 0 8.1398 0 7.72559Z" fill="white"/>
+                <path d="M9.17199 2.23247C8.87846 1.94021 8.87744 1.46534 9.1697 1.17181C9.43539 0.904974 9.852 0.879871 10.1461 1.09709L10.2304 1.16953L16.2804 7.19353C16.548 7.46002 16.5723 7.87813 16.3534 8.1722L16.2804 8.25643L10.2304 14.2814C9.9369 14.5737 9.46203 14.5727 9.16974 14.2792C8.90403 14.0124 8.88069 13.5957 9.09915 13.3025L9.17194 13.2186L14.688 7.7247L9.17199 2.23247Z" fill="white"/>
+                </svg>
               </span></a>
           </div>
         </div>
@@ -90,7 +93,7 @@
  
           <div v-else v-for="data in homepageData?.slice(0, 3)" class="news-box">
             <div class="image-wrapper">
-              <img style="max-height: 260px; max-height: 260px; object-fit: cover;" :src="`https://testingpro.xyz/storage/${data?.thumbnail}`" alt="">
+              <img style="max-height: 260px; max-height: 260px; object-fit: cover;" :src="`${runtimeConfig.public.imageApi}/storage/${data?.thumbnail}`" alt="">
             </div>
             <div class="title truncate-title">
               <h4>{{ data?.topic }}</h4>
@@ -99,8 +102,11 @@
               <p v-html="data?.body"></p>
             </div>
             <div class="link-wrapper">
-              <a @click="toDetails(data?.id)"><span class="underline">자세히 보기</span> <span class="material-symbols-outlined">
-                  arrow_right_alt
+              <a @click="toDetails(data?.id)"><span class="underline">자세히 보기</span> <span>
+                <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 7.72559C0 7.34589 0.282154 7.0321 0.648229 6.98243L0.75 6.97559L15.75 6.97559C16.1642 6.97559 16.5 7.31137 16.5 7.72559C16.5 8.10528 16.2178 8.41908 15.8518 8.46874L15.75 8.47559L0.75 8.47559C0.335786 8.47559 0 8.1398 0 7.72559Z" fill="white"/>
+                <path d="M9.17199 2.23247C8.87846 1.94021 8.87744 1.46534 9.1697 1.17181C9.43539 0.904974 9.852 0.879871 10.1461 1.09709L10.2304 1.16953L16.2804 7.19353C16.548 7.46002 16.5723 7.87813 16.3534 8.1722L16.2804 8.25643L10.2304 14.2814C9.9369 14.5737 9.46203 14.5727 9.16974 14.2792C8.90403 14.0124 8.88069 13.5957 9.09915 13.3025L9.17194 13.2186L14.688 7.7247L9.17199 2.23247Z" fill="white"/>
+                </svg>
                 </span></a>
             </div>
           </div>

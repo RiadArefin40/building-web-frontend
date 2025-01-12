@@ -62,7 +62,9 @@
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
                                                     <h6 class="dispute-issues">{{ dispute?.dispute_type.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
+                                                    <h6 v-if="dispute?.status == 'completed'" class="dispute-status completed-status">답변완료
+                                                    </h6>
+                                                    <h6 v-if="dispute?.status == 'pending'" style="background-color: #F3FACF; color: #5E6C12;" class="dispute-status completed-status">진행중
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -217,7 +219,9 @@
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
                                                     <h6 class="dispute-issues">{{ dispute?.dispute_type.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
+                                                    <h6 v-if="dispute?.status == 'completed'" style="background-color: #F3FACF; color: #5E6C12;" class="dispute-status completed-status">답변완료
+                                                    </h6>
+                                                    <h6 v-if="dispute?.status == 'pending'" class="dispute-status completed-status">진행중
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -363,7 +367,9 @@
                                             <div class="issues-status-time-wrapper">
                                                 <div class="issues-status-wrapper">
                                                     <h6 class="dispute-issues">{{ dispute?.dispute_type?.name }}</h6>
-                                                    <h6 class="dispute-status completed-status">{{ dispute?.status }}
+                                                    <h6 v-if="dispute?.status == 'completed'" style="background-color: #F3FACF; color: #5E6C12;" class="dispute-status completed-status">답변완료
+                                                    </h6>
+                                                    <h6 v-if="dispute?.status == 'pending'" class="dispute-status completed-status">진행중
                                                     </h6>
                                                 </div>
                                                 <div class="time-wrapper">
@@ -806,3 +812,13 @@ async function changePage (page) {
 }
 
 </script>
+<style scoped>
+    @media(min-width: 1440px){
+        .right-image-section{
+        margin-left: 150px;
+         }
+       
+    }
+
+
+</style>

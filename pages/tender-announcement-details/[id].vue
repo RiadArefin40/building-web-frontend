@@ -140,7 +140,7 @@ const loading = ref(true)
 const announcement = ref(null)
 const router = useRouter()
 const homepageData = ref(null)
-const imageWidth = ref("740px");
+const imageWidth = ref("840px");
 
 
 onMounted(() => {
@@ -214,7 +214,7 @@ function  formatTimestamp(timestamp) {
       if (window.innerWidth <= 991) {
         imageWidth.value = "390px";
       } else {
-        imageWidth.value = "740px";
+        imageWidth.value = "840px";
       }
     };
 
