@@ -91,9 +91,9 @@
                     내 프로필
 
                   </a></li>
-                <li v-if="isAuthenticated"><a class="dropdown-item" @click="handlePostManagement()">
+                <li v-if="isAuthenticated && authUser?.is_verified"><a class="dropdown-item" @click="handlePostManagement()">
                     구인공고 글 관리</a></li>
-                <li v-if="isAuthenticated"><a class="dropdown-item" @click="handleTenderManagement()">
+                <li v-if="isAuthenticated && authUser?.is_verified"><a class="dropdown-item" @click="handleTenderManagement()">
                     입찰공고 글 관리
 
                   </a></li>
@@ -154,12 +154,12 @@
                                     내 프로필
 
                                   </a></li>
-                                <li v-if="isAuthenticated"><a class="dropdown-item" href="/job-management">
+                                <li v-if="isAuthenticated && authUser?.is_verified"><a class="dropdown-item" href="/job-management">
                                   <div class="">
                                       <img src="/assets/images/file1.svg" alt="">
                                     </div>
                                     구인공고 글 관리</a></li>
-                                <li v-if="isAuthenticated"><a class="dropdown-item" href="/tender-management">
+                                <li v-if="isAuthenticated && authUser?.is_verified"><a class="dropdown-item" href="/tender-management">
                                   <div class="">
                                       <img src="/assets/images/file1.svg" alt="">
                                     </div>
