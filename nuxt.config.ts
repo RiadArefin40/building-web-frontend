@@ -6,23 +6,11 @@ export default defineNuxtConfig({
   plugins:["~/plugins/customHandler.js"],
   app:{
     head: {
-      title: '대한건물관리협회',
+      title: '대한건물관리협회 | 건물 관리의 새로운 표준',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content:
-            '대한건물관리협회는 건물 관리와 운영의 전문성을 지원하는 협회입니다. 건물 유지보수, 시설 관리, 스마트 관리 솔루션으로 관리 효율성을 높입니다.',
-        },
-        {
-          name: 'keywords',
-          content:
-            '건물관리, 시설관리, 대한건물관리협회, 건물유지보수, 스마트관리, 아파트관리, 공동주택관리, 건물협회',
-        },
-        { name: 'author', content: '대한건물관리협회' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-        { name: 'robots', content: 'index, follow' },
+   
       ],
       link: [
         {

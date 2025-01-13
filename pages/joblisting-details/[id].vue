@@ -58,7 +58,7 @@
         <div class="container-fluid">
             <div class="announcements-details-inner-wrapper">
                 <div class="news-content-related-content-wrapper">
-                    <div class="news-content-wrapper">
+                    <div class="news-content-wrapper" style="max-width: 100%; overflow-wrap: anywhere;">
                         <div v-html ="job?.description"></div>
                         <!-- <div class="matters-wrapper">
                             <h3>프로젝트 범위</h3>
@@ -110,7 +110,7 @@
                                                 <!-- <h5>행정 보조원</h5> -->
                                                  <h5>{{ job?.title }}</h5>
                                             </div>
-                                            <div class="job-description">
+                                            <div class="job-description" style="max-width: 100%; overflow-wrap: anywhere;">
                                                 <!-- <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p> -->
                                                  <p v-html ="job?.description"></p>
                                             </div>

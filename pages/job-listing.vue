@@ -128,9 +128,9 @@
                                                     <!-- <h5>행정 보조원</h5> -->
                                                     <h5>{{ job.title }}</h5>
                                                 </div>
-                                                <div class="job-description truncate-description">
+                                                <div class="job-description" style="max-width: 100%; overflow-wrap: anywhere;">
                                                     <!-- <p>일상 업무를 지원하고 일정을 관리하며 커뮤니케이션 업무를 지원합니다.</p> -->
-                                                    <p class="" v-html="removeImageTags(job?.description)"></p>
+                                                    <p  class="" v-html="removeImageTags(job?.description)"></p>
                                                 </div>
                                                 <div class="category-wrapper">
                                                     <!-- <p>작성자: <span>한국경영관</span></p> -->

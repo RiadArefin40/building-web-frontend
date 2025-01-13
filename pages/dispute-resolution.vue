@@ -769,7 +769,7 @@ async function onSubmit () {
             },
      
         })
-        toast.add({ detail:res?.data?.message , life: 3000 });
+        toast.add({ detail:"접수되었습니다." , life: 3000 });
         getDisputeData()
         loading.value = false
         name.value=''

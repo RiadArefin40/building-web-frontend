@@ -30,7 +30,7 @@
           <div class="announcements-details-inner-wrapper">
               
               <div class="news-content-related-content-wrapper">
-                  <div class="news-content-wrapper">
+                  <div class="news-content-wrapper" style="max-width: 100%; overflow-wrap: anywhere;">
                 
                       <div  class="key-recommendation-wrapper">
                         <div v-if="!loading" v-html="styledBody"></div>

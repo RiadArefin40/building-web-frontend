@@ -1071,6 +1071,9 @@ const getTestimonialData = async () =>{
 }
 </script>
 <style>
+  .note-editable{
+    height: 50vh !important;
+  }
 .rendered-p p{
   margin-bottom: 0px;
   /* height: 20px; */

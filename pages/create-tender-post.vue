@@ -23,7 +23,7 @@
              <div class="right-details-post-box">
                  <div class="inner-wrapper">
                      <div class="title-wrapper">
-                         <h3>상세 포스트</h3>
+                         <h3>게시물 작성</h3>
                      </div>
                      <div class="form-group">
                          <div class="form-floating">
@@ -60,7 +60,7 @@
                          </div>
                      </div> -->
                      <div class="submit-wrapper">
-                         <button :disabled="loading" class="submit_btn btn" type="submit">지금 게시 중 <span
+                         <button :disabled="loading" class="submit_btn btn" type="submit">게시하기 <span
                                  class="material-symbols-outlined">
                                  arrow_right_alt
                              </span></button>
